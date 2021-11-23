@@ -1,4 +1,4 @@
 module.exports = 
 {
-    "URI": "mongodb://localhost/book_store"
+    "URI": "mongodb://localhost/G5S4F21"
 }

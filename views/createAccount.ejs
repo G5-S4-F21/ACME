@@ -1,0 +1,48 @@
+<%- include('partials/home_header'); %>
+<meta charset="UTF-8" />
+
+<body>
+    <main class="container">
+        <div class="row align-items-md-stretch">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Create Account</h2>
+                <h4>Just choose some credentials and we can get to playing</h4>
+            </div>
+        </div>
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid">
+                <form action="/createAccount" method="post" charset="UTF-8">
+                    <div>
+                        <table>
+                            <tr>
+                                <td>User Name</td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="uname"></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="password"></td>
+                            </tr>
+                            <tr>
+                                <td>Account Type</td>
+                            </tr>
+                            <tr>
+                                
+                                <td><input type="radio" name="acctType" id="seeker" value="seeker">trainer seeker</td>
+                                <td><input type="radio" name="acctType" id="trainer" value="trainer">trainer</td>
+                                <td><input type="radio" name="acctType" id="admin" value="admin">admin</td>
+                                <td><input type="radio" name="acctType" id="audit" value="auditor">auditor</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <input type="submit" value="Sign me up!" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
