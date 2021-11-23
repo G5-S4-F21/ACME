@@ -16,6 +16,9 @@ function requireAuth(req, res, next)
     next();
 }
 
+router.get('/schedule', requireAuth, seekerController.renderSeekerSchedule);
+
+router.post('/schedule', requireAuth, seekerController.renderDetailedView);
 
 
 module.exports = router;
