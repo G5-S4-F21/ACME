@@ -16,6 +16,7 @@ mongoose.connect(DB.URI, {useNewUrlParser: true, useUnifiedTopology: true});
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
 mongoDB.once('open', ()=>{
+  console.log('url: localhost:3000');
   console.log('Connected to MongoDB...');
 });
 
@@ -24,22 +25,6 @@ var indexRouter = require('../routes/index');
 var usersRouter = require('../routes/users');
 
 var app = express();
-
-app.use(session({
-  secret: "somesecret",
-  saveUninitialized: false, 
-  resave: false
-}))
-
-//the passport stuff
-let userModel = require('../models/users.js');
-let User = userModel.User;
-
-passport.use(User.createStrategy()); 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -52,14 +37,36 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../node_modules')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({
+  secret: "somesecret",
+  saveUninitialized: false, 
+  resave: false
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+//the passport stuff
+let userModel = require('../models/users.js');
+let User = userModel.User;
+
+passport.use(User.createStrategy()); 
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
+
+
+
+
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({extended: false}));
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

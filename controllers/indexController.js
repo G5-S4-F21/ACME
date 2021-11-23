@@ -10,7 +10,20 @@ let url = require('url');
 let UserModel = require('../models/users');
 let User = UserModel.User;
 
-
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ uname: username}, function(err, user) {
+            if(err) {return done(err); }
+            if(!user) {
+                return done(null, false, {message: 'Incorrect username.'});
+            }
+            if(!user.validPassword(password)) {
+                return done(null, false, {message: 'in'});
+            }
+            return done(null, user);
+        });
+    }
+));
 
 
 
@@ -53,4 +66,48 @@ module.exports.handleCreateAccount = (req, res, next) => {
                 })
             }
         });
+}
+//renders the login page
+module.exports.login = (req, res, next) => {
+    res.render('login', { title: "Login"});
+}
+module.exports.handleLogin = (req, res, next) => {
+    // passport login
+    passport.authenticate('local', 
+    (err, user, info) => {
+        if(err)
+        {
+            return next(err);
+        }
+        //console.log(user);
+        if(!user)
+        {
+            return res.redirect('/login');
+        }
+        req.login(user, (err) => {
+            if(err){
+                return next(err);
+            }
+            if(user.accountType == "trainer")
+            {
+                res.render('homePages/trainerHome', { name: user.displayName, title: "Trainer" });
+            }
+            else if(user.accountType == "seeker")
+            {
+                res.render('homePages/seekerHome', { name: user.displayName, title: "Seeker" });
+            }
+            else if(user.accountType == "admin")
+            {
+                res.render('homePages/adminHome', { name: user.displayName, title: "Admin" });
+            }
+            else if(user.accountType == "auditor")
+            {
+                res.render('homePages/auditorHome', { name: user.name, title: "Audior" });
+            }
+            else
+            {
+                res.render('homePages/defaultHome', { name: "Visitor", title: "Visitor"});
+            }
+        });
+    })(req, res, next);
 }
