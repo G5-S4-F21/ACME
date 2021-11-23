@@ -21,8 +21,10 @@ mongoDB.once('open', ()=>{
 });
 
 
-var indexRouter = require('../routes/index');
-var usersRouter = require('../routes/users');
+let indexRouter = require('../routes/index');
+let usersRouter = require('../routes/users');
+let seekerRouter = require('../routes/seeker');
+let trainerRouter = require('../routes/trainer');
 
 var app = express();
 
@@ -48,6 +50,8 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/seeker', seekerRouter);
+app.use('/trainer', trainerRouter);
 
 //the passport stuff
 let userModel = require('../models/users.js');
