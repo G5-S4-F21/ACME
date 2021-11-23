@@ -15,3 +15,46 @@ let indexController = require("../controllers/indexController");
 
 let ApptModel = require('../models/appointment');
 let Appt = ApptModel.Appointment;
+
+
+//render the schedule page for the seeker
+module.exports.renderSeekerSchedule = (req, res, next) => {
+  let localUser = req.user;
+  Appt.find((err, mainList) => {
+      if(err) {
+          return console.error(err);
+      }
+      else {
+          /*let list = [];
+          for(let a in mainList)
+          {
+              if(localUser.username == mainList[a].ApptSeeker)
+              {
+                  list.push(mainList[a]);
+                  
+              }
+              //console.log(mainList[a]);
+          }
+          let toSend = JSON.stringify(list);
+          console.log(toSend);*/
+          res.render('seekerViews/seekerScheduleView', { title : "Schedule", 
+              list : mainList });
+      }
+  });
+  //res.render('seekerViews/seekerScheduleView', { title: "Schedule", list : mainList });
+}
+//handle the request for the detailed view of the schedule
+module.exports.renderDetailedView = (req, res, next) => {
+  let apptDate = req.body.dateLookup;
+  console.log(apptDate);
+  Appt.findById(apptDate, (err, date) => {
+      if(err)
+      {
+          console.log(err);
+      }
+      else{
+          console.log(date);
+          res.render('seekerViews/detailedApptView', { title : 'details', appt : date });        
+      }
+  });
+}
