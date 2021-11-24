@@ -1,0 +1,53 @@
+<%- include('../partials/home_header'); %>
+<%- include('../partials/defaultNav'); %>
+<div class="bg-image" 
+     style="background-image: url('/images/erik-werlin-4gqELewld-A-unsplash.jpg');">
+            <div class="col-lg-8 mx-auto p-3 py-md-5">
+                <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                  <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4" style="color: white">Lesson Scheduled for: <%= appt.ApptSeeker %></span>
+                  </a>
+                </header>
+              
+                <main>
+                  <h1>Important Date and Time</h1>
+                  <p class="fs-5 col-md-8">Your Appointment for Tennis training is on <span style='color:chartreuse'><%= appt.ApptDate %></span> at <span style='color:chartreuse'><%= appt.ApptTime %></span></p>
+              
+                  <div class="mb-5">
+                    <a href="/users/confirm/<% title %>" class="btn btn-success btn-lg px-4">Confirm</a>
+                  </div>
+              
+                  <hr class="col-3 col-md-2 mb-5">
+              
+                  <div class="row g-5">
+                    <div class="col-md-6">
+                      <h2>Your Trainer</h2>
+                      <p>Hey,  Looking forward to a great lesson.  See you soon</p>
+                      <ul class="icon-list">
+                        <li>Name: <span style='color:chartreuse'><%= appt.ApptTrainer %></span></li>
+                        <li>Place: <span style='color:chartreuse'><%= appt.ApptLoc %></span></li>
+                        <li>Contact info</li>
+                        <li>other stuff</li>
+                      </ul>
+                      <div class="mb-5">
+                        <a href="/users/cancel" class="btn btn-dark btn-lg px-4">Cancel</a>
+                      </div>
+                    </div>
+              
+                    <div class="col-md-6">
+                      <h2>Reminder</h2>
+                      <p>Just a few things about your lesson you will want to remember.  Your trainer will handle the rest</p>
+                      <ul class="icon-list">
+                        <li>Tennis racket</li>
+                        <li>Tennis shoes</li>
+                        <li>Towel</li>
+                        <li>Plenty of Water</li>
+                      </ul>
+                    </div>
+                  </div>
+                </main>
+                <footer class="pt-5 my-5 text-muted border-top">
+                  Created by the Stephen · © 2021
+                </footer>
+              </div>
+</div>

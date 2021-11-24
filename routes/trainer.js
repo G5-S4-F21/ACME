@@ -20,6 +20,7 @@ function requireAuth(req, res, next)
 //router.get('/profile', trainerController.renderIndex);
 
 router.get('/schedule', requireAuth, trainerController.renderSchedule);
+router.post('/schedule', requireAuth, trainerController.renderDetailedView);
 
 router.post('/setAppt', requireAuth, trainerController.renderSetAppt);
 module.exports = router;

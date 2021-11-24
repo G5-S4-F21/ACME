@@ -44,3 +44,17 @@ module.exports.renderSetAppt = (req, res, next) => {
     });
     res.render('trainerViews/viewSchedule', { title: 'Schedule'});
 }
+module.exports.renderDetailedView = (req, res, next) => {
+    let apptDate = req.body.dateLookup;
+    Appt.findById(apptDate, (err, date) => {
+        if(err)
+        {
+            console.log(err);
+        }
+        else{
+            console.log(date);
+            res.render('seekerViews/detailedApptView', { title : 'details', appt : date });        
+        }
+    });
+    //res.render('trainerViews/trainerDetailedAppt', { appt : })
+}
