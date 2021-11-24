@@ -75,6 +75,8 @@
                         {
                             let dayCalDate = document.getElementById('dayCalDate');
                             dayCalDate.innerHTML = jsonList[a].ApptDate;
+                            let dayLookup = document.getElementById('dateLookup');
+                            dayLookup.setAttribute('value', jsonList[a]._id);
                             let dayCalSeek = document.getElementById('dayCalSeek');
                             dayCalSeek.innerHTML = jsonList[a].ApptSeeker; 
                             let dayCalTime = document.getElementById('dayCalTime');

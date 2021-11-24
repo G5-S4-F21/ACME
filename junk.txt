@@ -1,0 +1,809 @@
+let localuser = User({
+        username: req.body.uname,
+        password: req.body.password
+    });
+    console.log(localuser);
+    /*passport.authenticate('local', (err, user) => {
+        if(err)
+        {
+            console.log(err);
+        }
+        if(!user)
+        {
+            console.log('user is false');
+        }
+        req.login(user, (err) => {
+            console.log('in the function');
+        }
+    })(req, res, next);*/
+    passport.authenticate('local', 
+    (err, localuser, info) => {
+        if(err)
+        {
+            return next(err);
+        }
+        console.log('user: ' + localuser);
+        if(!localuser)
+        {
+            //req.flash('loginMessage', 'Authentication Error');
+            return res.redirect('/login');
+        }
+        req.login(localuser, (err) => {
+            if(err){
+                return next(err);
+            }
+            //return res.redirect('/netList');
+            console.log('logged in');
+        });
+    })(req, res, next);
+
+
+<label for="floatingInput">Username</label>
+<label for="floatingPassword">Password</label>
+
+
+ <tr>
+                                
+                                <td><input type="radio" name="acctType" id="seeker" value="seeker">trainer seeker</td>
+                                <td><input type="radio" name="acctType" id="trainer" value="trainer">trainer</td>
+                                <td><input type="radio" name="acctType" id="admin" value="admin">admin</td>
+                                <td><input type="radio" name="acctType" id="audit" value="auditor">auditor</td>
+                            </tr>
+
+
+<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
+              <div class="card flex-fill">
+                <div class="card-header">
+                  <div class="card-actions float-end">
+                    <a href="#" class="me-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw align-middle"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                    </a>
+                    <div class="d-inline-block dropdown show">
+                      <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                      </a>
+      
+                      <div class="dropdown-menu dropdown-menu-end" id="hamburger">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                  </div>
+                  <h5 class="card-title mb-0">Calendar</h5>
+                </div>
+                <div class="card-body d-flex">
+                  <div class="align-self-center w-100">
+                    <div class="chart">
+                      <div id="datetimepicker-dashboard">
+                        <div class="bootstrap-datetimepicker-widget usetwentyfour">
+                          <ul class="list-unstyled">
+                            <li class="show">
+                              <div class="datepicker">
+                                <div class="datepicker-days" style="">
+                                  <table class="table table-sm">
+                                    <thead>
+                                      <tr>
+                                        <th class="prev" data-action="previous">
+                                          <span class="fas fa-chevron-left" title="Previous Month" id="left">
+      
+                                          </span>
+                                        </th>
+                                        <th id="MonthName" class="picker-switch" data-action="pickerSwitch" colspan="5" title="Select Month">November 2021</th>
+                                        <th class="next" data-action="next">
+                                          <span class="fas fa-chevron-right" title="Next Month" id="right"></span>
+                                        </th>
+                                      </tr>
+                                      <tr>
+                                        <th class="dow">Su</th>
+                                        <th class="dow">Mo</th>
+                                        <th class="dow">Tu</th>
+                                        <th class="dow">We</th>
+                                        <th class="dow">Th</th>
+                                        <th class="dow">Fr</th>
+                                        <th class="dow">Sa</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td id="Sunday" data-action="selectDay" data-day="10/31/2021" class="day old weekend">31<p>some data</p></td>
+                                        <td id="Monday" data-action="selectDay" data-day="11/01/2021" class="day">1</td>
+                                        <td id="Tuesday" data-action="selectDay" data-day="11/02/2021" class="day">2</td>
+                                        <td id="Wednesday" data-action="selectDay" data-day="11/03/2021" class="day">3</td>
+                                        <td id="Thursday" data-action="selectDay" data-day="11/04/2021" class="day">4</td>
+                                        <td id="Friday" data-action="selectDay" data-day="11/05/2021" class="day">5</td>
+                                        <td id="Saturday" data-action="selectDay" data-day="11/06/2021" class="day weekend">6</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="11/07/2021" class="day weekend">7</td>
+                                        <td id="" data-action="selectDay" data-day="11/08/2021" class="day">8</td>
+                                        <td id="" data-action="selectDay" data-day="11/09/2021" class="day">9</td>
+                                        <td id="" data-action="selectDay" data-day="11/10/2021" class="day">10</td>
+                                        <td id="" data-action="selectDay" data-day="11/11/2021" class="day">11</td>
+                                        <td id="" data-action="selectDay" data-day="11/12/2021" class="day active today">12</td>
+                                        <td id="onethree" data-action="selectDay" data-day="11/13/2021" class="day weekend">13</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="11/14/2021" class="day weekend">14</td>
+                                        <td id="" data-action="selectDay" data-day="11/15/2021" class="day">15</td>
+                                        <td id="" data-action="selectDay" data-day="11/16/2021" class="day">16</td>
+                                        <td id="" data-action="selectDay" data-day="11/17/2021" class="day">17</td>
+                                        <td id="" data-action="selectDay" data-day="11/18/2021" class="day">18</td>
+                                        <td id="" data-action="selectDay" data-day="11/19/2021" class="day">19</td>
+                                        <td id="" data-action="selectDay" data-day="11/20/2021" class="day weekend">20</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="11/21/2021" class="day weekend">21</td>
+                                        <td id="" data-action="selectDay" data-day="11/22/2021" class="day">22</td>
+                                        <td id="" data-action="selectDay" data-day="11/23/2021" class="day">23</td>
+                                        <td id="" data-action="selectDay" data-day="11/24/2021" class="day">24</td>
+                                        <td id="" data-action="selectDay" data-day="11/25/2021" class="day">25</td>
+                                        <td id="" data-action="selectDay" data-day="11/26/2021" class="day">26</td>
+                                        <td id="" data-action="selectDay" data-day="11/27/2021" class="day weekend">27</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="11/28/2021" class="day weekend">28</td>
+                                        <td id="" data-action="selectDay" data-day="11/29/2021" class="day">29</td>
+                                        <td id="" data-action="selectDay" data-day="11/30/2021" class="day">30</td>
+                                        <td id="" data-action="selectDay" data-day="12/01/2021" class="day new">1</td>
+                                        <td id="" data-action="selectDay" data-day="12/02/2021" class="day new">2</td>
+                                        <td id="" data-action="selectDay" data-day="12/03/2021" class="day new">3</td>
+                                        <td id="" data-action="selectDay" data-day="12/04/2021" class="day new weekend">4</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="12/05/2021" class="day new weekend">5</td>
+                                        <td id="" data-action="selectDay" data-day="12/06/2021" class="day new">6</td>
+                                        <td id="" data-action="selectDay" data-day="12/07/2021" class="day new">7</td>
+                                        <td id="" data-action="selectDay" data-day="12/08/2021" class="day new">8</td>
+                                        <td id="" data-action="selectDay" data-day="12/09/2021" class="day new">9</td>
+                                        <td id="" data-action="selectDay" data-day="12/10/2021" class="day new">10</td>
+                                        <td id="" data-action="selectDay" data-day="12/11/2021" class="day new weekend">11</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+      
+            </div>
+
+
+original from main branch
+
+'use strict';
+(function(){
+
+    function Start()
+    {
+        console.log("Calendar controls added...");
+
+        /*let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        console.log(dd);
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //Jan. is 0
+        console.log(mm);
+        let yyyy = today.getFullYear();
+        console.log(yyyy);
+        console.log(today);
+        */
+        let cheveronRight = document.getElementById("right");
+        cheveronRight.addEventListener('click', incCalendar);
+        let cheveronLeft = document.getElementById("left");
+        cheveronLeft.addEventListener('click', decCalendar);
+        
+        let days = document.getElementsByTagName('td');
+        for(let element of days)
+        {
+            element.addEventListener("click", (event) => {
+                //retreive the date and add to the url then send
+                console.log(element.getAttribute("data-day"));
+            });
+            element.addEventListener("mouseover", (event) => {
+                element.style.backgroundColor = "DeepSkyBlue";
+            });
+            element.addEventListener("mouseleave", (event) => {
+                element.style.backgroundColor = "white";
+            });
+        }
+        //logCalender();
+    }
+
+    window.addEventListener("load", Start);
+
+})();
+
+//build some seperate functions
+function logCalender(){
+    console.log("calendar function called");
+}
+
+function initializeCalender(){
+    console.log("calendar intializing");
+    let center = document.getElementById("onethree");
+    let pCenter = center.getAttribute('data-day').split('/');
+    let thisMonth = new Date(pCenter[2], pCenter[0]-1, pCenter[1], 0, 0, 0, 0);
+    console.log(thisMonth);
+}
+
+
+function incCalendar()
+{
+    let center = document.getElementById("onethree");
+            let pCenter = center.getAttribute('data-day').split('/');
+            let thisMonth = new Date(pCenter[2], pCenter[0]-1, pCenter[1], 0, 0, 0, 0);
+            let nextMonth = new Date(thisMonth.setMonth(thisMonth.getMonth()+1));
+            let monthTitle = document.getElementById('MonthName');
+            monthTitle.innerHTML = (nextMonth.toLocaleDateString("en-us", { month: "long"}) + " " + nextMonth.getFullYear());
+            nextMonth.setDate(1);
+            let dayName = nextMonth.toLocaleDateString("en-us", { weekday: "long"});
+            let days = document.getElementsByTagName('td');
+            
+            let trigger = false;
+            for(let d of days)
+            {
+                d.innerHTML = null;
+                if(trigger == false)
+                {
+                    if(!(d.getAttribute('id').localeCompare(dayName)))
+                    {
+                        d.innerHTML = nextMonth.getDate();
+                        let dd = String(nextMonth.getDate()).padStart(2, '0');
+                        let mm = String(nextMonth.getMonth() + 1).padStart(2, '0');
+                        let yyyy = nextMonth.getFullYear();
+                        let dateStr = mm + "/" + dd + "/" + yyyy;
+                        d.setAttribute("data-day", dateStr);
+                        nextMonth.setDate(nextMonth.getDate() + 1);
+                        trigger = true;
+                    }
+                }
+                else
+                {
+                    d.innerHTML = nextMonth.getDate();
+                    let dd = String(nextMonth.getDate()).padStart(2, '0');
+                    let mm = String(nextMonth.getMonth() + 1).padStart(2, '0');
+                    let yyyy = nextMonth.getFullYear();
+                    let dateStr = mm + "/" + dd + "/" + yyyy;
+                    d.setAttribute("data-day", dateStr);
+                    nextMonth.setDate(nextMonth.getDate() + 1);
+                }
+            }
+}
+
+function decCalendar()
+{
+    let center = document.getElementById("onethree");
+            let pCenter = center.getAttribute('data-day').split('/');
+            let thisMonth = new Date(pCenter[2], pCenter[0]-1, pCenter[1], 0, 0, 0, 0);
+            let prevMonth = new Date(thisMonth.setMonth(thisMonth.getMonth()-1));
+            let monthTitle = document.getElementById('MonthName');
+            monthTitle.innerHTML = (prevMonth.toLocaleDateString("en-us", { month: "long"}) + " " + prevMonth.getFullYear());
+            prevMonth.setDate(1);
+            let dayName = prevMonth.toLocaleDateString("en-us", { weekday: "long"});
+            let days = document.getElementsByTagName('td');
+            
+            let trigger = false;
+            for(let d of days)
+            {
+                d.innerHTML = null;
+                if(trigger == false)
+                {
+                    if(!(d.getAttribute('id').localeCompare(dayName)))
+                    {
+                        d.innerHTML = prevMonth.getDate();
+                        let dd = String(prevMonth.getDate()).padStart(2, '0');
+                        let mm = String(prevMonth.getMonth() + 1).padStart(2, '0'); //Jan. is 0
+                        let yyyy = prevMonth.getFullYear();
+                        let dateStr = mm + "/" + dd + "/" + yyyy;
+                        d.setAttribute("data-day", dateStr);
+                        prevMonth.setDate(prevMonth.getDate() + 1);
+                        trigger = true;
+                    }
+                }
+                else
+                {
+                    d.innerHTML = prevMonth.getDate();
+                    let dd = String(prevMonth.getDate()).padStart(2, '0');
+                    let mm = String(prevMonth.getMonth() + 1).padStart(2, '0'); //Jan. is 0
+                    let yyyy = prevMonth.getFullYear();
+                    let dateStr = mm + "/" + dd + "/" + yyyy;
+                    d.setAttribute("data-day", dateStr);
+                    prevMonth.setDate(prevMonth.getDate() + 1);
+                }
+            }
+}
+//jsonList.forEach(log());
+            //console.log(ApptList.split(',')[3]);
+            /*for(let a in ApptList)
+            {
+                console.log(a.AppDate);
+                match = compareDates(a, element.getAttribute('data-day'));
+                if(match)
+                {
+                    element.style.backgroundColor = 'DarkRed';
+                }
+                /*console.log(element.getAttribute('data-day') + a.ApptDate);
+                console.log(ApptList);
+                let tempObj = a.split(',');
+                console.log(a);
+                if(element.getAttribute('data-day') == tempObj.ApptDate)
+                {
+                    element.style.backgroundColor = "DarkRed";
+                    console.log('day marked');
+                }
+            }*/
+
+
+http://localhost:3000/seeker/profile
+
+<span type="hidden" id="apptList" value="[{&quot;_id&quot;:&quot;619bb0c49fe6dcfbe2ab7d88&quot;,&quot;ApptTrainer&quot;:&quot;trainer&quot;,&quot;ApptSeeker&quot;:&quot;seeker&quot;,&quot;ApptDate&quot;:&quot;11/09/2021&quot;,&quot;ApptLoc&quot;:&quot;someplace&quot;,&quot;ApptTime&quot;:&quot;2:00pm&quot;,&quot;__v&quot;:0}]"></span>
+
+    <div class="container">
+      <div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
+        <div class="card flex-fill">
+          <div class="card-header">
+            <div class="card-actions float-end">
+              <a href="#" class="me-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw align-middle"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              </a>
+              <div class="d-inline-block dropdown show">
+                <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-end" id="hamburger">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+            </div>
+            <h5 class="card-title mb-0">Calendar</h5>
+          </div>
+          <div class="card-body d-flex">
+            <div class="align-self-center w-100">
+              <div class="chart">
+                <div id="datetimepicker-dashboard">
+                  <div class="bootstrap-datetimepicker-widget usetwentyfour">
+                    <ul class="list-unstyled">
+                      <li class="show">
+                        <div class="datepicker">
+                          <div class="datepicker-days" style="">
+                            <table class="table table-sm">
+                              <thead>
+                                <tr>
+                                  <th class="prev" data-action="previous">
+                                    <span class="fas fa-chevron-left" title="Previous Month" id="left">
+
+                                    </span>
+                                  </th>
+                                  <th id="MonthName" class="picker-switch" data-action="pickerSwitch" colspan="5" title="Select Month">November 2021</th>
+                                  <th class="next" data-action="next">
+                                    <span class="fas fa-chevron-right" title="Next Month" id="right"></span>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <th class="dow">Su</th>
+                                  <th class="dow">Mo</th>
+                                  <th class="dow">Tu</th>
+                                  <th class="dow">We</th>
+                                  <th class="dow">Th</th>
+                                  <th class="dow">Fr</th>
+                                  <th class="dow">Sa</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td id="Sunday" data-action="selectDay" data-day="10/31/2021" class="day old weekend">31<p>some data</p></td>
+                                  <td id="Monday" data-action="selectDay" data-day="11/01/2021" class="day">1</td>
+                                  <td id="Tuesday" data-action="selectDay" data-day="11/02/2021" class="day">2</td>
+                                  <td id="Wednesday" data-action="selectDay" data-day="11/03/2021" class="day">3</td>
+                                  <td id="Thursday" data-action="selectDay" data-day="11/04/2021" class="day">4</td>
+                                  <td id="Friday" data-action="selectDay" data-day="11/05/2021" class="day">5</td>
+                                  <td id="Saturday" data-action="selectDay" data-day="11/06/2021" class="day weekend">6</td>
+                                </tr>
+                                <tr>
+                                  <td id="" data-action="selectDay" data-day="11/07/2021" class="day weekend">7</td>
+                                  <td id="" data-action="selectDay" data-day="11/08/2021" class="day">8</td>
+                                  <td id="" data-action="selectDay" data-day="11/09/2021" class="day">9</td>
+                                  <td id="" data-action="selectDay" data-day="11/10/2021" class="day">10</td>
+                                  <td id="" data-action="selectDay" data-day="11/11/2021" class="day">11</td>
+                                  <td id="" data-action="selectDay" data-day="11/12/2021" class="day active today">12</td>
+                                  <td id="onethree" data-action="selectDay" data-day="11/13/2021" class="day weekend">13</td>
+                                </tr>
+                                <tr>
+                                  <td id="" data-action="selectDay" data-day="11/14/2021" class="day weekend">14</td>
+                                  <td id="" data-action="selectDay" data-day="11/15/2021" class="day">15</td>
+                                  <td id="" data-action="selectDay" data-day="11/16/2021" class="day">16</td>
+                                  <td id="" data-action="selectDay" data-day="11/17/2021" class="day">17</td>
+                                  <td id="" data-action="selectDay" data-day="11/18/2021" class="day">18</td>
+                                  <td id="" data-action="selectDay" data-day="11/19/2021" class="day">19</td>
+                                  <td id="" data-action="selectDay" data-day="11/20/2021" class="day weekend">20</td>
+                                </tr>
+                                <tr>
+                                  <td id="" data-action="selectDay" data-day="11/21/2021" class="day weekend">21</td>
+                                  <td id="" data-action="selectDay" data-day="11/22/2021" class="day">22</td>
+                                  <td id="" data-action="selectDay" data-day="11/23/2021" class="day">23</td>
+                                  <td id="" data-action="selectDay" data-day="11/24/2021" class="day">24</td>
+                                  <td id="" data-action="selectDay" data-day="11/25/2021" class="day">25</td>
+                                  <td id="" data-action="selectDay" data-day="11/26/2021" class="day">26</td>
+                                  <td id="" data-action="selectDay" data-day="11/27/2021" class="day weekend">27</td>
+                                </tr>
+                                <tr>
+                                  <td id="" data-action="selectDay" data-day="11/28/2021" class="day weekend">28</td>
+                                  <td id="" data-action="selectDay" data-day="11/29/2021" class="day">29</td>
+                                  <td id="" data-action="selectDay" data-day="11/30/2021" class="day">30</td>
+                                  <td id="" data-action="selectDay" data-day="12/01/2021" class="day new">1</td>
+                                  <td id="" data-action="selectDay" data-day="12/02/2021" class="day new">2</td>
+                                  <td id="" data-action="selectDay" data-day="12/03/2021" class="day new">3</td>
+                                  <td id="" data-action="selectDay" data-day="12/04/2021" class="day new weekend">4</td>
+                                </tr>
+                                <tr>
+                                  <td id="" data-action="selectDay" data-day="12/05/2021" class="day new weekend">5</td>
+                                  <td id="" data-action="selectDay" data-day="12/06/2021" class="day new">6</td>
+                                  <td id="" data-action="selectDay" data-day="12/07/2021" class="day new">7</td>
+                                  <td id="" data-action="selectDay" data-day="12/08/2021" class="day new">8</td>
+                                  <td id="" data-action="selectDay" data-day="12/09/2021" class="day new">9</td>
+                                  <td id="" data-action="selectDay" data-day="12/10/2021" class="day new">10</td>
+                                  <td id="" data-action="selectDay" data-day="12/11/2021" class="day new weekend">11</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card flex-fill">
+          <!--header of daily calendar-->
+          <div class="card-header">
+            <div class="card-actions float-end">
+              <a href="#" class="me-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw align-middle"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              </a>
+              <div class="d-inline-block dropdown show">
+                <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-end" id="hamburger">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+            </div>
+            <h5 class="card-title mb-0">Day Schedule</h5>
+          </div>
+<!--body of daily calendar-->
+
+      </div>
+    </div>
+
+      <p>There are still some bugs in the calendar</p>
+    </div>
+  </main>
+
+
+ apptDate: '11/09/2021',
+    apptTrainer: 'trainer',
+    apptSeek: 'seeker',
+    apptLoc: 'someplace',
+    apptTime: '2:00pm'
+
+ 
+                        name="apptDate"
+                        name="apptTrainer" 
+                         name="apptSeek" 
+                         name="apptLoc" 
+                        name="apptTime"
+
+console.log(req.body.apptDate);
+    console.log(req.body.apptTrainer);
+    console.log(req.body.apptSeek);
+    console.log(req.body.apptLoc);
+    console.log(req.body.apptTime);
+
+
+Modified version from branch 2
+
+'use strict';
+(function(){
+
+    function Start()
+    {
+        console.log("Calendar controls added...");
+
+        /*let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        console.log(dd);
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //Jan. is 0
+        console.log(mm);
+        let yyyy = today.getFullYear();
+        console.log(yyyy);
+        console.log(today);*/
+
+        //perform init of calendar here
+        //initializeCalender();
+        console.log(req.user.username);
+        let cheveronRight = document.getElementById("right");
+        cheveronRight.addEventListener('click', incCalendar);
+        let cheveronLeft = document.getElementById("left");
+        cheveronLeft.addEventListener('click', decCalendar);
+        
+        let days = document.getElementsByTagName('td');
+        for(let element of days)
+        {
+            element.addEventListener("click", (event) => {
+                //retreive the date and add to the url then send
+                let setterDate = (element.getAttribute("data-day"));
+                //we want to present button for doing stuff
+                let dateStr = document.getElementById('apptDate');
+                dateStr.setAttribute('value', setterDate);
+                //dateStr.innerHTML = dateStr;
+            });
+            element.addEventListener("mouseover", (event) => {
+                element.style.backgroundColor = "DeepSkyBlue";
+            });
+            element.addEventListener("mouseleave", (event) => {
+                element.style.backgroundColor = "white";
+            });
+        }
+        //logCalender();
+    }
+
+    window.addEventListener("load", Start);
+
+})();
+
+//build some seperate functions
+function changeCalender(){
+    console.log("calendar function called");
+}
+
+function initializeCalender(){
+    console.log("calendar intilization");
+    let center = document.getElementById("onethree");
+    let pCenter = center.getAttribute('data-day').split('/');
+    let thisMonth = new Date(pCenter[2], pCenter[0]-1, pCenter[1], 0, 0, 0, 0);
+    //retreive the name of the month
+    let monthTitle = document.getElementById('MonthName');
+    monthTitle.innerHTML = (thisMonth.toLocaleDateString("en-us", { month: "long"}) + " " + thisMonth.getFullYear());
+    //set the date of this month to the first
+    thisMonth.setDate(1);
+    //find the day that the first falls on
+    let dayName = thisMonth.toLocaleDateString("en-us", { weekday: "long"});
+    let days = document.getElementsByTagName('td');
+    //start the day adding process but just add callbacks 
+    console.log(days);
+    /*let trigger = false;
+    for(let d of days)
+    {
+        d.innerHTML = null;
+        if(trigger == false)
+        {
+
+        }
+    }*/
+}
+
+function incCalendar()
+{
+    let center = document.getElementById("onethree");
+            let pCenter = center.getAttribute('data-day').split('/');
+            let thisMonth = new Date(pCenter[2], pCenter[0]-1, pCenter[1], 0, 0, 0, 0);
+            let nextMonth = new Date(thisMonth.setMonth(thisMonth.getMonth()+1));
+            let monthTitle = document.getElementById('MonthName');
+            monthTitle.innerHTML = (nextMonth.toLocaleDateString("en-us", { month: "long"}) + " " + nextMonth.getFullYear());
+            nextMonth.setDate(1);
+            let dayName = nextMonth.toLocaleDateString("en-us", { weekday: "long"});
+            let days = document.getElementsByTagName('td');
+            
+            let trigger = false;
+            for(let d of days)
+            {
+                d.innerHTML = null;
+                if(trigger == false)
+                {
+                    if(!(d.getAttribute('id').localeCompare(dayName)))
+                    {
+                        d.innerHTML = nextMonth.getDate();
+                        let dd = String(nextMonth.getDate()).padStart(2, '0');
+                        let mm = String(nextMonth.getMonth() + 1).padStart(2, '0');
+                        let yyyy = nextMonth.getFullYear();
+                        let dateStr = mm + "/" + dd + "/" + yyyy;
+                        d.setAttribute("data-day", dateStr);
+                        nextMonth.setDate(nextMonth.getDate() + 1);
+                        trigger = true;
+                    }
+                }
+                else
+                {
+                    d.innerHTML = nextMonth.getDate();
+                    let dd = String(nextMonth.getDate()).padStart(2, '0');
+                    let mm = String(nextMonth.getMonth() + 1).padStart(2, '0');
+                    let yyyy = nextMonth.getFullYear();
+                    let dateStr = mm + "/" + dd + "/" + yyyy;
+                    d.setAttribute("data-day", dateStr);
+                    nextMonth.setDate(nextMonth.getDate() + 1);
+                }
+            }
+}
+
+function decCalendar()
+{
+    let center = document.getElementById("onethree");
+            let pCenter = center.getAttribute('data-day').split('/');
+            let thisMonth = new Date(pCenter[2], pCenter[0]-1, pCenter[1], 0, 0, 0, 0);
+            let prevMonth = new Date(thisMonth.setMonth(thisMonth.getMonth()-1));
+            let monthTitle = document.getElementById('MonthName');
+            monthTitle.innerHTML = (prevMonth.toLocaleDateString("en-us", { month: "long"}) + " " + prevMonth.getFullYear());
+            prevMonth.setDate(1);
+            let dayName = prevMonth.toLocaleDateString("en-us", { weekday: "long"});
+            let days = document.getElementsByTagName('td');
+            
+            let trigger = false;
+            for(let d of days)
+            {
+                d.innerHTML = null;
+                if(trigger == false)
+                {
+                    if(!(d.getAttribute('id').localeCompare(dayName)))
+                    {
+                        d.innerHTML = prevMonth.getDate();
+                        let dd = String(prevMonth.getDate()).padStart(2, '0');
+                        let mm = String(prevMonth.getMonth() + 1).padStart(2, '0'); //Jan. is 0
+                        let yyyy = prevMonth.getFullYear();
+                        let dateStr = mm + "/" + dd + "/" + yyyy;
+                        d.setAttribute("data-day", dateStr);
+                        prevMonth.setDate(prevMonth.getDate() + 1);
+                        trigger = true;
+                    }
+                }
+                else
+                {
+                    d.innerHTML = prevMonth.getDate();
+                    let dd = String(prevMonth.getDate()).padStart(2, '0');
+                    let mm = String(prevMonth.getMonth() + 1).padStart(2, '0'); //Jan. is 0
+                    let yyyy = prevMonth.getFullYear();
+                    let dateStr = mm + "/" + dd + "/" + yyyy;
+                    d.setAttribute("data-day", dateStr);
+                    prevMonth.setDate(prevMonth.getDate() + 1);
+                }
+            }
+}
+
+
+<%- include('partials/header'); %>
+<%- include('partials/login_nav') %>
+
+<body>
+    <p>display info from the database</p>
+</body>
+
+<%- include('partials/bottom_nav') %>  
+<%- include('partials/footer') %>
+
+http://localhost:3000/seeker/favorites
+http://localhost:3000/seeker/search
+http://localhost:3000/seeker/account
+
+
+<body>
+    <main class="container">
+        <div class="row align-items-md-stretch">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Create Profile</h2>
+                <h4>This is represents the page that you show the world, express yourself!</h4>
+            </div>
+        </div>
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid">
+                <form action="/createAccount" method="post" charset="UTF-8">
+                    <table>
+                        <tr>
+                            <td>Greeting - A friendly way to introduce yourself</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="Greeting" name="greet"></td>
+                        </tr>
+
+
+                        <tr>
+                            <td><input type="submit" </td>
+                        </tr>
+                    </table>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+<a type=submit class="btn btn-dark btn-lg px-4">Create Profile</a>
+
+
+<div class="row mb-3">
+  <div class="col-6 col-sm-4 themed-grid-col">.col-6 .col-sm-4</div>
+  <div class="col-6 col-sm-4 themed-grid-col">.col-6 .col-sm-4</div>
+  <div class="col-6 col-sm-4 themed-grid-col">.col-6 .col-sm-4</div>
+</div>
+
+col-md-6 col-xxl-3 d-flex order-1 order-xxl-1
+
+let form1 = document.createElement('form');
+                               
+                let button1 = document.createElement('a');
+                button1.setAttribute("class", "btn btn-primary btn-lg");
+                button1.setAttribute("type", "submit");
+                button1.innerHTML = "Set Appt";
+                //button1.setAttribute("value", "Set Appt");
+                let loc = document.getElementById('location1');
+                let input = document.getElementById('formdate');
+                input.setAttribute('value', element.getAttribute('data-day'));
+                input.innerHTML=element.getAttribute('data-day');
+                //loc.appendChild(form1);
+                //div.appendChild(button1);
+                loc.appendChild(button1);
+                /*let button2 = document.createElement('a');
+                button2.setAttribute("class", "btn btn-primary");
+                button2.setAttribute("href", "/getAppt");
+                loc.appendChild(button2);*/
+
+
+<table>
+                        <tr>
+                          <td><table>
+                        <tr>
+                          <td>Date:</td>
+                          <td><input type="text" name="apptDate" id="apptDate"></td>
+                        </tr>
+                        <tr>
+                          <td>Trainer:</td>
+                          <td><input type="text" name="apptTrainer"></td>
+                        </tr>
+                        <tr>
+                          <td>Seeker:</td>
+                          <td><input type="text" name="apptSeek"></td>
+                        </tr>
+                        <tr>
+                          <td>Location:</td>
+                          <td><input type="text" name="apptLoc"></td>
+                        </tr>
+                        <tr>
+                          <td>Time:</td>
+                          <td><input type="text" name="apptTime"></td>
+                        </tr>
+                      </table></td>
+                          <td><input type="text" name="apptDate" id="apptDate"></td>
+                        </tr>
+                        <tr>
+                          <td>Trainer:</td>
+                          <td><input type="text" name="apptTrainer"></td>
+                        </tr>
+                        <tr>
+                          <td>Seeker:</td>
+                          <td><input type="text" name="apptSeek"></td>
+                        </tr>
+                        <tr>
+                          <td>Location:</td>
+                          <td><input type="text" name="apptLoc"></td>
+                        </tr>
+                        <tr>
+                          <td>Time:</td>
+                          <td><input type="text" name="apptTime"></td>
+                        </tr>
+                      </table>
+
