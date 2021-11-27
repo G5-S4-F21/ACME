@@ -7,43 +7,104 @@
         <div class="row align-items-md-stretch">
             <div class="h-100 p-5 text-white bg-dark rounded-3">
                 <h2>Create Account</h2>
-                <h4>Just choose some credentials and we can get to playing</h4>
+                <h4>Start here and we can get to playing</h4>
             </div>
         </div>
         <div class="p-5 mb-4 bg-light rounded-3">
             <div class="container-fluid">
-                <form action="/createAccount" method="post" charset="UTF-8">
-                    <div>
-                        <table>
-                            <tr>
-                                <td>User Name</td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="uname"></td>
-                            </tr>
-                            <tr>
-                                <td>Password</td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="password"></td>
-                            </tr>
-                            <tr>
-                                <td>Account Type</td>
-                            </tr>
-                            <tr>
-                                
-                                <td><input type="radio" name="acctType" id="seeker" value="seeker">trainer seeker</td>
-                                <td><input type="radio" name="acctType" id="trainer" value="trainer">trainer</td>
-                                <td><input type="radio" name="acctType" id="admin" value="admin">admin</td>
-                                <td><input type="radio" name="acctType" id="audit" value="auditor">auditor</td>
-                            </tr>
-                        </table>
+<!--                <form action="/createAccount" method="post" charset="UTF-8">-->
+                <div>
+<!--                    <div>-->
+<!--                        <table>-->
+<!--                            <tr>-->
+<!--                                <td>User Name</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td><input type="text" name="uname"></td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>Password</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td><input type="text" name="password"></td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>Account Type</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+
+<!--                                <td><input type="radio" name="acctType" id="seeker" value="seeker">trainer seeker</td>-->
+<!--                                <td><input type="radio" name="acctType" id="trainer" value="trainer">trainer</td>-->
+<!--                                <td><input type="radio" name="acctType" id="admin" value="admin">admin</td>-->
+<!--                                <td><input type="radio" name="acctType" id="audit" value="auditor">auditor</td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </div>-->
+                    <div class="container">
+                        <!--email field-->
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="mb-3">
+                                    <label for="userEmail" class="form-label">Email address</label>
+                                    <input required type="email" class="form-control" id="userEmail" placeholder="Please enter your email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--password field-->
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="mb-3">
+                                    <label for="userPassword" class="form-label">Password</label>
+                                    <input required type="password" class="form-control" id="userPassword" placeholder="Please setup your password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--cellphone field-->
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <div class="mb-3">
+                                    <label for="userCellphone" class="form-label">Cellphone number</label>
+                                    <input required type="text" class="form-control" id="userCellphone" placeholder="Please enter your cellphone number">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <input type="submit" value="Sign me up!" />
+
+                    <!--account type field-->
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="mb-3">
+                                <label for="userCellphone" class="form-label">Register as </label>
+                                <div class="form-check form-check-inline">
+                                    <input checked class="form-check-input" type="radio" name="account_type" id="inlineRadio1" value="trainer_seeker">
+                                    <label class="form-check-label" for="inlineRadio1">Trainer Seeker</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="account_type" id="inlineRadio2" value="trainer">
+                                    <label class="form-check-label" for="inlineRadio2">Trainer</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="account_type" id="inlineRadio3" value="auditor">
+                                    <label class="form-check-label" for="inlineRadio3">Auditor</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!--submit button-->
+                    <div class="row">
+                        <div class="col-md-2 offset-md-3">
+                            <Button id="submit_button" class="btn btn-primary">Submit</Button>
+                        </div>
+                    </div>
+<!--                    <div>-->
+<!--                        <input type="submit" value="Sign me up!" />-->
+<!--                    </div>-->
                 </form>
             </div>
         </div>
     </main>
+    <script type="text/javascript" src="/scripts/createAccount.js"></script>
 

@@ -37,11 +37,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+app.use('/', express.static('public'))
 app.use(express.static(path.join(__dirname, '../node_modules')));
 
 app.use(session({
   secret: "somesecret",
-  saveUninitialized: false, 
+  saveUninitialized: true,
   resave: false
 }));
 
@@ -57,7 +58,7 @@ app.use('/trainer', trainerRouter);
 let userModel = require('../models/users.js');
 let User = userModel.User;
 
-passport.use(User.createStrategy()); 
+passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
