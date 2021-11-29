@@ -16,7 +16,7 @@ let localuser = User({
             console.log('in the function');
         }
     })(req, res, next);*/
-    passport.authenticate('local', 
+    passport.authenticate('local',
     (err, localuser, info) => {
         if(err)
         {
@@ -43,7 +43,7 @@ let localuser = User({
 
 
  <tr>
-                                
+
                                 <td><input type="radio" name="acctType" id="seeker" value="seeker">trainer seeker</td>
                                 <td><input type="radio" name="acctType" id="trainer" value="trainer">trainer</td>
                                 <td><input type="radio" name="acctType" id="admin" value="admin">admin</td>
@@ -62,7 +62,7 @@ let localuser = User({
                       <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
                       </a>
-      
+
                       <div class="dropdown-menu dropdown-menu-end" id="hamburger">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -86,7 +86,7 @@ let localuser = User({
                                       <tr>
                                         <th class="prev" data-action="previous">
                                           <span class="fas fa-chevron-left" title="Previous Month" id="left">
-      
+
                                           </span>
                                         </th>
                                         <th id="MonthName" class="picker-switch" data-action="pickerSwitch" colspan="5" title="Select Month">November 2021</th>
@@ -171,8 +171,8 @@ let localuser = User({
                   </div>
                 </div>
               </div>
-      
-      
+
+
             </div>
 
 
@@ -198,7 +198,7 @@ original from main branch
         cheveronRight.addEventListener('click', incCalendar);
         let cheveronLeft = document.getElementById("left");
         cheveronLeft.addEventListener('click', decCalendar);
-        
+
         let days = document.getElementsByTagName('td');
         for(let element of days)
         {
@@ -245,7 +245,7 @@ function incCalendar()
             nextMonth.setDate(1);
             let dayName = nextMonth.toLocaleDateString("en-us", { weekday: "long"});
             let days = document.getElementsByTagName('td');
-            
+
             let trigger = false;
             for(let d of days)
             {
@@ -288,7 +288,7 @@ function decCalendar()
             prevMonth.setDate(1);
             let dayName = prevMonth.toLocaleDateString("en-us", { weekday: "long"});
             let days = document.getElementsByTagName('td');
-            
+
             let trigger = false;
             for(let d of days)
             {
@@ -504,11 +504,11 @@ http://localhost:3000/seeker/profile
     apptLoc: 'someplace',
     apptTime: '2:00pm'
 
- 
+
                         name="apptDate"
-                        name="apptTrainer" 
-                         name="apptSeek" 
-                         name="apptLoc" 
+                        name="apptTrainer"
+                         name="apptSeek"
+                         name="apptLoc"
                         name="apptTime"
 
 console.log(req.body.apptDate);
@@ -543,7 +543,7 @@ Modified version from branch 2
         cheveronRight.addEventListener('click', incCalendar);
         let cheveronLeft = document.getElementById("left");
         cheveronLeft.addEventListener('click', decCalendar);
-        
+
         let days = document.getElementsByTagName('td');
         for(let element of days)
         {
@@ -587,7 +587,7 @@ function initializeCalender(){
     //find the day that the first falls on
     let dayName = thisMonth.toLocaleDateString("en-us", { weekday: "long"});
     let days = document.getElementsByTagName('td');
-    //start the day adding process but just add callbacks 
+    //start the day adding process but just add callbacks
     console.log(days);
     /*let trigger = false;
     for(let d of days)
@@ -611,7 +611,7 @@ function incCalendar()
             nextMonth.setDate(1);
             let dayName = nextMonth.toLocaleDateString("en-us", { weekday: "long"});
             let days = document.getElementsByTagName('td');
-            
+
             let trigger = false;
             for(let d of days)
             {
@@ -654,7 +654,7 @@ function decCalendar()
             prevMonth.setDate(1);
             let dayName = prevMonth.toLocaleDateString("en-us", { weekday: "long"});
             let days = document.getElementsByTagName('td');
-            
+
             let trigger = false;
             for(let d of days)
             {
@@ -694,7 +694,7 @@ function decCalendar()
     <p>display info from the database</p>
 </body>
 
-<%- include('partials/bottom_nav') %>  
+<%- include('partials/bottom_nav') %>
 <%- include('partials/footer') %>
 
 http://localhost:3000/seeker/favorites
@@ -744,7 +744,7 @@ http://localhost:3000/seeker/account
 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1
 
 let form1 = document.createElement('form');
-                               
+
                 let button1 = document.createElement('a');
                 button1.setAttribute("class", "btn btn-primary btn-lg");
                 button1.setAttribute("type", "submit");
@@ -807,3 +807,32 @@ let form1 = document.createElement('form');
                         </tr>
                       </table>
 
+<li class="nav-item active">
+      <li class="nav-item">
+        <a id="Home" class="nav-link" href="/Home"><i class="fas fa-lg fa-laptop-house"></i> Home </a>
+      </li>
+
+      <li class="nav-item active">
+      <li class="nav-item">
+        <a id="About" class="nav-link" href="/About"><i class="fas fa-info-circle"></i> About </a>
+      </li>
+
+      <li class="nav-item active">
+      <li class="nav-item">
+        <a id="Projects" class="nav-link" href="/Projects"><i class="fab fa-elementor"></i> Products </a>
+      </li>
+
+      <li class="nav-item active">
+      <li class="nav-item">
+        <a id="Services" class="nav-link" href="/services"><i class="fas fa-cogs"></i> Services </a>
+      </li>
+
+      <li class="nav-item active">
+      <li class="nav-item">
+        <a class="nav-link" href="/login"><i class="fas fa-book"></i> Network </a>
+      </li>
+
+      <li class="nav-item active">
+      <li class="nav-item">
+        <a id="Contact" class="nav-link" href="/Contact"><i class="fas fa-mobile-alt"></i> Contact </a>
+      </li>

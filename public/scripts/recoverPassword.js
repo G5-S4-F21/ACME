@@ -15,7 +15,7 @@ $('#send_email_button').click(()=>{
         user_email,
         user_account_type
     }
-    console.log(userInfo)
+    $('#send_email_button').attr('disabled', 'disabled')
 
     $.ajax({
         type:'GET',
@@ -45,6 +45,7 @@ $('#send_email_button').click(()=>{
                     text: 'Recover password email sent',
                 })
             }
+            $('#send_email_button').removeAttr('disabled')
         }
     })
 })

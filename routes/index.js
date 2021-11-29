@@ -35,11 +35,11 @@ function requireAuth(req, res, next)
 //renders the home page
 router.get('/', indexController.renderIndex);
 //renders the create account page
-router.get('/createAccount', indexController.createAccount);
+router.get('/createAccount', indexController.createAccountView);
 //handle the post from createAccount
 router.post('/createAccount', indexController.handleCreateAccount);
 //renders the login page
-router.get('/login', indexController.login);
+router.get('/login', indexController.loginView);
 //handles the post from the login
 router.post('/login', indexController.handleLogin);
 
@@ -48,6 +48,8 @@ router.get('/forgetPassword',indexController.renderForgetPasswordView)
 router.get('/sendRecoverPasswordEmail',indexController.sendRecoverPasswordEmail)
 router.get('/recoverPassword',indexController.renderResetPasswordView)
 router.post('/resetPassword',indexController.resetPasswordByAccountTypeAndUUID)
+// logout user
+router.get('/logout',indexController.logout)
 
 
 

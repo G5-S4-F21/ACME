@@ -45,10 +45,31 @@ passport.use(new LocalStrategy(
 
 //should render ../views/index.ejs//
 module.exports.renderIndex = (req, res, next) => {
-    res.render('index', { title: 'Tennis Assistant' });
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    console.log(userInfo)
+    res.render('index', {
+        title: 'Tennis Assistant',
+        userInfo
+    });
 }
-module.exports.createAccount = (req, res, next) => {
-    res.render('createAccount', { title: "Create Account"});
+/**
+ * render register view
+ * @param req
+ * @param res
+ * @param next
+ */
+module.exports.createAccountView = (req, res, next) => {
+    const userInfo={}
+    res.render('createAccount', {
+        title: "Create Account",
+        userInfo:{
+            user_email: undefined
+        }
+    });
 }
 /**
  * create an account
@@ -133,10 +154,6 @@ const registerTrainer=(req,res)=>{
             })
 
             trainerSeeker.save().then(()=>{
-                // save session
-                req.session.user_email=req.body.user_email
-                req.session.user_password=req.body.user_password
-                req.session.user_account_type=req.body.user_account_type
                 return res.send('0')
             })
 
@@ -144,8 +161,16 @@ const registerTrainer=(req,res)=>{
     })
 }
 //renders the login page
-module.exports.login = (req, res, next) => {
-    res.render('login', { title: "Login"});
+module.exports.loginView = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    res.render('login', {
+        title: "Login",
+        userInfo
+    });
 }
 
 // module.exports.handleLogin = (req, res, next) => {
@@ -224,7 +249,10 @@ const findTrainerByEmailAndPassword=(req,res)=>{
         }else if(!trainers[0]){
             return res.send('-1') // email or password not right
         }else{
-            console.log(trainers)
+            // save session
+            req.session.user_email=req.body.user_email
+            req.session.user_password=req.body.user_password
+            req.session.user_account_type=req.body.user_account_type
             return res.send('1') // find user successfully
         }
     })
@@ -237,13 +265,24 @@ const findTrainerByEmailAndPassword=(req,res)=>{
  * @param next
  */
 module.exports.renderForgetPasswordView=(req,res,next)=>{
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
     res.render('forgetPasswordView',{
-        title:'Recover password'
+        title:'Recover password',
+        userInfo
     })
 }
 
 module.exports.sendRecoverPasswordEmail=(req,res,next)=>{
-    const {user_email, user_account_type}=req.query
+    const {user_account_type}=req.query
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
     switch (user_account_type){
         case 'Trainer':
             // find from Trainer DB
@@ -263,6 +302,11 @@ module.exports.sendRecoverPasswordEmail=(req,res,next)=>{
     }
 }
 const findTrainerByEmail=(req, res)=>{
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
     Trainer.find({trainerEmail:req.query.user_email}, (err, trainers)=>{
         if(err){
             return res.send('-2') // server error
@@ -285,11 +329,11 @@ const findTrainerByEmail=(req, res)=>{
             mailTransport.sendMail(options, function(err, msg){
                 if(err){
                     console.log(err);
-                    res.render('index', { title: err });
+                    res.render('index', { title: err, userInfo });
                 }
                 else {
                     console.log(msg);
-                    res.render('index', { title: "Received："+msg.accepted});
+                    res.render('index', { title: "Received："+msg.accepted, userInfo});
                 }
             })
         }
@@ -304,10 +348,16 @@ const findTrainerByEmail=(req, res)=>{
  */
 module.exports.renderResetPasswordView = (req,res,next)=>{
     // console.log(req.query.accountType,req.query.UUID)
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
     res.render('resetPasswordView', {
         title:'Reset password',
         account_type:req.query.accountType,
-        UUID: req.query.UUID
+        UUID: req.query.UUID,
+        userInfo
     })
 }
 
@@ -318,12 +368,11 @@ module.exports.renderResetPasswordView = (req,res,next)=>{
  * @param next
  */
 module.exports.resetPasswordByAccountTypeAndUUID=(req,res,next)=>{
-    const {new_password, account_type, UUID}=req.body
+    const {account_type}=req.body
 
     // find this user by account type and UUID
     switch (account_type){
         case 'Trainer':
-            // TODO: find this user in trainer DB by UUID
             findTrainerByUUID(req,res)
             break;
         case 'Trainer Seeker':
@@ -359,4 +408,17 @@ const findTrainerByUUID = (req,res)=>{
             return res.send('1')
         }
     })
+}
+/**
+ * logout user
+ * @param req
+ * @param res
+ * @param next
+ */
+module.exports.logout=(req,res,next)=>{
+    if(req.session){
+        req.session.destroy((err)=>{
+            res.redirect('/')
+        })
+    }
 }
