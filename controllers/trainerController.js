@@ -3,7 +3,7 @@ const { Console } = require('console');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
-let passport = require('passport'), 
+let passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy;
 let url = require('url');
 
@@ -21,7 +21,7 @@ module.exports.renderSchedule = (req, res, next) => {
             return console.error(err);
         }
         else {
-            res.render('trainerViews/viewSchedule', { title : "Schedule", 
+            res.render('trainerViews/viewSchedule', { title : "Schedule",
                 list : mainList });
         }
     });
@@ -36,7 +36,7 @@ module.exports.renderSetAppt = (req, res, next) => {
         ApptTime : req.body.apptTime
     });
     localAppt.save(function (err) {
-        if(err) 
+        if(err)
         {
             console.log('error setting appt');
             res.render('seekerViews/viewSchedule', { title: 'Schedule'});
@@ -53,8 +53,10 @@ module.exports.renderDetailedView = (req, res, next) => {
         }
         else{
             console.log(date);
-            res.render('seekerViews/detailedApptView', { title : 'details', appt : date });        
+            res.render('seekerViews/detailedApptView', { title : 'details', appt : date });
         }
     });
     //res.render('trainerViews/trainerDetailedAppt', { appt : })
 }
+
+

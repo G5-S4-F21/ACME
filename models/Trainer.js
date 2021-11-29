@@ -17,6 +17,7 @@ const trainerSchema=mongoose.Schema({
         type:Boolean,
         default: false
     },
+    'UUID':String
 })
 
 // configure options for User Model

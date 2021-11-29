@@ -1,11 +1,13 @@
 let express = require('express');
-let passport = require('passport'), 
+let passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 let router = express.Router();
 let UserModel = require('../models/users');
 let User = UserModel.User;
 
+
 let indexController = require('../controllers/indexController');
+const trainerController = require("../controllers/trainerController");
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
@@ -40,6 +42,12 @@ router.post('/createAccount', indexController.handleCreateAccount);
 router.get('/login', indexController.login);
 //handles the post from the login
 router.post('/login', indexController.handleLogin);
+
+// handle forget password
+router.get('/forgetPassword',indexController.renderForgetPasswordView)
+router.get('/sendRecoverPasswordEmail',indexController.sendRecoverPasswordEmail)
+router.get('/recoverPassword',indexController.renderResetPasswordView)
+router.post('/resetPassword',indexController.resetPasswordByAccountTypeAndUUID)
 
 
 
