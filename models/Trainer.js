@@ -12,7 +12,10 @@ const trainerSchema=mongoose.Schema({
         type:String,
         default: 'anonymous trainer',
     },
-    'trainerYearsOfTraining': String,
+    'trainerYearsOfTraining': {
+        type:String,
+        default: ''
+    },
     'passAudit':{
         type:Boolean,
         default: false

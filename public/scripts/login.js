@@ -51,7 +51,7 @@ $('#login_button').click(()=>{
                     position: 'center',
                     icon: 'success',
                     confirmButtonText: 'OK',
-                    title: 'Register successfully',
+                    title: 'Login successfully',
                     text: 'You will go to home page'
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */

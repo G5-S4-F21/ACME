@@ -43,4 +43,6 @@ h4{
 .fa-envelope{
   margin-right: 4px
 }
-
+#my_schedule:hover{
+  cursor: pointer
+}

@@ -20,8 +20,12 @@ function requireAuth(req, res, next)
 
 //router.get('/profile', trainerController.renderIndex);
 
-router.get('/schedule', requireAuth, trainerController.renderSchedule);
+router.get('/schedule', trainerController.renderScheduleView);
 router.post('/schedule', requireAuth, trainerController.renderDetailedView);
+
+// display fill certificate for a trainer view
+router.get('/certificate', trainerController.renderCertificateView);
+router.post('/certificate', trainerController.trainerFillCertificate);
 
 router.post('/setAppt', requireAuth, trainerController.renderSetAppt);
 
