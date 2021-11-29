@@ -17,6 +17,12 @@ const trainerSchema=mongoose.Schema({
         type:Boolean,
         default: false
     },
+    trainer_appointment:[
+        {
+            'trainer_seeker': String,
+            'date':String
+        }
+    ],
     'UUID':String
 })
 

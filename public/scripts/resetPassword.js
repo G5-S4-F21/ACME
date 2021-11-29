@@ -2,7 +2,7 @@
 $('#reset_button').click(()=>{
     const new_password=$('#new_password').val()
     const confirm_new_password=$('#confirm_new_password').val()
-    const account_type=$('#account_type').val()
+    const account_type=$('#account_type').val().replace(' ', '')
     const UUID=$('#UUID').val()
 
     // validation
@@ -28,6 +28,7 @@ $('#reset_button').click(()=>{
         account_type,
         UUID
     }
+    console.log(userInfo)
 
     // send AJAX to reset password
     $.ajax({
@@ -47,7 +48,7 @@ $('#reset_button').click(()=>{
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Trainer no exist',
+                    text: 'User does not exist',
                     footer: '<a href="/createAccount">Create one?</a>'
                 })
             }else if(data==='1'){

@@ -15,6 +15,9 @@ let User = UserModel.User;
 // refer to trainer DB
 const TrainerModel=require('../models/Trainer')
 const Trainer=TrainerModel.Trainer
+// refer to trainer seeker DB
+const Trainer_seeker_model=require('../models/Trainer_seeker')
+const Trainer_seeker=Trainer_seeker_model.Trainer_seeker
 
 // set up email sender
 
@@ -83,7 +86,7 @@ module.exports.handleCreateAccount = (req, res, next) => {
     switch (user_account_type){
         case 'trainer_seeker':
             // TODO:register trainer seeker
-            console.log('handle trainer seeker DB')
+            registerTrainerSeeker(req,res)
             break
         case 'trainer':
             // register trainer seek
@@ -143,23 +146,24 @@ const registerTrainer=(req,res)=>{
         }
 
         if(trainers[0]){
-            return res.send('1') // trainer seeker already exists
+            return res.send('1') // trainer already exists
         }else{
             // can register
-            let trainerSeeker=new Trainer({
+            let trainer=new Trainer({
                 trainerEmail:req.body.user_email,
                 trainerPassword:req.body.user_password,
                 trainerCellphone:req.body.user_cellphone_number,
                 UUID:uuidv4()
             })
 
-            trainerSeeker.save().then(()=>{
+            trainer.save().then(()=>{
                 return res.send('0')
             })
 
         }
     })
 }
+
 //renders the login page
 module.exports.loginView = (req, res, next) => {
     const userInfo={
@@ -171,6 +175,37 @@ module.exports.loginView = (req, res, next) => {
         title: "Login",
         userInfo
     });
+}
+
+/**
+ * register trainer seeker
+ * @param req
+ * @param res
+ */
+const registerTrainerSeeker=(req,res)=>{
+    console.log(req.body)
+    Trainer_seeker.find({trainer_seeker_email:req.body.user_email}, (err, trainer_seekers) =>{
+        if(err){
+            console.log(err)
+            return res.send('-2') // server err
+        }
+
+        if(trainer_seekers[0]){
+            return res.send('1') // trainer seeker already exists
+        }else{
+            // can register
+            let trainer_seeker=new Trainer_seeker({
+                trainer_seeker_email:req.body.user_email,
+                trainer_seeker_password:req.body.user_password,
+                trainer_seeker_cellphone:req.body.user_cellphone_number,
+                UUID:uuidv4()
+            })
+
+            trainer_seeker.save().then(()=>{
+                return res.send('0')
+            })
+        }
+    })
 }
 
 // module.exports.handleLogin = (req, res, next) => {
@@ -219,12 +254,12 @@ module.exports.handleLogin=(req, res, next)=>{
     const {user_email, user_password, user_account_type}=req.body
     switch (user_account_type){
         case 'Trainer':
-            // TODO: find user in Trainer DB
+            // find user in Trainer DB
             findTrainerByEmailAndPassword(req,res)
             break
         case 'Trainer Seeker':
-            // TODO: find user in Trainer Seeker DB
-            console.log('look for trainer seeker')
+            // find user in Trainer Seeker DB
+            findTrainerSeekerByEmailAndPassword(req,res)
             break
         case 'Auditor':
             // TODO: find user in Auditor DB
@@ -239,6 +274,11 @@ module.exports.handleLogin=(req, res, next)=>{
     }
 }
 
+/**
+ * find the trainer by email and password
+ * @param req
+ * @param res
+ */
 const findTrainerByEmailAndPassword=(req,res)=>{
     Trainer.find({
         trainerEmail: req.body.user_email,
@@ -247,6 +287,30 @@ const findTrainerByEmailAndPassword=(req,res)=>{
         if(err){
             return res.send('-2') // server error
         }else if(!trainers[0]){
+            return res.send('-1') // email or password not right
+        }else{
+            // save session
+            req.session.user_email=req.body.user_email
+            req.session.user_password=req.body.user_password
+            req.session.user_account_type=req.body.user_account_type
+            return res.send('1') // find user successfully
+        }
+    })
+}
+
+/**
+ * find the trainer seeker by email and password
+ * @param req
+ * @param res
+ */
+const findTrainerSeekerByEmailAndPassword=(req,res)=>{
+    Trainer_seeker.find({
+        trainer_seeker_email: req.body.user_email,
+        trainer_seeker_password:req.body.user_password
+    }, (err, trainer_seekers) =>{
+        if(err){
+            return res.send('-2') // server error
+        }else if(!trainer_seekers[0]){
             return res.send('-1') // email or password not right
         }else{
             // save session
@@ -276,6 +340,12 @@ module.exports.renderForgetPasswordView=(req,res,next)=>{
     })
 }
 
+/**
+ * send reset password email
+ * @param req
+ * @param res
+ * @param next
+ */
 module.exports.sendRecoverPasswordEmail=(req,res,next)=>{
     const {user_account_type}=req.query
     const userInfo={
@@ -289,7 +359,8 @@ module.exports.sendRecoverPasswordEmail=(req,res,next)=>{
             findTrainerByEmail(req,res)
             break
         case 'Trainer Seeker':
-            // TODO: find from Trainer Seeker DB
+            // find from Trainer Seeker DB
+            findTrainerSeekerByEmail(req,res)
             break
         case 'Auditor':
             // TODO: find from Auditor DB
@@ -301,6 +372,12 @@ module.exports.sendRecoverPasswordEmail=(req,res,next)=>{
             break
     }
 }
+
+/**
+ * find trainer by email
+ * @param req
+ * @param res
+ */
 const findTrainerByEmail=(req, res)=>{
     const userInfo={
         user_email:req.session.user_email,
@@ -341,6 +418,50 @@ const findTrainerByEmail=(req, res)=>{
 }
 
 /**
+ * find trainer seeker by email
+ * @param req
+ * @param res
+ */
+const findTrainerSeekerByEmail=(req, res)=>{
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    Trainer_seeker.find({trainer_seeker_email:req.query.user_email}, (err, trainer_seekers)=>{
+        if(err){
+            return res.send('-2') // server error
+        }else if(!trainer_seekers[0]){
+            return res.send('0') // no such user
+        }else{
+            // find user and ready to recover password email
+            //send an email to my email
+            const options = {
+                from        : '"My Personal Website" <wangxiaobei666@hotmail.com>',
+                to          : req.query.user_email,
+                subject        : 'An email from G5-S4-F21/ACME',
+                // text          : 'An email from my website',
+
+                html           : '<h4>Please click the link below to reset your password</h4><p>' +
+                    '<p>From: G5-S4-F21/ACME</p>' +
+                    '<p><a href="http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+trainer_seekers[0].UUID+'">http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+trainer_seekers[0].UUID+'</a>'
+            };
+
+            mailTransport.sendMail(options, function(err, msg){
+                if(err){
+                    console.log(err);
+                    res.render('index', { title: err, userInfo });
+                }
+                else {
+                    console.log(msg);
+                    res.render('index', { title: "Received："+msg.accepted, userInfo});
+                }
+            })
+        }
+    })
+}
+
+/**
  * render reset password view
  * @param req
  * @param res
@@ -348,14 +469,11 @@ const findTrainerByEmail=(req, res)=>{
  */
 module.exports.renderResetPasswordView = (req,res,next)=>{
     // console.log(req.query.accountType,req.query.UUID)
-    const userInfo={
-        user_email:req.session.user_email,
-        user_password:req.session.user_password,
-        user_account_type:req.session.user_account_type
-    }
+    const userInfo={}
+    console.log(req.query.accountType)
     res.render('resetPasswordView', {
         title:'Reset password',
-        account_type:req.query.accountType,
+        account_type:req.query.accountType.replace(' ', ''),
         UUID: req.query.UUID,
         userInfo
     })
@@ -369,14 +487,16 @@ module.exports.renderResetPasswordView = (req,res,next)=>{
  */
 module.exports.resetPasswordByAccountTypeAndUUID=(req,res,next)=>{
     const {account_type}=req.body
-
+    console.log(account_type)
     // find this user by account type and UUID
     switch (account_type){
         case 'Trainer':
+            // find this user in trainer DB by UUID
             findTrainerByUUID(req,res)
             break;
-        case 'Trainer Seeker':
-            // TODO: find this user in trainer seeker DB by UUID
+        case 'TrainerSeeker':
+            // find this user in trainer seeker DB by UUID
+            findTrainerSeekerByUUID(req,res)
             break;
         case 'Auditor':
             // TODO: find this user in Auditor DB by UUID
@@ -389,6 +509,11 @@ module.exports.resetPasswordByAccountTypeAndUUID=(req,res,next)=>{
     }
 }
 
+/**
+ * find the trainer by UUID
+ * @param req
+ * @param res
+ */
 const findTrainerByUUID = (req,res)=>{
     Trainer.findOneAndUpdate({UUID: req.body.UUID}, {
         $set:{
@@ -409,6 +534,34 @@ const findTrainerByUUID = (req,res)=>{
         }
     })
 }
+
+/**
+ * find the trainer seeker by UUID
+ * @param req
+ * @param res
+ */
+const findTrainerSeekerByUUID = (req,res)=>{
+    Trainer_seeker.findOneAndUpdate({UUID: req.body.UUID}, {
+        $set:{
+            trainer_seeker_password:req.body.new_password
+        }
+    }, {},(err, trainer_seeker) => {
+        console.log(trainer_seeker)
+        if(err){
+            // -2: server error
+            return res.send('-2')
+        }
+        if(!trainer_seeker){
+            // 0: no such user
+            return res.send('0')
+        }else{
+            // reset password
+            console.log('updated!')
+            return res.send('1')
+        }
+    })
+}
+
 /**
  * logout user
  * @param req
