@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "sans-serif", Helvetica, Arial, sans-serif;
+
 }
 
 a {
@@ -12,4 +13,36 @@ label{
 }
 nav{
   margin-bottom:20px;
+}
+h4{
+  color: #4b4b4b
+}
+.fa-home, .fa-address-card, .fa-basketball-ball{
+  color:white;
+  margin-right:10px;
+}
+.btn-profile{
+  color:white;
+  border-color: white;
+}
+.home_page_login_link{
+  color:white
+}
+.home_page_login_link:hover{
+  color: #cecece
+}
+.user_email, .fa-envelope{
+  color: #aaaaaa
+}
+.user_info{
+  font-size: small
+}
+.home_page_title{
+  font-size: 16px
+}
+.fa-envelope{
+  margin-right: 4px
+}
+#my_schedule:hover{
+  cursor: pointer
 }
