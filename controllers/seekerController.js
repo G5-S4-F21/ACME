@@ -73,6 +73,15 @@ module.exports.performSearch = (req, res, next) => {
     });
 }
 
+module.exports.renderFavorites = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    };
+
+    res.render('seekerViews/seekerFavView', { title : 'Favorites', userInfo : userInfo });
+}
 //render the schedule page for the seeker
 module.exports.renderSeekerSchedule = (req, res, next) => {
     const userInfo={
