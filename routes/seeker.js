@@ -10,7 +10,7 @@ let seekerController = require("../controllers/seekerController");
 
 function requireAuth(req, res, next)
 {
-    if(!req.isAuthenticated()){
+    if(!req.session){
         return res.redirect('/login');
     }
     next();
@@ -20,5 +20,6 @@ router.get('/schedule', requireAuth, seekerController.renderSeekerSchedule);
 
 router.post('/schedule', requireAuth, seekerController.renderDetailedView);
 
+router.post('/setAppt', requireAuth, seekerController.setAppt);
 
 module.exports = router;

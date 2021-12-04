@@ -43,6 +43,8 @@ router.get('/login', indexController.loginView);
 //handles the post from the login
 router.post('/login', indexController.handleLogin);
 
+//trial to add the login part
+
 // handle forget password
 router.get('/forgetPassword',indexController.renderForgetPasswordView)
 router.get('/sendRecoverPasswordEmail',indexController.sendRecoverPasswordEmail)
@@ -51,6 +53,7 @@ router.post('/resetPassword',indexController.resetPasswordByAccountTypeAndUUID)
 // logout user
 router.get('/logout',indexController.logout)
 
-
+//routes to specific homepages may be we change
+router.get('/seekerHome', indexController.renderSeekerHome);
 
 module.exports = router;

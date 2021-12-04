@@ -2,8 +2,8 @@ const { Console } = require('console');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
-let passport = require('passport'),
-LocalStrategy = require('passport-local').Strategy;
+let passport = require('passport');
+
 let url = require('url');
 const { v4: uuidv4 } = require('uuid')
 let nodemailer  = require('nodemailer')
@@ -28,21 +28,6 @@ const mailTransport = nodemailer.createTransport({
         pass: "13ULovEi14962464"
     }
 });
-
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.findOne({ uname: username}, function(err, user) {
-            if(err) {return done(err); }
-            if(!user) {
-                return done(null, false, {message: 'Incorrect username.'});
-            }
-            if(!user.validPassword(password)) {
-                return done(null, false, {message: 'in'});
-            }
-            return done(null, user);
-        });
-    }
-));
 
 
 
@@ -99,37 +84,6 @@ module.exports.handleCreateAccount = (req, res, next) => {
         default:
             break
     }
-    //User account creation
-    // let currentUser = User({
-    //         username: req.body.uname,
-    //         password: req.body.password,
-    //         accountType: req.body.acctType
-    //     });
-    //     //console.log(tempUser);
-    //     User.register(currentUser, req.body.password, (err) => {
-    //         if(err)
-    //         {
-    //              if(err.name == "UserExistsError"){
-    //              /*req.flash(
-    //                     'registerMessage',
-    //                     'Registration Error: User Already Exists!'
-    //              );*/
-    //              console.log("Error: User Already Exists");
-    //          }
-    //             return res.render('createAccount', {
-    //                 title: 'Register',
-    //                 //messages: req.flash('register'),
-    //                 displayName: req.user ? req.user.displayname: ''
-    //             });
-    //         }
-    //         else
-    //         {
-    //              //successful registration to the confirm account details page
-    //             return passport.authenticate('local')(req, res, ()=>{
-    //                 res.render('confCreateAccount', {title: "Account Confirmation" })
-    //             })
-    //         }
-    //     });
 }
 
 /**
@@ -208,70 +162,31 @@ const registerTrainerSeeker=(req,res)=>{
     })
 }
 
-// module.exports.handleLogin = (req, res, next) => {
-//     // passport login
-//     passport.authenticate('local',
-//     (err, user, info) => {
-//         if(err)
-//         {
-//             return next(err);
-//         }
-//         //console.log(user);
-//         if(!user)
-//         {
-//             return res.redirect('/login');
-//         }
-//         req.login(user, (err) => {
-//             if(err){
-//                 return next(err);
-//             }
-//             console.log(user.accountType)
-//             if(user.accountType == "trainer")
-//             {
-//
-//                 res.render('homePages/trainerHome', { name: user.displayName, title: "Trainer" });
-//             }
-//             else if(user.accountType == "seeker")
-//             {
-//                 res.render('homePages/seekerHome', { name: user.displayName, title: "Seeker" });
-//             }
-//             else if(user.accountType == "admin")
-//             {
-//                 res.render('homePages/adminHome', { name: user.displayName, title: "Admin" });
-//             }
-//             else if(user.accountType == "auditor")
-//             {
-//                 res.render('homePages/auditorHome', { name: user.name, title: "Audior" });
-//             }
-//             else
-//             {
-//                 res.render('homePages/defaultHome', { name: "Visitor", title: "Visitor"});
-//             }
-//         });
-//     })(req, res, next);
-// }
+
 module.exports.handleLogin=(req, res, next)=>{
     const {user_email, user_password, user_account_type}=req.body
-    switch (user_account_type){
-        case 'Trainer':
-            // find user in Trainer DB
-            findTrainerByEmailAndPassword(req,res)
-            break
-        case 'Trainer Seeker':
-            // find user in Trainer Seeker DB
-            findTrainerSeekerByEmailAndPassword(req,res)
-            break
-        case 'Auditor':
-            // TODO: find user in Auditor DB
-            console.log('look for auditor')
-            break
-        case 'Admin':
-            // TODO: find user in Admin DB
-            console.log('look for admin')
-            break
-        default:
-            break
-    }
+    
+        switch (user_account_type){
+            case 'Trainer':
+                // find user in Trainer DB
+                findTrainerByEmailAndPassword(req,res)
+                break
+            case 'Trainer Seeker':
+                // find user in Trainer Seeker DB
+                findTrainerSeekerByEmailAndPassword(req,res)
+                break
+            case 'Auditor':
+                // TODO: find user in Auditor DB
+                console.log('look for auditor')
+                break
+            case 'Admin':
+                // TODO: find user in Admin DB
+                console.log('look for admin')
+                break
+            default:
+                break
+        }    
+    //}) (res, req, next);      
 }
 
 /**
@@ -574,4 +489,20 @@ module.exports.logout=(req,res,next)=>{
             res.redirect('/')
         })
     }
+}
+
+
+//renders the seeker home page
+//send to seeker locations - steve
+module.exports.renderSeekerHome = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    if(userInfo.user_email == null && userInfo.user_password == null)
+    {
+        res.render('/login');
+    }
+    res.render('homePages/seekerHome', { title : req.session.user_email, userInfo: userInfo });
 }
