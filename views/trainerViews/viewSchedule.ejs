@@ -13,10 +13,10 @@
           <div class="col-12 col-md-6 col-xxl-12 d-flex">
             <div class="card flex-fill">
               <div class="card-header">
-                <h5 class="card-title mb-0">Day Schedule</h5>
+                <h5 class="card-title mb-0">Day Schedule <span id='dayTitle' style="color:chartreuse"></span></h5>
               </div>
                <!--individual dates start here-->
-              <form method='post' action='schedule' class="card-body d-flex">
+               <form method='post' action='schedule' class="card-body d-flex">
                 <div class="container">
                   <h6 id='dayCalDate'>Date</h6>
                   <input type='hidden' name='dateLookup' id='dateLookup' value=''></input>
@@ -25,11 +25,11 @@
                 <div class="container">
                   <dl>
                     <dt id='dayCalLoc'>Location: </dt>
-                    <dt id='dayCalSeek'>Trainer Seeker:</dt>
+                    <dt id='dayCalSeek'>Trainer:</dt>
                     <dt id='dayCalTime'>Time: </dt>
                   </dl>
                 </div>
-              </form>
+            </form>
               <div>
                 <hr class="col-md-11 ">
               </div>
@@ -46,6 +46,8 @@
                     </dl>
                   </div>
                 </div>
+              
+              
             </div>
           </div>
         </div>

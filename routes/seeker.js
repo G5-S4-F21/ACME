@@ -21,6 +21,8 @@ router.get('/schedule', requireAuth, seekerController.renderSeekerSchedule);
 
 router.post('/schedule', requireAuth, seekerController.renderDetailedView);
 
+router.post('/confirmDetailed', requireAuth, seekerController.confirmAppt);
+
 router.post('/setAppt', requireAuth, seekerController.setAppt);
 
 router.get('/search', requireAuth, seekerController.renderSeekerSearch);
