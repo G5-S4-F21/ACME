@@ -117,6 +117,11 @@ module.exports.renderSeekerSchedule = (req, res, next) => {
 }
 //handle the request for the detailed view of the schedule
 module.exports.renderDetailedView = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
   let apptDate = req.body.dateLookup;
   console.log(apptDate);
   Appt.findById(apptDate, (err, date) => {
@@ -126,9 +131,38 @@ module.exports.renderDetailedView = (req, res, next) => {
       }
       else{
           console.log(date);
-          res.render('seekerViews/detailedApptView', { title : 'details', appt : date });        
+          res.render('seekerViews/detailedApptView', { title : 'details', appt : date, userInfo : userInfo });        
       }
   });
+}
+//handles the confirm for the detailed view
+//this is really just a put to the appt
+module.exports.confirmAppt = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    let newAppt = Appt({
+        '_id' : req.body.confId,
+        'ApptDate' : req.body.confDate,
+        'ApptTrainer' : req.body.confTrain,
+        'ApptSeeker' : req.body.confSeek,
+        'ApptLoc' : req.body.confLoc,
+        'ApptTime' : req.body.confTime,
+        'Confirmed' : true
+    });
+    Appt.updateOne({_id : newAppt._id } , newAppt, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.redirect('schedule');
+        }
+        else
+        {
+            res.redirect('schedule');
+        }
+    });
 }
 
 module.exports.setAppt = (req, res, next) => {

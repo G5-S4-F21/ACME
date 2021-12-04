@@ -31,33 +31,75 @@
             element.addEventListener("click", (event) => {
                 //retreive the date and add to the url then send
                 let setterDate = (element.getAttribute("data-day"));
-                //we want to present button for doing stuff
+                //pass the calendar date to the form below
                 let dateStr = document.getElementById('apptDate');
                 dateStr.setAttribute('value', setterDate);
                 //add in extra stuff that will pass the data to other calendar
                 let match = false;
                 //console.log(days);
-                for(let element of days)
+                let selectedDay = element.getAttribute('data-day');
+                console.log(selectedDay);
+                let dayTitle = document.getElementById('dayTitle');
+                dayTitle.innerHTML = selectedDay;
+                //clear the list of tags in 
+                let togo = document.getElementById('virtualForm');
+                if(togo != null)
                 {
-                    for(let a in jsonList)
+                    togo.remove();
+                }
+                
+                for(let a in jsonList)
+                {
+                    if(selectedDay == jsonList[a].ApptDate)
                     {
-                        //console.log(jsonList[a]);
-                        //console.log(element.getAttribute('data-day'));
-                        if(jsonList[a].ApptDate == element.getAttribute('data-day'))
-                        {
-                            let dayCalDate = document.getElementById('dayCalDate');
-                            dayCalDate.innerHTML = jsonList[a].ApptDate;
-                            let dayLookup = document.getElementById('dateLookup');
-                            dayLookup.setAttribute('value', jsonList[a]._id);
-                            console.log(jsonList[a]._id);
-                            let dayCalSeek = document.getElementById('dayCalSeek');
-                            dayCalSeek.innerHTML = jsonList[a].ApptTrainer; 
-                            let dayCalTime = document.getElementById('dayCalTime');
-                            dayCalTime.innerHTML = jsonList[a].ApptTime; 
-                            let dayCalLoc = document.getElementById('dayCalLoc');
-                            dayCalLoc.innerHTML = jsonList[a].ApptLoc;  
-                            //console.log(dayCalLoc);
-                        }
+                        let mainDaily = document.getElementById('daily');
+                        let form = document.createElement('form');
+                        form.setAttribute('method', 'POST');
+                        form.setAttribute('action', 'schedule');
+                        form.setAttribute('class', 'card-body d-flex');
+                        form.setAttribute('id','virtualForm');
+                        //add in the control here
+                        mainDaily.appendChild(form);
+                        let div1 = document.createElement('div');
+                        div1.setAttribute('class', 'container');
+                        form.appendChild(div1);
+                        let h61 = document.createElement('h6');
+                        div1.appendChild(h61);
+                        h61.innerHTML = jsonList[a].ApptDate;
+                        let hInput = document.createElement('input');
+                        hInput.setAttribute('type', 'hidden');
+                        hInput.setAttribute('name', 'dateLookup');
+                        hInput.setAttribute('id', 'dateLookup');
+                        //hInput.setAttribute('class', 'btn btn-secondary');
+                        hInput.setAttribute('value', jsonList[a]._id);
+                        div1.appendChild(hInput);
+                        let div2 = document.createElement('div');
+                        div2.setAttribute('class', 'container');
+                        div1.appendChild(div2);
+                        let br = document.createElement('br');
+                        div2.appendChild(br);
+                        let sub = document.createElement('input');
+                        sub.setAttribute('type', 'submit');
+                        sub.setAttribute('class', 'btn btn-secondary');
+                        div2.appendChild(sub);
+                        
+                        let div3 = document.createElement('div');
+                        div3.setAttribute('class', 'container');
+                        let list = document.createElement('dl');
+                        let dt1 = document.createElement('dt');
+                        dt1.setAttribute('id', 'dayCalLoc');
+                        dt1.innerHTML = "Location: " + jsonList[a].ApptLoc;
+                        list.appendChild(dt1);
+                        let dt2 = document.createElement('dt');
+                        dt2.innerHTML = "Trainer: " + jsonList[a].ApptTrainer;
+                        list.appendChild(dt2);
+                        let dt3 = document.createElement('dt');
+                        dt3.innerHTML = "Time: " + jsonList[a].ApptTime;
+                        list.appendChild(dt3);
+                        div3.appendChild(list);
+                        form.appendChild(div3);
+
+                        
                     }
                 }
             });

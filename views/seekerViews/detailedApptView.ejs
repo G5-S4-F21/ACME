@@ -1,5 +1,5 @@
-<%- include('../partials/home_header'); %>
-<%- include('../partials/defaultNav'); %>
+<%- include('../partials/wideHeader'); %>
+<%- include('../partials/wideNav'); %>
 <div class="bg-image" 
      style="background-image: url('/images/erik-werlin-4gqELewld-A-unsplash.jpg');">
             <div class="col-lg-8 mx-auto p-3 py-md-5">
@@ -14,7 +14,15 @@
                   <p class="fs-5 col-md-8">Your Appointment for Tennis training is on <span style='color:chartreuse'><%= appt.ApptDate %></span> at <span style='color:chartreuse'><%= appt.ApptTime %></span></p>
               
                   <div class="mb-5">
-                    <a href="/users/confirm/<% title %>" class="btn btn-success btn-lg px-4">Confirm</a>
+                    <form method='post' action='confirmDetailed'>
+                      <input type="hidden" id='confirmInput' name='confId' value='<%= appt._id %>'/>
+                      <input type="hidden" id='confirmInput' name='confDate' value='<%= appt.ApptDate %>'/>
+                      <input type="hidden" id='confirmInput' name='confTime' value='<%= appt.ApptTime %>'/>
+                      <input type="hidden" id='confirmInput' name='confLoc' value='<%= appt.ApptLoc %>'/>
+                      <input type="hidden" id='confirmInput' name='confSeek' value='<%= appt.ApptSeeker %>'/>
+                      <input type="hidden" id='confirmInput' name='confTrain' value='<%= appt.ApptTrainer %>'/>
+                      <button type="submit" href="/seeker/confirm" class="btn btn-success btn-lg px-4">Confirm</a>
+                    </form>
                   </div>
               
                   <hr class="col-3 col-md-2 mb-5">

@@ -36,6 +36,11 @@ let AppointmentModel = mongoose.Schema
             type: String,
             default: '',
             trim: true
+        },
+        Confirmed:
+        {
+            type: Boolean,
+            default: false
         }
     },
     {
