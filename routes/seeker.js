@@ -10,7 +10,8 @@ let seekerController = require("../controllers/seekerController");
 
 function requireAuth(req, res, next)
 {
-    if(!req.session.user_email){
+    //if(!req.session.user_email){
+    if(!req.session){
         return res.redirect('/login');
     }
     next();
