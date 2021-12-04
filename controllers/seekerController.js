@@ -202,3 +202,20 @@ module.exports.setAppt = (req, res, next) => {
         res.redirect('schedule');
     });   
 }
+
+module.exports.renderAccountChoices =(req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    res.render('seekerViews/seekerAccountChoice', { title : 'Accounts', userInfo: userInfo });
+}
+
+module.exports.renderAccountPage = (req, res, next) => {
+
+}
+
+module.exports.renderPublicPage = (req, res, next) => {
+    
+}
