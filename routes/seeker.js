@@ -32,4 +32,9 @@ router.get('/search', requireAuth, seekerController.renderSeekerSearch);
 router.post('/search', requireAuth, seekerController.performSearch);
 
 router.get('/favorites', requireAuth, seekerController.renderFavorites);
+
+router.get('/account', seekerController.renderAccountChoices);
+
+router.get('/secret', requireAuth, seekerController.renderAccountPage);
+router.get('/notsecret', requireAuth, seekerController.renderPublicPage);
 module.exports = router;
