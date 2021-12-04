@@ -22,4 +22,7 @@ router.post('/schedule', requireAuth, seekerController.renderDetailedView);
 
 router.post('/setAppt', requireAuth, seekerController.setAppt);
 
+router.get('/search', requireAuth, seekerController.renderSeekerSearch);
+
+router.post('/search', requireAuth, seekerController.performSearch);
 module.exports = router;
