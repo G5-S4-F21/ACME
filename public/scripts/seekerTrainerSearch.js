@@ -7,7 +7,6 @@
         
         let listItems = document.getElementsByTagName('td');
         
-        console.log(listItems);
         for(let a of listItems)
         {
             a.addEventListener('click', showView);
@@ -20,4 +19,6 @@
 function showView()
 {
     console.log('working');
+    //this should be a post
+    //window.open().focus();
 }
