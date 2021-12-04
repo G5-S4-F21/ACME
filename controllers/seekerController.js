@@ -7,12 +7,71 @@ let ProfileModel = require('../models/profile');
 let Profile = ProfileModel.Profile;
 let UserModel = require('../models/users')
 let User = UserModel.User;
+// refer to trainer DB
+const TrainerModel=require('../models/Trainer')
+const Trainer=TrainerModel.Trainer
 
 let indexController = require("../controllers/indexController");
 
 let Appt = require('../models/appointment');
 
 
+
+
+module.exports.renderSeekerSearch = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    let tlist = [];
+    res.render('seekerViews/seekerTrainerSearch', { title : 'Search', userInfo : userInfo, 'list' : tlist });
+}
+
+module.exports.performSearch = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    let alphaN = req.body.alphaName;
+    let alphaE = req.body.alphaEmail;
+    let exp = req.body.expYears;
+    let retList;
+    Trainer.find((err, tList) => {
+        if(err)
+        {
+            return console.error(err);
+        }
+        else
+        {
+            //console.log(tList);
+            for(let a of tList)
+            {
+                try
+                {
+                    if(a.trainerName.contains(alphaN))
+                    {
+                        retList.push(a);
+                    }
+                    if(a.trainerEmail.contains(alphaEmail))
+                    {
+                        retList.push(a);
+                    }
+                    if(a.trainerYearsOfTraining.contains(expYears))
+                    {
+                        retList.push(a);
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+        }
+        res.render('seekerViews/seekerTrainerSearch', { title : 'Search', userInfo : userInfo, 'list' : tList });
+    });
+}
 
 //render the schedule page for the seeker
 module.exports.renderSeekerSchedule = (req, res, next) => {
