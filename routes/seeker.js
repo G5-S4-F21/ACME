@@ -10,7 +10,7 @@ let seekerController = require("../controllers/seekerController");
 
 function requireAuth(req, res, next)
 {
-    if(!req.session){
+    if(!req.session.user_email){
         return res.redirect('/login');
     }
     next();
@@ -25,4 +25,6 @@ router.post('/setAppt', requireAuth, seekerController.setAppt);
 router.get('/search', requireAuth, seekerController.renderSeekerSearch);
 
 router.post('/search', requireAuth, seekerController.performSearch);
+
+router.get('/favorites', requireAuth, seekerController.renderFavorites);
 module.exports = router;
