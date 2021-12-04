@@ -21,7 +21,7 @@
                       <input type="hidden" id='confirmInput' name='confLoc' value='<%= appt.ApptLoc %>'/>
                       <input type="hidden" id='confirmInput' name='confSeek' value='<%= appt.ApptSeeker %>'/>
                       <input type="hidden" id='confirmInput' name='confTrain' value='<%= appt.ApptTrainer %>'/>
-                      <button type="submit" href="/seeker/confirm" class="btn btn-success btn-lg px-4">Confirm</a>
+                      <button type="submit" class="btn btn-success btn-lg px-4">Confirm</a>
                     </form>
                   </div>
               
@@ -38,7 +38,15 @@
                         <li>other stuff</li>
                       </ul>
                       <div class="mb-5">
-                        <a href="/users/cancel" class="btn btn-dark btn-lg px-4">Cancel</a>
+                        <form method='post' action='delete'>
+                          <input type="hidden" id='confirmInput' name='confId' value='<%= appt._id %>'/>
+                          <input type="hidden" id='confirmInput' name='confDate' value='<%= appt.ApptDate %>'/>
+                          <input type="hidden" id='confirmInput' name='confTime' value='<%= appt.ApptTime %>'/>
+                          <input type="hidden" id='confirmInput' name='confLoc' value='<%= appt.ApptLoc %>'/>
+                          <input type="hidden" id='confirmInput' name='confSeek' value='<%= appt.ApptSeeker %>'/>
+                          <input type="hidden" id='confirmInput' name='confTrain' value='<%= appt.ApptTrainer %>'/>
+                          <button type="submit" class="btn btn-success btn-lg px-4">Confirm</a>
+                        </form>
                       </div>
                     </div>
               

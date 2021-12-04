@@ -55,6 +55,7 @@ router.get('/logout',indexController.logout)
 
 //routes to specific homepages may be we change
 router.get('/seekerHome', indexController.renderSeekerHome);
-
+//routes to the trainer home page
+router.get('/trainerHome', indexController.renderTrainerHome);
 
 module.exports = router;

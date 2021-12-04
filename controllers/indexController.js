@@ -506,3 +506,16 @@ module.exports.renderSeekerHome = (req, res, next) => {
     }
     res.render('homePages/seekerHome', { title : req.session.user_email, userInfo: userInfo });
 }
+
+module.exports.renderTrainerHome = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    if(userInfo.user_email == null && userInfo.user_password == null)
+    {
+        res.render('/login');
+    }
+    res.render('homePages/trainerHome', { title : req.session.user_email, userInfo: userInfo });
+}
