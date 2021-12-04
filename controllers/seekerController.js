@@ -45,7 +45,7 @@ module.exports.performSearch = (req, res, next) => {
         }
         else
         {
-            //console.log(tList);
+            //this part is not correct
             for(let a of tList)
             {
                 try
@@ -165,6 +165,24 @@ module.exports.confirmAppt = (req, res, next) => {
     });
 }
 
+module.exports.confirmDelete = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    Appt.remove({_id : req.body.confId }, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.redirect('schedule');
+        }
+        else
+        {
+            res.redirect('schedule');
+        }
+    });
+}
 module.exports.setAppt = (req, res, next) => {
     let newAppt = Appt({
         'ApptDate' : req.body.apptDate,

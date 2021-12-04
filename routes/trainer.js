@@ -10,7 +10,7 @@ const indexController = require("../controllers/indexController");
 
 function requireAuth(req, res, next)
 {
-    if(!req.isAuthenticated()){
+    if(!req.session){
         return res.redirect('/login');
     }
     next();
@@ -29,7 +29,8 @@ router.post('/certificate', trainerController.trainerFillCertificate);
 
 router.post('/setAppt', requireAuth, trainerController.renderSetAppt);
 
+router.post('/confirmDetailed', trainerController.confirmAppt)
 
-
+router.post('/delete', trainerController.deleteAppt);
 
 module.exports = router;
