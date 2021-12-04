@@ -1,7 +1,6 @@
-'use.strict'
 let mongoose = require('mongoose');
 
-let Appointment = mongoose.Schema
+let AppointmentModel = mongoose.Schema
 (
     {
         //add the elements here
@@ -38,9 +37,12 @@ let Appointment = mongoose.Schema
             default: '',
             trim: true
         }
+    },
+    {
+        collection : "appointments"
     }
 );
 
 // export for the appointment profile
 
-module.exports.Appointment = mongoose.model('Appointment', Appointment);
+module.exports = mongoose.model('Appointment', AppointmentModel);

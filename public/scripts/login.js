@@ -56,7 +56,22 @@ $('#login_button').click(()=>{
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        window.location.href='/'
+                        if(user_account_type == 'Trainer')
+                        {
+                            window.location.href='/trainerHome'
+                        }
+                        else if(user_account_type == 'Trainer Seeker')
+                        {
+                            window.location.href='/seekerHome'
+                        }
+                        else if(user_account_type == 'admin')
+                        {
+                            window.location.href='/adminHome'
+                        }
+                        else
+                        {
+                            window.location.href='/'
+                        }
                     }
                 })
             }

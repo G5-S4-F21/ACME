@@ -1,11 +1,8 @@
 'use.strict'
 let express = require('express');
-let mongoose = require('mongoose');
-let MongoClient = require('mongodb').MongoClient;
-let db = require('../config/db');
-//let passport = require('passport'), 
-  //  LocalStrategy = require('passport-local').Strategy;
 let router = express.Router();
+let mongoose = require('mongoose');
+
 let ProfileModel = require('../models/profile');
 let Profile = ProfileModel.Profile;
 let UserModel = require('../models/users')
@@ -13,12 +10,18 @@ let User = UserModel.User;
 
 let indexController = require("../controllers/indexController");
 
-let ApptModel = require('../models/appointment');
-let Appt = ApptModel.Appointment;
+let Appt = require('../models/appointment');
+
 
 
 //render the schedule page for the seeker
 module.exports.renderSeekerSchedule = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    console.log(req.body);
   let localUser = req.user;
   Appt.find((err, mainList) => {
       if(err) {
@@ -38,7 +41,8 @@ module.exports.renderSeekerSchedule = (req, res, next) => {
           let toSend = JSON.stringify(list);
           console.log(toSend);*/
           res.render('seekerViews/seekerScheduleView', { title : "Schedule", 
-              list : mainList });
+              list : mainList, 
+              userInfo : userInfo, email: userInfo.user_email });
       }
   });
   //res.render('seekerViews/seekerScheduleView', { title: "Schedule", list : mainList });
@@ -57,4 +61,24 @@ module.exports.renderDetailedView = (req, res, next) => {
           res.render('seekerViews/detailedApptView', { title : 'details', appt : date });        
       }
   });
+}
+
+module.exports.setAppt = (req, res, next) => {
+    let newAppt = Appt({
+        'ApptDate' : req.body.apptDate,
+        'ApptTrainer' : req.body.apptTrainer,
+        'ApptSeeker' : req.body.apptSeek,
+        'ApptLoc' : req.body.apptLoc,
+        'ApptTime' : req.body.apptTime
+    });
+    console.log(newAppt);
+    //store the data in the db
+    newAppt.save((err, Appt) => {
+        if(err)
+        {
+            //try to add in ajax here
+            res.render('schedule')
+        }
+        res.redirect('schedule');
+    });   
 }
