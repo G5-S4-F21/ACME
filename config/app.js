@@ -7,6 +7,7 @@ let passport = require('passport');
 let bodyParser = require('body-parser');
 let localStrategy = require('passport-local').Strategy;
 let session = require('express-session');
+let pdfkit = require('pdfkit');
 
 // database setup
 let mongoose = require('mongoose');
@@ -58,6 +59,7 @@ app.use('/trainer', trainerRouter);
 //the passport stuff
 let userModel = require('../models/users.js');
 let User = userModel.User;
+
 
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());

@@ -134,7 +134,11 @@
                     </div>
                   </div>
                 </div>
-
+                <div class='container pl-3 pb-3'>
+                  <form method='post' action='download'>
+                    <button type='submit' class='btn btn-primary' value='Find Pdf'>PDF download</button>
+                  </form>
+                </div>
               </div>
             </div>
 
@@ -171,7 +175,7 @@
                             <div class="input-group-append">
                               <span class="btn btn-secondary">Seeker</span>
                             </div>
-                            <input type="text" name="apptSeek" id="apptSeek" class="form-control" placeholder="seeker" value="<%=userInfo.user_email%>">
+                            <input type="text" name="apptSeek" id="apptSeek" class="form-control" placeholder="seeker" value="<%=userInfo.user_email%>" readonly>
                           </div>
                         </dt>
                         <dt>
@@ -197,7 +201,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
 
           </div>

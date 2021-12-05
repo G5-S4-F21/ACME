@@ -40,20 +40,27 @@ let Profile = mongoose.Schema
        favFood: 
        {
             type: String,
-            default: '',
+            default: 'tennis players eat anything',
             trim: true
        },
        favTennisPlayer: 
        {
             type: String,
-            default: '',
+            default: 'myself',
             trim: true
        },
        favMovie: 
        {
             type: String,
-            default: '',
+            default: 'tennis pro documentary',
             trim: true
+       },
+       UUIDid:
+       {
+           type: String,
+           default : '',
+           required : 'uuid is required',
+           trim: true
        }
     },
     {
@@ -61,10 +68,5 @@ let Profile = mongoose.Schema
     }
 );
 
-// configure options for User Model
-
 let options = ({ missingPasswordError: 'Wrong / Missing Password'});
-
-//User.plugin(passportLocalMongoose, options);
-
 module.exports.Profile = mongoose.model('Profile', Profile);

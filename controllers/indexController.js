@@ -165,29 +165,28 @@ const registerTrainerSeeker=(req,res)=>{
 
 module.exports.handleLogin=(req, res, next)=>{
     const {user_email, user_password, user_account_type}=req.body
-    
-        switch (user_account_type){
-            case 'Trainer':
-                // find user in Trainer DB
-                findTrainerByEmailAndPassword(req,res)
-                break
-            case 'Trainer Seeker':
-                // find user in Trainer Seeker DB
-                findTrainerSeekerByEmailAndPassword(req,res)
-                break
-            case 'Auditor':
-                // TODO: find user in Auditor DB
-                console.log('look for auditor')
-                break
-            case 'Admin':
-                // TODO: find user in Admin DB
-                console.log('look for admin')
-                break
-            default:
-                break
-        }    
-    //}) (res, req, next);      
+    switch (user_account_type){
+        case 'Trainer':
+            // find user in Trainer DB
+            findTrainerByEmailAndPassword(req,res)
+            break
+        case 'Trainer Seeker':
+            // find user in Trainer Seeker DB
+            findTrainerSeekerByEmailAndPassword(req,res)
+            break
+        case 'Auditor':
+            // TODO: find user in Auditor DB
+            console.log('look for auditor')
+            break
+        case 'Admin':
+            // TODO: find user in Admin DB
+            console.log('look for admin')
+            break
+        default:
+            break
+    }        
 }
+  
 
 /**
  * find the trainer by email and password
