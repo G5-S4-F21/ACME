@@ -7,7 +7,7 @@ $('#login_button').click(()=>{
     let user_password=$('#user_password').val()
     let user_account_type=$('#user_account_type').val()
 
-    const userInfo={
+    const user={
         user_email,
         user_password,
         user_account_type
@@ -24,7 +24,7 @@ $('#login_button').click(()=>{
     $.ajax({
         type:'post',
         url:'/login',
-        data:userInfo,
+        data:user,
         success: (data)=>{
             if(data==='-2'){
                 // server error
