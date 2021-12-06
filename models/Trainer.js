@@ -12,6 +12,8 @@ const trainerSchema=mongoose.Schema({
         type:String,
         default: 'anonymous trainer',
     },
+    'trainerProvince':String,
+    'trainerCity':String,
     'trainerYearsOfTraining': {
         type:String,
         default: ''

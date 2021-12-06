@@ -19,6 +19,9 @@ const Trainer=TrainerModel.Trainer
 const Trainer_seeker_model=require('../models/Trainer_seeker')
 const Trainer_seeker=Trainer_seeker_model.Trainer_seeker
 
+
+
+
 // set up email sender
 
 const mailTransport = nodemailer.createTransport({
@@ -165,7 +168,7 @@ const registerTrainerSeeker=(req,res)=>{
 
 module.exports.handleLogin=(req, res, next)=>{
     const {user_email, user_password, user_account_type}=req.body
-    
+
         switch (user_account_type){
             case 'Trainer':
                 // find user in Trainer DB
@@ -185,8 +188,8 @@ module.exports.handleLogin=(req, res, next)=>{
                 break
             default:
                 break
-        }    
-    //}) (res, req, next);      
+        }
+    //}) (res, req, next);
 }
 
 /**
@@ -519,3 +522,4 @@ module.exports.renderTrainerHome = (req, res, next) => {
     }
     res.render('homePages/trainerHome', { title : req.session.user_email, userInfo: userInfo });
 }
+
