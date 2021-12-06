@@ -58,4 +58,6 @@ router.get('/seekerHome', indexController.renderSeekerHome);
 //routes to the trainer home page
 router.get('/trainerHome', indexController.renderTrainerHome);
 
+
+
 module.exports = router;

@@ -16,6 +16,9 @@ let Appt = require('../models/appointment');
 const TrainerModel=require('../models/Trainer')
 const Trainer=TrainerModel.Trainer
 
+// original province and city
+const province_list=require('../public/resource/province')
+
 /**
  * render the schedule page
  * @param req
@@ -153,7 +156,7 @@ module.exports.deleteAppt = (req, res, next) => {
             res.redirect('schedule');
         }
     });
-    
+
 }
 /**
  * render trainer certificate form view
@@ -174,7 +177,8 @@ module.exports.renderCertificateView=(req,res,next)=>{
             }
             return res.render('trainerViews/trainerCertificateFormView',{
                 title:'Trainer Certificate',
-                userInfo
+                userInfo,
+                province_list
             })
         }
     })
@@ -184,11 +188,13 @@ module.exports.renderCertificateView=(req,res,next)=>{
  * store trainer certificate
  */
 module.exports.trainerFillCertificate=(req,res,next)=>{
-    const {trainer_full_name, trainer_years_of_training}=req.body
+    const {trainer_full_name, trainer_years_of_training, trainer_province, trainer_city}=req.body
     Trainer.findOneAndUpdate({trainerEmail: req.session.user_email}, {
         $set:{
             trainerName:trainer_full_name,
-            trainerYearsOfTraining:trainer_years_of_training
+            trainerYearsOfTraining:trainer_years_of_training,
+            trainerProvince:trainer_province,
+            trainerCity:trainer_city
         }
     }, {},(err, trainer) => {
         if(err){
