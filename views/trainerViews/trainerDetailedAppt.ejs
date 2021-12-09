@@ -1,11 +1,11 @@
-<%- include('../partials/wideHeader'); %>
-<%- include('../partials/wideNav'); %>
+<%- include('../partials/home_header'); %>
+<%- include('../partials/defaultNav'); %>
 <div class="bg-image" 
      style="background-image: url('/images/erik-werlin-4gqELewld-A-unsplash.jpg');">
             <div class="col-lg-8 mx-auto p-3 py-md-5">
                 <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
                   <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                    <span class="fs-4" style="color: white">Lesson Scheduled for: <%= userInfo.user_email %></span>
+                    <span class="fs-4" style="color: white">Lesson Scheduled for: <%= appt.ApptSeeker %></span>
                   </a>
                 </header>
               
@@ -14,15 +14,7 @@
                   <p class="fs-5 col-md-8">Your Appointment for Tennis training is on <span style='color:chartreuse'><%= appt.ApptDate %></span> at <span style='color:chartreuse'><%= appt.ApptTime %></span></p>
               
                   <div class="mb-5">
-                    <form method='post' action='confirmDetailed'>
-                      <input type="hidden" id='confirmInput' name='confId' value='<%= appt._id %>'/>
-                      <input type="hidden" id='confirmInput' name='confDate' value='<%= appt.ApptDate %>'/>
-                      <input type="hidden" id='confirmInput' name='confTime' value='<%= appt.ApptTime %>'/>
-                      <input type="hidden" id='confirmInput' name='confLoc' value='<%= appt.ApptLoc %>'/>
-                      <input type="hidden" id='confirmInput' name='confSeek' value='<%= appt.ApptSeeker %>'/>
-                      <input type="hidden" id='confirmInput' name='confTrain' value='<%= appt.ApptTrainer %>'/>
-                      <button type="submit" class="btn btn-success btn-lg px-4">Confirm</a>
-                    </form>
+                    <a href="/users/confirm/<% title %>" class="btn btn-success btn-lg px-4">Confirm</a>
                   </div>
               
                   <hr class="col-3 col-md-2 mb-5">
@@ -38,15 +30,7 @@
                         <li>other stuff</li>
                       </ul>
                       <div class="mb-5">
-                        <form method='post' action='delete'>
-                          <input type="hidden" id='confirmInput' name='confId' value='<%= appt._id %>'/>
-                          <input type="hidden" id='confirmInput' name='confDate' value='<%= appt.ApptDate %>'/>
-                          <input type="hidden" id='confirmInput' name='confTime' value='<%= appt.ApptTime %>'/>
-                          <input type="hidden" id='confirmInput' name='confLoc' value='<%= appt.ApptLoc %>'/>
-                          <input type="hidden" id='confirmInput' name='confSeek' value='<%= appt.ApptSeeker %>'/>
-                          <input type="hidden" id='confirmInput' name='confTrain' value='<%= appt.ApptTrainer %>'/>
-                          <button type="submit" class="btn btn-dark btn-lg px-4">Cancel</a>
-                        </form>
+                        <a href="/users/cancel" class="btn btn-dark btn-lg px-4">Cancel</a>
                       </div>
                     </div>
               

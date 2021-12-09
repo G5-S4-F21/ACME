@@ -1,78 +1,45 @@
 'use.strict'
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+
 const { Console } = require('console');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
-//let passport = require('passport'),
-//LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport'); 
+LocalStrategy = require('passport-local').Strategy;
 let url = require('url');
-
 let UserModel = require('../models/users');
 let User = UserModel.User;
+const trainer_1 = require('../Utils/trainer');
+let ApptModel = require('../models/appointment');
+let Appt = ApptModel.Appointment;
+let trainerController = require("../controllers/trainerController");
+const multer_1 = __importDefault(require("multer"));
+const moment_1 = __importDefault(require("moment"));
+const fs_1 = __importDefault(require("fs"));
+const db = mongoose.connection;
+const q = __importDefault(require("q"));
 
-let Appt = require('../models/appointment');
 
-// refer to trainer DB
-const TrainerModel=require('../models/Trainer')
-const Trainer=TrainerModel.Trainer
+const tennisTrainer_1 = require("../models/tennisTrainer");
 
-// original province and city
-const province_list=require('../public/resource/province')
 
-/**
- * render the schedule page
- * @param req
- * @param res
- * @param next
- */
-module.exports.renderScheduleView = (req, res, next) => {
-    //cannot view this page without logged in
-    const userInfo={
-        user_email:req.session.user_email,
-        user_password:req.session.user_password,
-        user_account_type:req.session.user_account_type
-    }
-    //console.log("the trainer schedule view controller");
-    if(!req.session.user_email){
-        res.redirect('/login')
-        return
-    }
 
-    // if the trainer does not submit their profile, they cannot book appointment.
-    // use years of training as the enter point
-    Trainer.findOne({trainerEmail:req.session.user_email}, (err, trainer) => {
-        console.log(trainer)
-        if(!trainer){
-            // no such user
-            res.redirect('/register')
-        }else{
-            // have this user
-            // To see whether the user fill the certificate form
-            if(trainer.trainerYearsOfTraining.trim()===''){
-                // did not fill certificate form
-                return res.send('0')
-            }else{
-                // filled certificate form
-                //retreive the list of appts and send to the client
-                // TODO: render trainer schedule view
-                Appt.find({},(err, mainList) => {
-                    if(err) {
-                        return console.error(err);
-                    }
-                    else {
-
-                        console.log('schedule')
-                        res.render('trainerViews/viewSchedule', { title : "My Schedule",
-                            list : mainList, userInfo : userInfo });
-                    }
-                });
-            }
+//render the schedule page
+module.exports.renderSchedule = (req, res, next) => {
+    //retreive the list of appts and send to the client
+    Appt.find((err, mainList) => {
+        if(err) {
+            return console.error(err);
         }
-    })
+        else {
+            res.render('trainerViews/viewSchedule', { title : "Schedule", 
+                list : mainList });
+        }
+    });
 }
-
-
-
 module.exports.renderSetAppt = (req, res, next) => {
     //find the user and check that there data
     let localAppt = new Appt({
@@ -83,21 +50,18 @@ module.exports.renderSetAppt = (req, res, next) => {
         ApptTime : req.body.apptTime
     });
     localAppt.save(function (err) {
-        if(err)
+        if(err) 
         {
+            let mainList = req.body.list;
             console.log('error setting appt');
-            res.render('seekerViews/viewSchedule', { title: 'Schedule'});
+            //res.render('seekerViews/viewSchedule', { title: 'Schedule', list: mainList});
+            res.redirect('schedule');
         }
     });
-    res.render('trainerViews/viewSchedule', { title: 'Schedule'});
+    //res.render('trainerViews/viewSchedule', { title: 'Schedule'});
+    res.redirect('schedule');
 }
-//will show the detaile view of the trainer appt
 module.exports.renderDetailedView = (req, res, next) => {
-    const userInfo={
-        user_email:req.session.user_email,
-        user_password:req.session.user_password,
-        user_account_type:req.session.user_account_type
-    }
     let apptDate = req.body.dateLookup;
     Appt.findById(apptDate, (err, date) => {
         if(err)
@@ -106,108 +70,130 @@ module.exports.renderDetailedView = (req, res, next) => {
         }
         else{
             console.log(date);
-            res.render('trainerViews/trainerDetailedAppt', { title : 'details', appt : date, userInfo : userInfo });
+            res.render('seekerViews/detailedApptView', { title : 'details', appt : date }); 
+                   
         }
     });
+
+    
+    //res.render('trainerViews/trainerDetailedAppt', { appt : })
 }
 
-module.exports.confirmAppt = (req, res, next) => {
-    const userInfo={
-        user_email:req.session.user_email,
-        user_password:req.session.user_password,
-        user_account_type:req.session.user_account_type
+function DisplayRegisterTrainerPage(req, res, next) {
+    if (!req.user) {
+        return res.render('trainerViews/trainerIndex', { title: 'Register Trainer', page: 'registerTrainer', messages: req.flash('registerMessage'), displayName: (0, trainer_1.TrainerDisplayName)(req) });
     }
-    let newAppt = Appt({
-        '_id' : req.body.confId,
-        'ApptDate' : req.body.confDate,
-        'ApptTrainer' : req.body.confTrain,
-        'ApptSeeker' : req.body.confSeek,
-        'ApptLoc' : req.body.confLoc,
-        'ApptTime' : req.body.confTime,
-        'Confirmed' : true
-    });
-    Appt.updateOne({_id : newAppt._id } , newAppt, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.redirect('schedule');
-        }
-        else
-        {
-            res.redirect('schedule');
-        }
-    });
+    return res.redirect('/tennis');
 }
+exports.DisplayRegisterTrainerPage = DisplayRegisterTrainerPage;
 
-module.exports.deleteAppt = (req, res, next) => {
-    const userInfo={
-        user_email:req.session.user_email,
-        user_password:req.session.user_password,
-        user_account_type:req.session.user_account_type
-    }
-    Appt.remove({_id : req.body.confId }, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.redirect('schedule');
-        }
-        else
-        {
-            res.redirect('schedule');
-        }
+function ProcessRegisterTrainerPage(req, res, next) 
+{
+    const file = req.file;
+    var img = fs_1.default.readFileSync(req.file.path);
+    var encode_image = img.toString('base64');
+    var finalImg = {
+        contentType: req.file.mimetype,
+        image: new Buffer(encode_image, 'base64'),
+        certificate: file.filename
+    };
+    db.collection('certificates').insertOne(finalImg, (err, result) => {
+        console.log(result);
+        if (err)
+            return console.log(err);
+            
+        console.log('saved to database');
     });
-
-}
-/**
- * render trainer certificate form view
- */
-module.exports.renderCertificateView=(req,res,next)=>{
-    // find this trainer first
-    Trainer.findOne({trainerEmail:req.session.user_email}, (err, trainer)=>{
-        if(err){
-            return res.send('-2')
-        }
-        if(!trainer){
-            return res.send('0')
-        }else if(trainer){
-            const userInfo={
-                user_email:req.session.user_email,
-                user_password:req.session.user_password,
-                user_account_type:req.session.user_account_type
+     // Delete the file like normal
+     fs_1.default.unlinkSync(req.file.path);
+     
+    let ageCalculation = (0, moment_1.default)().diff(req.body.birthDate, 'years');
+    let newUser2 = new tennisTrainer_1.default({
+        hourlyRate: req.body.hourlyRate,
+        aboutMe: req.body.aboutMe,
+        certificate: file.filename,
+        userType: "trainer",
+        username: req.body.username,
+        anyGender: "Any gender",
+        emailAddress: req.body.emailAddress,
+        age: ageCalculation,
+        phoneNumber: req.body.phoneNumber,
+        sex: req.body.sex,
+        birthDate: req.body.birthDate,
+        province: req.body.province,
+        city: req.body.city,
+        displayName: req.body.FirstName + " " + req.body.LastName
+    });
+    tennisTrainer_1.default.register(newUser2, req.body.password, (err) => {
+        
+        if (err) {
+            
+            console.error('Error: Inserting New User');
+            if (err.name == "UserExistsError") {
+                req.flash('registerMessage', 'Registration Error');
             }
-            return res.render('trainerViews/trainerCertificateFormView',{
-                title:'Trainer Certificate',
-                userInfo,
-                province_list
-            })
-        }
-    })
-}
+            console.log(err);
+            console.log('Error: User Already Exists');
+            return res.json("not successful");
 
-/**
- * store trainer certificate
- */
-module.exports.trainerFillCertificate=(req,res,next)=>{
-    const {trainer_full_name, trainer_years_of_training, trainer_province, trainer_city}=req.body
-    Trainer.findOneAndUpdate({trainerEmail: req.session.user_email}, {
-        $set:{
-            trainerName:trainer_full_name,
-            trainerYearsOfTraining:trainer_years_of_training,
-            trainerProvince:trainer_province,
-            trainerCity:trainer_city
         }
-    }, {},(err, trainer) => {
-        if(err){
-            // -2: server error
-            return res.send('-2')
-        }
-        if(!trainer){
-            // 0: no such user
-            return res.send('0')
-        }else{
-            // reset password
-            console.log('updated!')
-            return res.send('1')
-        }
-    })
+        return passport.authenticate('trainerLocal')(req, res, () => {
+            
+            //return res.redirect('/home');
+            //return res.json("successful");
+            let username = req.body.username;
+            let trainerRoute = '/trainer/displayTrainerHome/'+ `${username}`;
+            return res.redirect(trainerRoute);
+        });
+        
+    });
 }
+exports.ProcessRegisterTrainerPage = ProcessRegisterTrainerPage;
+
+function DisplayTrainerHome(req, res, next) {
+    var deferred = q.default.defer();
+    let trainerName = req.params.username;
+    tennisTrainer_1.default.find({
+        "username": trainerName
+    }, function (err, docs) {
+        if (err) {
+            console.log('Error Finding Files');
+            deferred.reject(err);
+        }
+        else {
+            let hourlyRate = " ";
+            let aboutMe = " ";
+            let emailAddress = " ";
+            let displayName = " ";
+            let phoneNumber = " ";
+            let sex = " ";
+            let age = " ";
+            let province = " ";
+            let city = " ";
+            docs.forEach(function fn(doc) {
+                hourlyRate = `${doc.hourlyRate}`;
+                aboutMe = `${doc.aboutMe}`;
+                emailAddress = `${doc.emailAddress}`;
+                displayName = `${doc.displayName}`;
+                phoneNumber = `${doc.phoneNumber}`;
+                sex = `${doc.sex}`;
+                age = `${doc.age}`;
+                province = `${doc.province}`;
+                city = `${doc.city}`;
+            });
+            deferred.resolve({
+                hourlyRate: hourlyRate,
+                aboutMe: aboutMe,
+                emailAddress: emailAddress,
+                displayName: displayName,
+                phoneNumber: phoneNumber,
+                sex: sex,
+                age: age,
+                province: province,
+                city: city,
+                respond: res.render('trainerViews/trainerIndex', { title: 'Trainer Page', page: 'trainerHome', city: city, province: province, age: age, sex: sex, hourlyRate: hourlyRate, aboutMe: aboutMe, emailAddress: emailAddress, displayNameFromQuery: displayName, phoneNumber: phoneNumber, username: trainerName, displayName: (0, trainer_1.TrainerDisplayName)(req) })
+            });
+        }
+    });
+}
+exports.DisplayTrainerHome = DisplayTrainerHome;

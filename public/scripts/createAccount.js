@@ -1,4 +1,3 @@
-
 let user_email=$('#userEmail').val()
 let user_password=$('#userPassword').val()
 let user_cellphone_number=$('#userCellphone').val()
@@ -20,11 +19,7 @@ $('#submit_button').click(() => {
 
     //validation
     if(!validateField(user_email) || !validateField(user_password) || !validateField(user_cellphone_number)){
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Please fill all fields',
-        })
+        alert("Please fill all fields")
         return
     }
 
@@ -45,42 +40,13 @@ $('#submit_button').click(() => {
         success: (data)=>{
             console.log(data)
             if(data==='0'){
-                // registered successfully
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    confirmButtonText: 'OK',
-                    title: 'Register successfully',
-                    text: 'You will go to login page'
-                }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        window.location.href='/login'
-                    }
-                })
-
+                // jump to trainer detail page
+                alert('register successfully')
             }else if(data==='1'){
-                // the email has been registered
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'The email has been registered',
-                })
-                // clear form
-                $('#userEmail').val('')
-                $('#userPassword').val('')
-                $('#userCellphone').val('')
+                alert('The email has been registered')
+                // window.load('/createAccount')
             }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong, please try again later',
-                    footer: '<a href="/createAccount">Click me to refresh the page</a>'
-                })
-                // clear form
-                $('#userEmail').val('')
-                $('#userPassword').val('')
-                $('#userCellphone').val('')
+                alert('Oops! There is something wrong, please try again later')
             }
         }
     })

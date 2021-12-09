@@ -1,40 +1,49 @@
-<%- include('partials/home_header'); %>
-<%- include('partials/defaultNav'); %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&amp;display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- CSS Section -->
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  <!--sweet alert lib-->
+  <link rel="stylesheet" href="/sweetalert2/dist/sweetalert2.css">
+  <link href="css/classic.css" rel="stylesheet"/>
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&amp;display=swap" rel="stylesheet"> 
+    <!-- JavaScript Section -->
+  <!--sweet alert lib-->
+<script src="/sweetalert2/dist/sweetalert2.js"></script>
+   <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/scripts/app.js"></script>
+  <script type='text/javascript', src = '/scripts/location.js'> </script>
+  <script type='text/javascript', src = '/scripts/imageUpload.js'> </script>
+  <script type='text/javascript', src = '/scripts/pagination.js'> </script>  
+    <script src="/jquery/dist/jquery.min.js"></script>
 </head>
+<body>
+  <!-- Navigation Section -->
+  <header>
+    <%- include('partials/defaultHeader.ejs'); %>
+  </header>
 
-<!-- Main Content -->
-<div>
-  <div class='container'>
-    <div class="row col-12">
-      <img src='/images/pexels-harrison-haines-2973104.jpg' />
+  <!-- Main Content Section -->
+  <main>
+    <div  >
+      <%- include('generalPages/' + page + '.ejs'); %>
     </div>
-    <div>
-      <div class="container my-5">
-        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-          <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-            <h1 class="display-4 fw-bold lh-1">Welcome to your Tennis Trainer Assistant</h1>
-            <p class="lead">Are you ready to start you new life as a tennis player?  You have come to the right place.  Anything you want to do with the sport can be found here, sign up for lessons, be a trainer, we will have you learning in a mater of clicks.  Whatever you want its up to you!
-            </p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-              <button  type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">
-                <a href="/createAccount">Sign up!</a>
-              </button>
-              <button  type="button" class="btn btn-outline-secondary btn-lg px-4">
-                <a href="/login">Login</a>
-              </button>
-            </div>
-          </div>
-          <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-              <img class="rounded-lg-3" src="/images/jeffery-erhunse-6D2Lmtv_X8A-unsplash.jpg" alt="" width="420" height="500">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+  </main>
+  
+  <!-- Bottom Nav -->
+  <footer>
+    <%- include('partials/defaultFooter.ejs'); %>
+  </footer>
+    
+  
+  
+</body>
+</html>

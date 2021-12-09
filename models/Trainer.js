@@ -12,23 +12,11 @@ const trainerSchema=mongoose.Schema({
         type:String,
         default: 'anonymous trainer',
     },
-    'trainerProvince':String,
-    'trainerCity':String,
-    'trainerYearsOfTraining': {
-        type:String,
-        default: ''
-    },
+    'trainerYearsOfTraining': String,
     'passAudit':{
         type:Boolean,
         default: false
     },
-    trainer_appointment:[
-        {
-            'trainer_seeker': String,
-            'date':String
-        }
-    ],
-    'UUID':String
 })
 
 // configure options for User Model

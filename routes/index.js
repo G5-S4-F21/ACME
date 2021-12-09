@@ -1,13 +1,11 @@
 let express = require('express');
-let passport = require('passport'),
+let passport = require('passport'), 
     LocalStrategy = require('passport-local').Strategy;
 let router = express.Router();
 let UserModel = require('../models/users');
 let User = UserModel.User;
 
-
 let indexController = require('../controllers/indexController');
-const trainerController = require("../controllers/trainerController");
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
@@ -35,29 +33,18 @@ function requireAuth(req, res, next)
 //renders the home page
 router.get('/', indexController.renderIndex);
 //renders the create account page
-router.get('/createAccount', indexController.createAccountView);
+router.get('/createAccount', indexController.createAccount);
 //handle the post from createAccount
 router.post('/createAccount', indexController.handleCreateAccount);
 //renders the login page
-router.get('/login', indexController.loginView);
+router.get('/login', indexController.DisplayLoginPage);
 //handles the post from the login
-router.post('/login', indexController.handleLogin);
-
-//trial to add the login part
+router.post('/login', indexController.ProcessLoginPage);
+router.get('/logout', indexController.ProcessLogoutPage);
 
 // handle forget password
-router.get('/forgetPassword',indexController.renderForgetPasswordView)
-router.get('/sendRecoverPasswordEmail',indexController.sendRecoverPasswordEmail)
-router.get('/recoverPassword',indexController.renderResetPasswordView)
+router.get('/forgetPassword',indexController.renderForgetPasswordView);
+router.get('/sendRecoverPasswordEmail',indexController.sendRecoverPasswordEmail);
+router.get('/recoverPassword',indexController.renderResetPasswordView);
 router.post('/resetPassword',indexController.resetPasswordByAccountTypeAndUUID)
-// logout user
-router.get('/logout',indexController.logout)
-
-//routes to specific homepages may be we change
-router.get('/seekerHome', indexController.renderSeekerHome);
-//routes to the trainer home page
-router.get('/trainerHome', indexController.renderTrainerHome);
-
-
-
 module.exports = router;

@@ -13,12 +13,39 @@
           <div class="col-12 col-md-6 col-xxl-12 d-flex">
             <div class="card flex-fill">
               <div class="card-header">
-                <h5 class="card-title mb-0">Day Schedule <span id='dayTitle' style="color:chartreuse"></span></h5>
+                <h5 class="card-title mb-0">Day Schedule</h5>
               </div>
                <!--individual dates start here-->
-               <div id="daily">
-
+              <form method='post' action='schedule' class="card-body d-flex">
+                <div class="container">
+                  <h6 id='dayCalDate'>Date</h6>
+                  <input type='hidden' name='dateLookup' id='dateLookup' value=''></input>
+                  <div class="container"><br><input type='submit' class="btn btn-secondary" value='view'></div>
+                </div>
+                <div class="container">
+                  <dl>
+                    <dt id='dayCalLoc'>Location: </dt>
+                    <dt id='dayCalSeek'>Trainer:</dt>
+                    <dt id='dayCalTime'>Time: </dt>
+                  </dl>
+                </div>
+            </form>
+              <div>
+                <hr class="col-md-11 ">
               </div>
+                <!--end of indivudual item-->
+                <div class="card-body d-flex">
+                  <div class="container">
+                    <h6>Date</h6>
+                  </div>
+                  <div class="container">
+                    <dl>
+                      <dt>Location: </dt>
+                      <dt>Trainer Seeker:</dt>
+                      <dt>Time: </dt>
+                    </dl>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -134,11 +161,7 @@
                     </div>
                   </div>
                 </div>
-                <div class='container pl-3 pb-3'>
-                  <form method='post' action='download'>
-                    <button type='submit' class='btn btn-primary' value='Find Pdf'>PDF download</button>
-                  </form>
-                </div>
+
               </div>
             </div>
 
@@ -154,46 +177,16 @@
                   <div class="card-body d-flex">
                     <form action='setAppt' method='POST'>
                       <dl>
-                        <dt>
-                          <div class="input-group mb-1">
-                            <div class="input-group-append">
-                              <span class="btn btn-secondary">Date</span>
-                            </div>
-                            <input type="text" name="apptDate" id="apptDate" class="form-control" placeholder="seeker">
-                          </div>
-                        </dt>
-                        <dt>
-                          <div class="input-group mb-1">
-                            <div class="input-group-append">
-                              <span class="btn btn-secondary">Trainer</span>
-                            </div>
-                            <input type="text" name="apptTrainer" id="apptTrainer" class="form-control" placeholder="seeker">
-                          </div>
-                        </dt>
-                        <dt>
-                          <div class="input-group mb-1">
-                            <div class="input-group-append">
-                              <span class="btn btn-secondary">Seeker</span>
-                            </div>
-                            <input type="text" name="apptSeek" id="apptSeek" class="form-control" placeholder="seeker" value="<%=userInfo.user_email%>" readonly>
-                          </div>
-                        </dt>
-                        <dt>
-                          <div class="input-group mb-1">
-                            <div class="input-group-append">
-                              <span class="btn btn-secondary">Location</span>
-                            </div>
-                            <input type="text" name="apptLoc" id="apptLoc" class="form-control" placeholder="seeker">
-                          </div>
-                        </dt>
-                        <dt>
-                          <div class="input-group mb-1">
-                            <div class="input-group-append">
-                              <span class="btn btn-secondary">Time</span>
-                            </div>
-                            <input type="text" name="apptTime" id="apptTime" class="form-control" placeholder="seeker">
-                          </div>
-                        </dt>
+                        <dt>Date: </dt>
+                        <dt><input type="text" name="apptDate" id="apptDate"></dt>
+                        <dt>Trainer:</dt>
+                        <dt><input type="text" name="apptTrainer" id="apptTrainer"></dt>
+                        <dt>Seeker:</dt>
+                        <dt><input type="text" name="apptSeek" id="apptSeeker"></dt>
+                        <dt>Location:</dt>
+                        <dt><input type="text" name="apptLoc" id="apptLoc"></dt>
+                        <dt>Time:</dt>
+                        <dt><input type="text" name="apptTime" id="apptTime"></dt>
                       </dl>
                       <input type="submit" class="btn btn-primary"/>
                     </form>
@@ -201,6 +194,7 @@
                   </div>
                 </div>
               </div>
+
             </div>
 
           </div>
