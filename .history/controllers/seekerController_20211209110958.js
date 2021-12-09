@@ -101,6 +101,6 @@ function DisplaySeekerHome(req, res, next) {
 }
 exports.DisplaySeekerHome = DisplaySeekerHome;
 function DisplaySeekerSearch(req, res, next) {
-    res.render('seekerViews/seekerIndex', { title: 'Seeker Search Page', page: 'seekerSearch', displayName: (0, Util_1.UserDisplayName)(req) });
+    res.render('index', { title: 'Seeker Search Page', page: 'seekerSearch', displayName: (0, Util_1.UserDisplayName)(req) });
 }
 exports.DisplaySeekerSearch = DisplaySeekerSearch;
