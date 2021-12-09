@@ -603,7 +603,7 @@ function DisplayTrainerHome(req, res, next) {
                 age: age,
                 province: province,
                 city: city,
-                respond: res.render('seekerViews/seekerIndex', { title: 'Trainer Page', page: 'trainerHome', city: city, province: province, age: age, sex: sex, hourlyRate: hourlyRate, aboutMe: aboutMe, emailAddress: emailAddress, displayNameFromQuery: displayName, phoneNumber: phoneNumber, username: trainerName, displayName: (0, Util_1.UserDisplayName)(req) })
+                respond: res.render('index', { title: 'Trainer Page', page: 'trainerHome', city: city, province: province, age: age, sex: sex, hourlyRate: hourlyRate, aboutMe: aboutMe, emailAddress: emailAddress, displayNameFromQuery: displayName, phoneNumber: phoneNumber, username: trainerName, displayName: (0, Util_1.UserDisplayName)(req) })
             });
         }
     });

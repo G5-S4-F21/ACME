@@ -26,5 +26,5 @@ router.post('/registerSeeker', seekerController.ProcessRegisterSeekerPage);
 router.get('/displaySeekerHome', seekerController.DisplaySeekerHome);
 router.get('/displaySeekerSearch', seekerController.DisplaySeekerSearch);
 router.post('/displaySeekerSearch', seekerController.ProcessSeekerSearchPage);
-router.get('/displayTrainerHome/:username', seekerController.DisplayTrainerHome);
+router.get('/displayTrainerHome/:username', DisplayTrainerHome);
 module.exports = router;
