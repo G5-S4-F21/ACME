@@ -24,5 +24,5 @@ router.post('/schedule', requireAuth, seekerController.renderDetailedView);
 router.get('/registerSeeker', seekerController.DisplayRegisterSeekerPage);
 router.post('/registerSeeker', seekerController.ProcessRegisterSeekerPage);
 router.get('/displaySeekerHome', seekerController.DisplaySeekerHome);
-
+router.get('/displaySeekerSearch', seekerController.DisplaySeekerSearch);
 module.exports = router;
