@@ -1,0 +1,87 @@
+<div class="container">
+        <p>
+            <div class="row align-items-md-stretch">
+                
+                <div class="h-100 p-2 text-white bg-dark rounded-3">
+                    <a href="/displaySeekerSearch"><i class="fas fa-arrow-alt-circle-left fa-3x"></i></a>
+                    <h1 style="text-align:center"><%= title %></h1>
+                </div>
+        </p>
+        </div>
+<div class="container" style ="width: 100%;margin: auto;background-color: #fff;overflow: hidden;border-radius: 10px;">
+            <ul class="list" style="list-style: none;"></ul>
+            <div class="list-footer" style="display: flex;justify-content: space-between;align-items: center;background-color: rgb(110, 9, 169);color: #fff;padding: 1rem;">
+                <button class="btn" style="padding: 0.5rem;border: none;font-size: 1rem;background: transparent;transition: background-color 0.3s ease;color: #fff;cursor: pointer;border-radius: 8px;" id="prev-page"><</button>
+                <div><span id="current-page"></span> of <span id="total-pages"></span></div>
+                <button class="btn" style="padding: 0.5rem;border: none;font-size: 1rem;background: transparent;transition: background-color 0.3s ease;color: #fff;cursor: pointer;border-radius: 8px;" id="next-page">></button>
+            </div>
+            </div>
+            <script>
+// DOM Elements
+const list = document.querySelector('.list');
+const currPage = document.querySelector('#current-page');
+const totalPages = document.querySelector('#total-pages');
+const buttonPrev = document.querySelector('#prev-page');
+const buttonNext = document.querySelector('#next-page');
+
+
+var length = 2;
+const items = [];
+<% for (let count = 0; count < name.length ; count++) { %>
+       items.push({title: '<%= name[count].title %>' , description: '<%= name[count].description %>', username:'<%= name[count].username %>',hourlyRate:'<%= name[count].hourlyRate %>' });
+               
+                <% } %>
+let currentPage = 1;
+let currentIndex = 0;
+const itemsPerPage = 5;
+
+const numPages = Math.ceil(items.length / itemsPerPage);
+if(numPages==0)
+{
+    currentPage = 0;
+}
+// Functions
+const createListItem = (item) => `<li class="list-item"><h4 class="item-title">${item.title}</h4><h4 class="item-title"><span>Hourly rate: $</span> ${item.hourlyRate}</h4><a href="/displayTrainerHome/${item.username}">View ${item.title} </a></li>`;
+
+const nextPage = () => {
+    if (currentPage === numPages) return;
+
+    currentPage++;
+    currentIndex = (currentPage - 1) * itemsPerPage;
+    let newIndex = currentIndex + itemsPerPage;
+    list.innerHTML = items
+        .slice(currentIndex, newIndex)
+        .map((item) => createListItem(item))
+        .join('');
+    currPage.innerHTML = currentPage;
+};
+
+const prevPage = () => {
+    if (currentPage === 1 || currentPage === 0) return;
+
+    currentPage--;
+    currentIndex = (currentPage - 1) * itemsPerPage;
+    let newIndex = currentIndex + itemsPerPage;
+    list.innerHTML = items
+        .slice(currentIndex, newIndex)
+        .map((item) => createListItem(item))
+        .join('');
+    currPage.innerHTML = currentPage;
+};
+
+const init = () => {
+    currPage.innerHTML = currentPage;
+    totalPages.innerHTML = numPages;
+
+    list.innerHTML = items
+        .slice(0, itemsPerPage)
+        .map((item) => createListItem(item))
+        .join('');
+};
+
+// Event Listeners
+buttonPrev.addEventListener('click', prevPage);
+buttonNext.addEventListener('click', nextPage);
+
+init();
+</script>
