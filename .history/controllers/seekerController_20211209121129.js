@@ -21,8 +21,6 @@ let Appt = ApptModel.Appointment;
 
 const tennisTrainerSeeker = __importDefault(require("../models/tennisTrainerSeeker"));
 const q_1 = __importDefault(require("q"));
-const rateIndex_1 = require("../Utils/rateIndex");
-const tennisTrainer_1 = __importDefault(require("../models/tennisTrainer"));
 //render the schedule page for the seeker
 module.exports.renderSeekerSchedule = (req, res, next) => {
   let localUser = req.user;
