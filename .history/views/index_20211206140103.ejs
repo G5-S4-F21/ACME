@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- CSS Section -->
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  <!--sweet alert lib-->
+  <link rel="stylesheet" href="/sweetalert2/dist/sweetalert2.css">
+  <link href="css/classic.css" rel="stylesheet"/>
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&amp;display=swap" rel="stylesheet">   
+    
+</head>
+<body>
+  <!-- Navigation Section -->
+  <header>
+    <%- include('partials/defaultHeader.ejs'); %>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <div  >
+      <%- include('generalPages/' + page + '.ejs'); %>
+    </div>
+  </main>
+  
+  <!-- Bottom Nav -->
+  <footer>
+    <%- include('partials/defaultFooter.ejs'); %>
+  </footer>
+    
+  <!-- JavaScript Section -->
+  <!--sweet alert lib-->
+<script src="/sweetalert2/dist/sweetalert2.js"></script>
+  <script src="/jquery/dist/jquery.min.js"></script>
+  <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/scripts/app.js"></script>
+  <script type='text/javascript', src = '/scripts/location.js'> </script>
+  <script type='text/javascript', src = '/scripts/imageUpload.js'> </script>
+  <script type='text/javascript', src = '/scripts/pagination.js'> </script>
+  
+</body>
+</html>

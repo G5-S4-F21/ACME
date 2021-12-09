@@ -1,0 +1,236 @@
+<%- include('../partials/home_header'); %>
+<%- include('../partials/defaultNav'); %>
+<p>the default user page <%= title %></p>
+<body>
+    <div class="container">
+        <div class="row align-items-md-stretch">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-end row">
+                        <div class="col">
+                            <h6 class="header-pretitle">Overview</h6>
+                            <h1 class="header-title">Dashboard</h1>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="lift btn btn-primary">Create Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--add some other box here-->
+        <div class="container">
+            <hr>
+        </div>
+        <div class="container-fluid p-5 mb-4 bg-light rounded-3">
+            <div class="row">
+                <!--Total Tickets box-->
+                <div class="col-xl col-md-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-items-center row">
+                                <div class="col">
+                                    <h6 class="text-uppercase text-muted mb-2">Tickets Completed</h6>
+                                    <span class="h2 mb-0">365</span>
+                                    
+                                </div>
+                                <div class="col-auto">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign text-muted">
+                                        <g>
+                                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Time taken box-->
+                <div class="col-xl col-md-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-items-center row">
+                                <div class="col">
+                                    <h6 class="text-uppercase text-muted mb-2">Total hours</h6>
+                                    <span class="h2 mb-0">763.5</span>
+                                </div>
+                                <div class="col-auto">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase text-muted">
+                                        <g>
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--second row-->
+            <div class="row">
+                <div class="col-xl-4 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-header-title">Common Tasks</h4>
+                            <a class="small" href="/project-overview">View all</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group-flush my-n3 list-group">
+                                <div class="list-group-item">
+                                    <div class="row align-items-center row">
+                                        <div class="col-auto">
+                                            <a class="avatar avatar-4by3">
+                                                <img class="avatar-img rounded" src="/img/avatars/projects/project-1.jpg" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="ms-n2 col">
+                                            <h4 class="mb-1">
+                                                <a href="/project-overview">Homepage Redesign</a>
+                                            </h4>
+                                            <p class="small text-muted card-text">
+                                                <time datetime="2018-05-24">Updated 4hr ago</time>
+                                            </p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="dropdown">
+                                                <span class="dropdown-ellipses dropdown-toggle" id="react-aria5016654841-34" aria-expanded="false" role="button">
+                                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical ">
+                                                        <g>
+                                                            <circle cx="12" cy="12" r="1"></circle>
+                                                            <circle cx="12" cy="5" r="1"></circle>
+                                                            <circle cx="12" cy="19" r="1"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row align-items-center row">
+                                        <div class="col-auto">
+                                            <a class="avatar avatar-4by3">
+                                                <img class="avatar-img rounded" src="/img/avatars/projects/project-2.jpg" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="ms-n2 col">
+                                            <h4 class="mb-1">
+                                                <a href="/project-overview">Travels &amp; Time</a>
+                                            </h4>
+                                            <p class="small text-muted card-text">
+                                                <time datetime="2018-05-24">Updated 4hr ago</time>
+                                            </p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="dropdown">
+                                                <span class="dropdown-ellipses dropdown-toggle" id="react-aria5016654841-35" aria-expanded="false" role="button">
+                                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical ">
+                                                        <g>
+                                                            <circle cx="12" cy="12" r="1"></circle>
+                                                            <circle cx="12" cy="5" r="1"></circle>
+                                                            <circle cx="12" cy="19" r="1"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row align-items-center row">
+                                        <div class="col-auto">
+                                            <a class="avatar avatar-4by3">
+                                                <img class="avatar-img rounded" src="/img/avatars/projects/project-3.jpg" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="ms-n2 col">
+                                            <h4 class="mb-1">
+                                                <a href="/project-overview">Safari Exploration</a>
+                                            </h4>
+                                            <p class="small text-muted card-text">
+                                                <time datetime="2018-05-24">Updated 4hr ago</time>
+                                            </p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="dropdown">
+                                                <span class="dropdown-ellipses dropdown-toggle" id="react-aria5016654841-36" aria-expanded="false" role="button">
+                                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical ">
+                                                        <g>
+                                                            <circle cx="12" cy="12" r="1"></circle>
+                                                            <circle cx="12" cy="5" r="1"></circle>
+                                                            <circle cx="12" cy="19" r="1"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row align-items-center row">
+                                        <div class="col-auto">
+                                            <a class="avatar avatar-4by3">
+                                                <img class="avatar-img rounded" src="/img/avatars/projects/project-5.jpg" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="ms-n2 col">
+                                            <h4 class="mb-1">
+                                                <a href="/project-overview">Personal Site</a>
+                                            </h4>
+                                            <p class="small text-muted card-text">
+                                                <time datetime="2018-05-24">Updated 4hr ago</time>
+                                            </p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="dropdown">
+                                                <span class="dropdown-ellipses dropdown-toggle" id="react-aria5016654841-37" aria-expanded="false" role="button">
+                                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical ">
+                                                        <g>
+                                                            <circle cx="12" cy="12" r="1"></circle>
+                                                            <circle cx="12" cy="5" r="1"></circle>
+                                                            <circle cx="12" cy="19" r="1"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-header-title">Common Tasks</h4>
+                            <a class="small" href="/project-overview">View all</a>
+                        </div>
+                        <div class="card-body">
+                            <ul class="d-grid gap-4 my-5 list-unstyled">
+                                <li class="d-flex gap-4">
+                                    <svg class="bi text-muted flex-shrink-0" width="48" height="48"><use xlink:href="#grid-fill"></use></svg>
+                                    <div>
+                                      <h5 class="mb-0">Task 1</h5>
+                                      Not into lists? Try the new grid view.
+                                    </div>
+                                  </li>
+                                  <li class="d-flex gap-4">
+                                    <svg class="bi text-muted flex-shrink-0" width="48" height="48"><use xlink:href="#grid-fill"></use></svg>
+                                    <div>
+                                      <h5 class="mb-0">Task 2</h5>
+                                      Not into lists? Try the new grid view.
+                                    </div>
+                                  </li>
+                            </ul>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+    
+</body>

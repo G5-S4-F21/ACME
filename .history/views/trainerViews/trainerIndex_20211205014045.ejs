@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- CSS Section -->
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  
+    
+</head>
+<body >
+  <!-- Navigation Section -->
+  <header>
+    <%- include('../partials/trainerHeader.ejs'); %>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <div class="container">
+      <%- include('../trainerViews/' + page + '.ejs'); %>
+    </div>
+  </main>
+  
+  <!-- Bottom Nav -->
+  <footer>
+    <%- include('../partials/trainerFooter.ejs'); %>
+  </footer>
+    
+  <!-- JavaScript Section -->
+  <script src="/jquery/dist/jquery.min.js"></script>
+  <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/scripts/app.js"></script>
+  <script type='text/javascript', src = '/scripts/location.js'> </script>
+  <script type='text/javascript', src = '/scripts/imageUpload.js'> </script>
+  <script type='text/javascript', src = '/scripts/pagination.js'> </script>
+  <script type='text/javascript', src = '/scripts/smallGallery.js'> </script>
+</body>
+</html>

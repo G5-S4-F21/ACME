@@ -1,0 +1,44 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+            <li class="nav-item">
+            <a class="nav-link" href="/logout"><i class="fas fa-baseball-ball"></i></i></a>
+          </li>
+            <a class="nav-link"  href="#"><i class="fa-solid fa-tennis-ball"></i></i></a>
+            
+            <img src="/Assets/images/logo.png"></a>
+            
+         
+      <a class="navbar-brand" href="#">LAWN TENNIS TRAINER</a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <% if(displayName) { %>
+          <li style="font-family:Georgia, serif;" class="nav-item">
+            <span class="badge"> Hello, <%= displayName %></span>
+          </li>
+          <% }%>
+          <li class="nav-item">
+            <a class="nav-link" href="/home"><i class="fas fa-home fa-lg"></i> Home</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/contact"><i class="fas fa-phone fa-lg"></i> Contact</a>
+          </li>
+            
+          <% if (displayName){ %>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt fa-lg"></i> Logout</a>
+          </li>
+          <%} else{%>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt fa-lg"></i> Login</a>
+          </li>
+          <%}%>
+        </ul>
+      </div>
+    </div>
+  </nav>

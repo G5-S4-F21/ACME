@@ -1,0 +1,211 @@
+<%- include('../partials/home_header'); %>
+
+<script type="text/javascript" src="/scripts/calendar.js"></script>
+
+<main class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">Welcome to the <%= title %> page</h1>
+    </div>
+<span type="hidden" id="apptList" value='<%= JSON.stringify(list) %>'></span>
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-sm-6 col-lg-8 themed-grid-col">
+          <div class="col-12 col-md-6 col-xxl-12 d-flex">
+            <div class="card flex-fill">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Day Schedule</h5>
+              </div>
+               <!--individual dates start here-->
+              <form method='post' action='schedule' class="card-body d-flex">
+                <div class="container">
+                  <h6 id='dayCalDate'>Date</h6>
+                  <input type='hidden' name='dateLookup' id='dateLookup' value=''></input>
+                  <div class="container"><br><input type='submit' class="btn btn-secondary" value='view'></div>
+                </div>
+                <div class="container">
+                  <dl>
+                    <dt id='dayCalLoc'>Location: </dt>
+                    <dt id='dayCalSeek'>Trainer Seeker:</dt>
+                    <dt id='dayCalTime'>Time: </dt>
+                  </dl>
+                </div>
+              </form>
+              <div>
+                <hr class="col-md-11 ">
+              </div>
+                <!--end of indivudual item-->
+                <div class="card-body d-flex">
+                  <div class="container">
+                    <h6>Date</h6>
+                  </div>
+                  <div class="container">
+                    <dl>
+                      <dt>Location: </dt>
+                      <dt>Trainer Seeker:</dt>
+                      <dt>Time: </dt>
+                    </dl>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+          
+        
+          
+        <div class="col-6 col-md-4 themed-grid-col">
+
+          <div class="container">
+            <div class="col-12"><!--make changes here-->
+              <div class="card flex-fill">
+                <div class="card-header">
+                  <div class="card-actions ">
+                    <h5 class="card-title mb-0">Calendar</h5>
+                  </div>
+                </div>
+
+                <div class="card-body d-flex">
+                  <div class="align-self-center w-100">
+                    <div class="chart">
+                      <div id="datetimepicker-dashboard">
+                        <div class="bootstrap-datetimepicker-widget usetwentyfour">
+                          <ul class="list-unstyled">
+                            <li class="show">
+                              <div class="datepicker">
+                                <div class="datepicker-days" style="">
+                                  <table class="table table-sm">
+                                    <thead>
+                                      <tr>
+                                        <th class="prev" data-action="previous">
+                                          <span class="fas fa-chevron-left" title="Previous Month" id="left">
+      
+                                          </span>
+                                        </th>
+                                        <th id="MonthName" class="picker-switch" data-action="pickerSwitch" colspan="5" title="Select Month">November 2021</th>
+                                        <th class="next" data-action="next">
+                                          <span class="fas fa-chevron-right" title="Next Month" id="right"></span>
+                                        </th>
+                                      </tr>
+                                      <tr>
+                                        <th class="dow">Su</th>
+                                        <th class="dow">Mo</th>
+                                        <th class="dow">Tu</th>
+                                        <th class="dow">We</th>
+                                        <th class="dow">Th</th>
+                                        <th class="dow">Fr</th>
+                                        <th class="dow">Sa</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td id="Sunday" data-action="selectDay" data-day="10/31/2021" class="day old weekend">31<p>some data</p></td>
+                                        <td id="Monday" data-action="selectDay" data-day="11/01/2021" class="day">1</td>
+                                        <td id="Tuesday" data-action="selectDay" data-day="11/02/2021" class="day">2</td>
+                                        <td id="Wednesday" data-action="selectDay" data-day="11/03/2021" class="day">3</td>
+                                        <td id="Thursday" data-action="selectDay" data-day="11/04/2021" class="day">4</td>
+                                        <td id="Friday" data-action="selectDay" data-day="11/05/2021" class="day">5</td>
+                                        <td id="Saturday" data-action="selectDay" data-day="11/06/2021" class="day weekend">6</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="11/07/2021" class="day weekend">7</td>
+                                        <td id="" data-action="selectDay" data-day="11/08/2021" class="day">8</td>
+                                        <td id="" data-action="selectDay" data-day="11/09/2021" class="day">9</td>
+                                        <td id="" data-action="selectDay" data-day="11/10/2021" class="day">10</td>
+                                        <td id="" data-action="selectDay" data-day="11/11/2021" class="day">11</td>
+                                        <td id="" data-action="selectDay" data-day="11/12/2021" class="day active today">12</td>
+                                        <td id="onethree" data-action="selectDay" data-day="11/13/2021" class="day weekend">13</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="11/14/2021" class="day weekend">14</td>
+                                        <td id="" data-action="selectDay" data-day="11/15/2021" class="day">15</td>
+                                        <td id="" data-action="selectDay" data-day="11/16/2021" class="day">16</td>
+                                        <td id="" data-action="selectDay" data-day="11/17/2021" class="day">17</td>
+                                        <td id="" data-action="selectDay" data-day="11/18/2021" class="day">18</td>
+                                        <td id="" data-action="selectDay" data-day="11/19/2021" class="day">19</td>
+                                        <td id="" data-action="selectDay" data-day="11/20/2021" class="day weekend">20</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="11/21/2021" class="day weekend">21</td>
+                                        <td id="" data-action="selectDay" data-day="11/22/2021" class="day">22</td>
+                                        <td id="" data-action="selectDay" data-day="11/23/2021" class="day">23</td>
+                                        <td id="" data-action="selectDay" data-day="11/24/2021" class="day">24</td>
+                                        <td id="" data-action="selectDay" data-day="11/25/2021" class="day">25</td>
+                                        <td id="" data-action="selectDay" data-day="11/26/2021" class="day">26</td>
+                                        <td id="" data-action="selectDay" data-day="11/27/2021" class="day weekend">27</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="11/28/2021" class="day weekend">28</td>
+                                        <td id="" data-action="selectDay" data-day="11/29/2021" class="day">29</td>
+                                        <td id="" data-action="selectDay" data-day="11/30/2021" class="day">30</td>
+                                        <td id="" data-action="selectDay" data-day="12/01/2021" class="day new">1</td>
+                                        <td id="" data-action="selectDay" data-day="12/02/2021" class="day new">2</td>
+                                        <td id="" data-action="selectDay" data-day="12/03/2021" class="day new">3</td>
+                                        <td id="" data-action="selectDay" data-day="12/04/2021" class="day new weekend">4</td>
+                                      </tr>
+                                      <tr>
+                                        <td id="" data-action="selectDay" data-day="12/05/2021" class="day new weekend">5</td>
+                                        <td id="" data-action="selectDay" data-day="12/06/2021" class="day new">6</td>
+                                        <td id="" data-action="selectDay" data-day="12/07/2021" class="day new">7</td>
+                                        <td id="" data-action="selectDay" data-day="12/08/2021" class="day new">8</td>
+                                        <td id="" data-action="selectDay" data-day="12/09/2021" class="day new">9</td>
+                                        <td id="" data-action="selectDay" data-day="12/10/2021" class="day new">10</td>
+                                        <td id="" data-action="selectDay" data-day="12/11/2021" class="day new weekend">11</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+
+              <div class="col-12 margin-top"><!--make changes here-->
+                <div class="card flex-fill">
+                  <div class="card-header">
+                    <div class="card-actions ">
+                      <h5 class="card-title mb-0">Appointment Setter</h5>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex">
+                    <form action='setAppt' method='POST'>
+                      <dl>
+                        <dt>Date: </dt>
+                        <dt><input type="text" name="apptDate" id="apptDate"></dt>
+                        <dt>Trainer:</dt>
+                        <dt><input type="text" name="apptTrainer" id="apptTrainer"></dt>
+                        <dt>Seeker:</dt>
+                        <dt><input type="text" name="apptSeek" id="apptSeeker"></dt>
+                        <dt>Location:</dt>
+                        <dt><input type="text" name="apptLoc" id="apptLoc"></dt>
+                        <dt>Time:</dt>
+                        <dt><input type="text" name="apptTime" id="apptTime"></dt>
+                      </dl>
+                      <input type="submit" class="btn btn-primary"/>
+                    </form>
+                    
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <form method='post' action='/setAppt'>
+            <input type="hidden" id='formdate' name="formdate" value=''/>
+            <span id="location1"></span>
+          </form>
+           
+
+        </div>
+      </div>
+    </div>
+
+

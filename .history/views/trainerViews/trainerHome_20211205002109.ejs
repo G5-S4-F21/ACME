@@ -1,0 +1,38 @@
+
+<div class="bg-image" 
+     >
+            <div class="col-lg-8 mx-auto p-3 py-md-5">
+                <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                  <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4">Hi I'm: <%= displayNameFromQuery %> <span>&nbsp  </span></span>
+                  </a>
+                  <div class="btn-group" role="group" arial-label="Basic example" >
+                  <button id="submitButton" type="submit" class="btn btn-info">View or update your appointment</button>
+                   <button id="submitButton" type="submit" class="btn btn-secondary">Rate <%= displayNameFromQuery %> </button>
+                   <button id="submitButton" type="submit" class="btn btn-success">Mark <%= displayNameFromQuery %> as favorite</button>
+                   
+                </div>
+                </header>
+              
+                
+
+
+                  <h1>Contact me</h1>
+                  <p class="fs-6 col-md-8">Phone number: <%= phoneNumber %>  </p>
+                  <p class="fs-6 col-md-8">Email: <%= emailAddress %>  </p>
+                  <p class="fs-6 col-md-8">Province: <%= province %>  </p>
+                  <p class="fs-6 col-md-8">City: <%= city %>  </p>
+                  <p class="fs-6 col-md-8">Age: <%= age %>  </p>
+                  <p class="fs-6 col-md-8">Gender: <%= sex %>  </p>
+                  <hr class="col-3 col-md-2 mb-5">
+              
+                <h1>About me</h1>
+                  <p class="fs-6 col-md-12"><%= aboutMe %>  </p>   
+                </main>
+                
+              </div>
+</div>
+
+
+
+

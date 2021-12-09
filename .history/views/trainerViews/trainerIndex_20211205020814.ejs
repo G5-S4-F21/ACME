@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- CSS Section -->
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  
+    
+</head>
+<body style="min-height: 400px;margin-bottom: 100px;clear: both;">
+  <!-- Navigation Section -->
+  <header>
+    <%- include('../partials/trainerHeader.ejs'); %>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <div class="container">
+      <%- include('../trainerViews/' + page + '.ejs'); %>
+    </div>
+  </main>
+  
+  <!-- Bottom Nav -->
+  <footer>
+    <%- include('../partials/trainerFooter.ejs'); %>
+  </footer>
+    
+  <!-- JavaScript Section -->
+  <script src="/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/Scripts/app.js"></script>
+  <script type='text/javascript', src = '/scripts/location.js'> </script>
+  
+</body>
+</html>

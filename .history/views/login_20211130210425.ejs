@@ -1,0 +1,44 @@
+
+
+<head>
+    <%- include('partials/home_header'); %>
+    <%- include('partials/defaultNav'); %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Signin Template · Bootstrap v5.1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    <main class="form-signin">
+        <form action="/login" method="post">
+            <img class="mb-4" src="/images/ball1.jpg" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Welcome to Tennis Trainer Finder</h1>
+            <h3 class="h3 mb-3 fw-normal">Please Sign In!</h3>
+
+            <div class="form-floating flex-md">
+                
+                <input type="text" class="form-control d-inline-flex" name="username" placeholder="300111222">
+
+            </div>
+            <div class="form-floating">
+                
+                <input type="password" class="form-control" name="password" placeholder="password">
+            </div>
+            <br />
+            <div>
+                <input class="w-25 btn btn-lg btn-primary" value="Sign In" type="submit"></input>
+            </div>
+            <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        </form>
+    </main>
+
+
+
+</body>

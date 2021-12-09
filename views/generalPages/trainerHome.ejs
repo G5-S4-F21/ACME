@@ -1,0 +1,91 @@
+<%- include('../partials/home_header'); %>
+<%- include('../partials/defaultNav'); %>
+
+<body>
+    <main class="container">
+        <p>
+            <div class="row align-items-md-stretch">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h1>display general info about the user</h1>
+                </div>
+        </p>
+    <div class="row row-cols-1 row-cols-md-4 mb-4 text-center">
+
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">View Favs</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">Loved them!<small class="text-muted fw-light">yay!</small></h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Did you vibe with someone</li>
+                <li>Do you want another lesson</li>
+                <li>You can save them here</li>
+                <li>To find them press the button</li>
+              </ul>
+              <button type="button" class="w-100 btn btn-lg btn-outline-primary">
+                  <a href="/users/favorites">Show my Favs</a></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">Search</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">Many to choose<small class="text-muted fw-light">yay!</small></h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Find one that fits</li>
+                <li>They will teach you </li>
+                <li>Book an appt</li>
+                <li>Just click and search</li>
+              </ul>
+              <button type="button" class="w-100 btn btn-lg btn-primary">
+                <a href="/trainer/search">Get started</a></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm border-primary">
+            <div class="card-header py-3 text-white bg-primary border-primary">
+              <h4 class="my-0 fw-normal">Profile</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">Change<small class="text-muted fw-light"> here</small></h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Both account and profile</li>
+                <li>your online image</li>
+                <li>account info</li>
+                <li>Keep it up to date</li>
+              </ul>
+              <button type="button" href="#" class="w-100 btn btn-lg btn-primary">
+                <a href="/trainer/account">New Me</a></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+              <div class="card-header py-3 text-white bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Schedule</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">Work<small class="text-muted fw-light">/week</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Choose you own schedule</li>
+                  <li>any time you want</li>
+                  <li>The possiblilites</li>
+                  <li>click for your calendar</li>
+                </ul>
+                <button type="button" href="#" class="w-100 btn btn-lg btn-primary">
+                    <a href="/trainer/schedule">Lets do it!</a></button>
+              </div>
+            </div>
+          </div>
+
+      </div>
+</body>

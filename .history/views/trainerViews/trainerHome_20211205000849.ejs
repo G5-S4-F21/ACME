@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="/stylesheets/smallGallery.css">
+<div class="bg-image" 
+     >
+            <div class="col-lg-8 mx-auto p-3 py-md-5">
+                <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                  <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4">Hi I'm: <%= displayNameFromQuery %> <span>&nbsp  </span></span>
+                  </a>
+                  <div class="btn-group" role="group" arial-label="Basic example" >
+                  <button id="submitButton" type="submit" class="btn btn-info">View or update your appointment</button>
+                   <button id="submitButton" type="submit" class="btn btn-secondary">Rate <%= displayNameFromQuery %> </button>
+                   <button id="submitButton" type="submit" class="btn btn-success">Mark <%= displayNameFromQuery %> as favorite</button>
+                   
+                </div>
+                </header>
+              
+                <div class="carousel js-carousel">
+  <figure class="carousel__frame js-carousel__frame">
+    <div class="carousel__slides js-carousel__slides">
+      <img src="https://images.unsplash.com/photo-1510154011132-f48b8eabd172?fit=crop&w=1920&h=960&q=80" alt="" class="carousel__item">
+      <img src="https://images.unsplash.com/photo-1532979142617-bbb2fe39ad52?fit=crop&w=1920&h=960&q=80" alt="" class="carousel__item">
+      <img src="https://images.unsplash.com/photo-1521624002551-9ea092b0bc52?fit=crop&w=1920&h=960&q=80" alt="" class="carousel__item">
+      <img src="https://images.unsplash.com/photo-1517260739337-6799d239ce83?fit=crop&w=1920&h=960&q=80" alt="" class="carousel__item">
+      <img src="https://images.unsplash.com/photo-1534531173927-aeb928d54385?fit=crop&w=1920&h=960&q=80" alt="" class="carousel__item">
+    </div>
+    
+    <button class="carousel__prev js-carousel__prev"><i class="fa fa-chevron-left"></i></button>
+    <button class="carousel__next js-carousel__next"><i class="fa fa-chevron-right"></i></button>
+  </figure>
+</div>
+
+
+
+                  <h1>Contact me</h1>
+                  <p class="fs-6 col-md-8">Phone number: <%= phoneNumber %>  </p>
+                  <p class="fs-6 col-md-8">Email: <%= emailAddress %>  </p>
+                  <p class="fs-6 col-md-8">Province: <%= province %>  </p>
+                  <p class="fs-6 col-md-8">City: <%= city %>  </p>
+                  <p class="fs-6 col-md-8">Age: <%= age %>  </p>
+                  <p class="fs-6 col-md-8">Gender: <%= sex %>  </p>
+                  <hr class="col-3 col-md-2 mb-5">
+              
+                <h1>About me</h1>
+                  <p class="fs-6 col-md-12"><%= aboutMe %>  </p>   
+                </main>
+                
+              </div>
+</div>
+
+<script>
+let slider = document.querySelector('.js-carousel');
+
+lory(slider, {
+  infinite: 1,
+  enableMouseEvents: true,
+  classNameFrame: 'js-carousel__frame',
+  classNameSlideContainer: 'js-carousel__slides',
+  classNamePrevCtrl: 'js-carousel__prev',
+  classNameNextCtrl: 'js-carousel__next',
+});
+</script>
+
+
