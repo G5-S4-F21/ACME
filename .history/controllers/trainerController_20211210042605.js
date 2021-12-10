@@ -182,7 +182,7 @@ function DisplayTrainerHome(req, res, next) {
                 age = `${doc.age}`;
                 province = `${doc.province}`;
                 city = `${doc.city}`;
-                approved = `${doc.approvedByAuditor}`;
+                approved = `${doc.approvedByAuditor:}`;
             });
             deferred.resolve({
                 hourlyRate: hourlyRate,

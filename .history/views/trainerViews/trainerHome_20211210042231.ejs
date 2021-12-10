@@ -6,8 +6,8 @@
                 
                    
                   <h1>Your profile</h1>
-                  <% if(approved === "false") { %>
-                  <h5 style="color:red;">is not yet approved. Seekers cannot find you. Your signup application is still being processed</h5>
+                  <% if(displayName) { %>
+                  <h1 style="color:red;">is not yet approved. Seekers cannot find you. Your signup application is still being processed</h1>
           <% } %>
                   <div class="btn-group" role="group" arial-label="Basic example" >
                   

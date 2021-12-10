@@ -212,7 +212,7 @@ exports.ProcessLoginPage = ProcessLoginPage;
 
 function ProcessLogoutPage(req, res, next) {
     req.logout();
-    return res.redirect('/');
+    return res.redirect('login');
 }
 exports.ProcessLogoutPage = ProcessLogoutPage;
 

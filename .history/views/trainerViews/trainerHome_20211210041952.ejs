@@ -4,11 +4,17 @@
             <div class="col-lg-8 mx-auto p-3 py-md-5">
                 <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
                 
-                   
-                  <h1>Your profile</h1>
-                  <% if(approved === "false") { %>
-                  <h5 style="color:red;">is not yet approved. Seekers cannot find you. Your signup application is still being processed</h5>
+                   <% if(displayName) { %>
+          <li style="font-family:Georgia, serif;" class="nav-item">
+            <span class="badge"> Hello, <%= displayName %></span>
+          </li>
+          <% } else { %>
+          <li style="font-family:Georgia, serif;" class="nav-item">
+            <span style="color:#F5DEB3" class="badge"> Hello, Guest</span>
+          </li>
           <% } %>
+
+                  <h1>Your profile</h1>
                   <div class="btn-group" role="group" arial-label="Basic example" >
                   
                    

@@ -182,7 +182,7 @@ function DisplayTrainerHome(req, res, next) {
                 age = `${doc.age}`;
                 province = `${doc.province}`;
                 city = `${doc.city}`;
-                approved = `${doc.approvedByAuditor}`;
+                approved = `${doc.approvedByAuditor:}`;
             });
             deferred.resolve({
                 hourlyRate: hourlyRate,
@@ -195,7 +195,7 @@ function DisplayTrainerHome(req, res, next) {
                 province: province,
                 city: city,
                 approved: approved,
-                respond: res.render('trainerViews/trainerIndex', { title: 'Trainer Page', page: 'trainerHome', approved: approved, city: city, province: province, age: age, sex: sex, hourlyRate: hourlyRate, aboutMe: aboutMe, emailAddress: emailAddress, displayNameFromQuery: displayName, phoneNumber: phoneNumber, username: trainerName, displayName: (0, trainer_1.TrainerDisplayName)(req) })
+                respond: res.render('trainerViews/trainerIndex', { title: 'Trainer Page', page: 'trainerHome', city: city, province: province, age: age, sex: sex, hourlyRate: hourlyRate, aboutMe: aboutMe, emailAddress: emailAddress, displayNameFromQuery: displayName, phoneNumber: phoneNumber, username: trainerName, displayName: (0, trainer_1.TrainerDisplayName)(req) })
             });
         }
     });

@@ -142,7 +142,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             maxAmount = 101;
             tennisTrainer_1.default.find({
                 "province": req.body.province,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -168,7 +167,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             maxAmount = 201;
             tennisTrainer_1.default.find({
                 "province": req.body.province,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -194,7 +192,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             maxAmount = 301;
             tennisTrainer_1.default.find({
                 "province": req.body.province,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -220,7 +217,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             maxAmount = 401;
             tennisTrainer_1.default.find({
                 "province": req.body.province,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -245,7 +241,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             minAmount = 399;
             tennisTrainer_1.default.find({
                 "province": req.body.province,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -272,7 +267,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             tennisTrainer_1.default.find({
                 "province": req.body.province,
                 "city": req.body.city,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -299,7 +293,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             tennisTrainer_1.default.find({
                 "province": req.body.province,
                 "city": req.body.city,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -326,7 +319,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             tennisTrainer_1.default.find({
                 "province": req.body.province,
                 "city": req.body.city,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -353,7 +345,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             tennisTrainer_1.default.find({
                 "province": req.body.province,
                 "city": req.body.city,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -380,7 +371,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             tennisTrainer_1.default.find({
                 "province": req.body.province,
                 "city": req.body.city,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -406,7 +396,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             tennisTrainer_1.default.find({
                 "province": req.body.province,
                 "city": req.body.city,
-                "approvedByAuditor": "true",
                 "hourlyRate": { $gt: minAmount },
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
@@ -432,7 +421,6 @@ function ProcessSeekerSearchPage(req, res, next) {
         if ((0, rateIndex_1.rateIndex)(req) === "1") {
             tennisTrainer_1.default.find({
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
-                "approvedByAuditor": "true",
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
                 if (err) {
@@ -457,7 +445,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             maxAmount = 101;
             tennisTrainer_1.default.find({
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
-                "approvedByAuditor": "true",
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
                 if (err) {
@@ -482,7 +469,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             maxAmount = 201;
             tennisTrainer_1.default.find({
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
-                "approvedByAuditor": "true",
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
                 if (err) {
@@ -507,7 +493,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             maxAmount = 301;
             tennisTrainer_1.default.find({
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
-                "approvedByAuditor": "true",
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
                 if (err) {
@@ -532,7 +517,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             maxAmount = 401;
             tennisTrainer_1.default.find({
                 "hourlyRate": { $gt: minAmount, $lt: maxAmount },
-                "approvedByAuditor": "true",
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
                 if (err) {
@@ -556,7 +540,6 @@ function ProcessSeekerSearchPage(req, res, next) {
             minAmount = 399;
             tennisTrainer_1.default.find({
                 "hourlyRate": { $gt: minAmount },
-                "approvedByAuditor": "true",
                 $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
                 if (err) {
