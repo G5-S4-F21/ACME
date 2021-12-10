@@ -86,9 +86,7 @@ passport.serializeUser(function (userObject, done) {
   } else if (userPrototype === trainerModel.default.prototype) {
     userGroup = "model2";
   }
-  else if (userPrototype === auditorModel.default.prototype) {
-    userGroup = "model3";
-  }
+
   let sessionConstructor = new SessionConstructor(userObject.id, userGroup, '');
   done(null,sessionConstructor);
 });
@@ -103,13 +101,6 @@ passport.deserializeUser(function (sessionConstructor, done) {
     });
   } else if (sessionConstructor.userGroup == 'model2') {
     trainerModel.default.findOne({
-        _id: sessionConstructor.userId
-    }, '-localStrategy.password', function (err, user) { // When using string syntax, prefixing a path with - will flag that path as excluded.
-        done(err, user);
-    });
-  }
-  else if (sessionConstructor.userGroup == 'model3') {
-    auditorModel.default.findOne({
         _id: sessionConstructor.userId
     }, '-localStrategy.password', function (err, user) { // When using string syntax, prefixing a path with - will flag that path as excluded.
         done(err, user);

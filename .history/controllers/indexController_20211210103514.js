@@ -224,7 +224,7 @@ function ProcessLoginPage(req, res, next) {
                     return next(err);
                 }
                 let username = req.body.username;
-                return res.redirect('/auditor/pendingTrainerJoinRequests/');
+                return res.redirect('/auditor/pendingTrainerJoinRequests/'+ `${username}`);
             });
         })(req, res, next);
     }
