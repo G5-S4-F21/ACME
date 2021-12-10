@@ -421,8 +421,7 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
             //findTrainerSeekerByUUID(req,res)
             break;
         case 'Auditor':
-            //find this user in Auditor DB by UUID
-            findAuditorByUUID(req,res)
+            // TODO: find this user in Auditor DB by UUID
             break;
         case 'Admin':
             // TODO: find this user in Admin DB by UUID
@@ -444,44 +443,6 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
          if(NewPass==confirm_password){
              console.log(NewPass);
              TrainerModel.default.findById(req.body.UUID, (err, user)=>{
-                 if(err) console.log(err);
-                 else
-                   {
-                       user.setPassword(NewPass,(err, user)=>{
-                        if(err){
-                            // -2: server error
-                            return res.send('-2')
-                        }
-                        if(!user){
-                            // 0: no such user
-                            return res.send('0')
-                        }
-                        else{
-                            // reset password
-                            user.save();
-                            console.log('updated!')
-                            return res.send('1')
-                        }
-                        
-                       });
-                   } 
-             });
-
-         }
-}
-
-/**
- * find the auditor by UUID
- * @param req
- * @param res
- */
- const findAuditorByUUID = (req,res)=>{
-    const NewPass=req.body.new_password,
-         confirm_password=req.body.new_password;
-         console.log(NewPass);
-         if(NewPass==confirm_password){
-             console.log(NewPass);
-             AuditorModel.default.findById(req.body.UUID, (err, user)=>{
                  if(err) console.log(err);
                  else
                    {
