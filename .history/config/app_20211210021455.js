@@ -59,7 +59,7 @@ app.use('/users', usersRouter);
 app.use('/seeker', seekerRouter);
 app.use('/trainer', trainerRouter);
 app.use('/administrator', administratorRouter);
-app.use('/auditor', auditorRouter);
+
 //the passport stuff
 let userModel = require('../models/users.js');
 let User = userModel.User;

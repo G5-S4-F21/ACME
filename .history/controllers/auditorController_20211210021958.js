@@ -29,4 +29,30 @@ function DisplayRegisterAuditorPage(req, res, next) {
 }
 exports.DisplayRegisterAuditorPage = DisplayRegisterAuditorPage;
 
-
+function DisplayPendingTrainerJoinRequests(req, res, next) {
+    var deferred = q_1.default.defer();
+    let province = req.body.province;
+    let city = req.body.city;
+    let minAmount = 0;
+    let maxAmount = 51;
+    tennisTrainer_1.default.find({
+        "approvedByAuditor": "false",
+    }, function (err, docs) {
+        if (err) {
+            console.log('Error Finding Files');
+            deferred.reject(err);
+        }
+        else {
+            var names = [];
+            docs.forEach(function fn(doc) {
+                var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                names.push(item);
+            });
+            deferred.resolve({
+                names: names,
+                respond: res.render('auditorIndex', { title: 'List of pending auditor requests', page: 'trainerJoinRequest', name: names, displayName: (0, auditor_2.AuditorDisplayName)(req) })
+            });
+        }
+    });
+}
+exports.DisplayPendingTrainerJoinRequests = DisplayPendingTrainerJoinRequests;
