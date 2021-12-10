@@ -2,6 +2,7 @@
 // require modules for the User Model
 let mongoose = require('mongoose');
 let passportLocalMongoose = require('passport-local-mongoose');
+const favorite = require('./favorite');
 
 let trainerSeekerSchema = mongoose.Schema
 (
@@ -41,6 +42,11 @@ let trainerSeekerSchema = mongoose.Schema
             type: String,
             trim: true,
             required: "is required"
+        },
+        favorites:
+        {
+            type : Array,
+            default : "",
         }
     },
     {

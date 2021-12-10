@@ -88,7 +88,8 @@
                     <% for(let count = 0; count < list.length; count++) { %>
                       <form action='setFavorite' method='post' id='<%= list[count]._id %>'>
                         <tr>
-                          <td><button type='submit' class="fas fa-bomb fa-2x" style="color:chartreuse"></button></td>
+                          <td><a href="/seeker/favorite/<%= list[count]._id %>" class="btn btn-sm">
+                            <i class="fas fa-bomb fa-2x" style="color:chartreuse"></i></a></td>
                           <td class="pt-2"><%= list[count].TrainerName %></td>
                           <input type='hidden' name='trainerId' value="<%= list[count]._id %>"/>
                           <td class="pt-2"><%= list[count].trainerYearsOfTraining %></td>

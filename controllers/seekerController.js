@@ -92,9 +92,45 @@ module.exports.setFavorite = (req, res, next) => {
         user_password:req.session.user_password,
         user_account_type:req.session.user_account_type
     }
+    console.log("setFav");
+    let id = req.params.id;
+    SeekerModel.Trainer_seeker.find((err, seekerList) => {
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            for(let a of seekerList)
+            {
+                if(a.trainer_seeker_email == userInfo.user_email)
+                {
+                    let toUpdate = a;
+                    console.log(a.trainer_seeker_email);
+                    if(!a.favorites.includes(id))
+                    {
+                        toUpdate.favorites.push(id);
+                        console.log(toUpdate);
+                        SeekerModel.Trainer_seeker.updateOne({_id : toUpdate._id}, toUpdate, (err) => {
+                            if(err)
+                            {
+                                console.log(err);
+                                res.end(err);
+                            }
+                            else
+                            {
+                                let tlist = [];
+                                res.render('seekerViews/seekerTrainerSearch', { title : 'Search', userInfo : userInfo, 'list' : tlist });
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    });
     //logic to add trainer to favorites
-    console.log(req.body.trainerId);
-    res.redirect('/search');
+    let tlist = [];
+    res.render('seekerViews/seekerTrainerSearch', { title : 'Search', userInfo : userInfo, 'list' : tlist });
 }
 
 module.exports.renderFavorites = (req, res, next) => {
