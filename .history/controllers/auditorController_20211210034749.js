@@ -129,7 +129,7 @@ function ProcessTrainerRequestRejection(req, res, next) {
             console.error(err);
             res.end(err);
         }
-        res.redirect('/auditor/pendingTrainerJoinRequests');
+        res.redirect('/pendingTrainerJoinRequests');
     });
 }
 exports.ProcessTrainerRequestRejection = ProcessTrainerRequestRejection;
@@ -214,7 +214,7 @@ function ProcessTrainerRequestApproval(req, res, next) {
                     console.error(err);
                     res.end(err);
                 }
-                res.redirect('/auditor/pendingTrainerJoinRequests');
+                res.redirect('/pendingTrainerJoinRequests');
             });
         }
     });
