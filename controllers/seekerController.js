@@ -188,6 +188,38 @@ module.exports.renderFavorites = (req, res, next) => {
     //send the list to the view
     //res.render('seekerViews/seekerFavView', { title : 'Favorites', userInfo : userInfo, tList : tList });
 }
+
+module.exports.favBook = (req, res, next) => {
+    let fav = req.params.id;
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    //get trainer
+    let apptList;
+    /*Trainer.findById({fav}, (err, fTrainer) => {
+        if(err)
+        {
+            return console.error(err);
+        }
+        else
+        {
+            Appt.find((err, apptList) => {
+                for(let a of apptList)
+                {
+                    if(a.apptTrainer == fTrainer.apptEmail)
+                    {
+                        apptList.push(a);
+                    }
+                }
+            });
+            res.render('/seekerViews/singleBooking');
+        }
+    });*/
+    res.render('seekerViews/singleBooking', { title : "booking", userInfo : userInfo });
+}
+
 //render the schedule page for the seeker
 module.exports.renderSeekerSchedule = (req, res, next) => {
     const userInfo={
