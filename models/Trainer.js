@@ -3,33 +3,70 @@
 let mongoose = require('mongoose');
 let passportLocalMongoose = require('passport-local-mongoose');
 
-const trainerSchema=mongoose.Schema({
-    'trainerId':Number,
-    'trainerEmail': String,
-    'trainerPassword':String,
-    'trainerCellphone':String,
-    'trainerName': {
-        type:String,
-        default: 'anonymous trainer',
-    },
-    'trainerProvince':String,
-    'trainerCity':String,
-    'trainerYearsOfTraining': {
-        type:String,
-        default: ''
-    },
-    'passAudit':{
-        type:Boolean,
-        default: false
-    },
-    trainer_appointment:[
+const trainerSchema=mongoose.Schema
+(
+    {
+        'trainerId': 
         {
-            'trainer_seeker': String,
-            'date':String
+            type :  Number,
+            required : "is required",
+            trim : true
+        },
+        'trainerEmail':
+        {
+            type : String,
+            required : 'is required',
+            trim: true
+        },
+        'trainerPassword':
+        {
+            type : String,
+            required : 'is required',
+            trim: true
+        },
+        'trainerCellphone':
+        {
+            type : String,
+            trim : true
+        },
+        'trainerName':
+        {
+            type: String,
+            default: 'anonymous trainer'
+        },
+        'trainerProvince':
+        {
+            type:  String,
+            trim : true
+        },
+        'trainerCity':
+        {
+            type : String,
+            trim : true
+        },
+        'trainerYearsOfTraining':
+        {
+            type : String,
+            default : '',
+            trim : true
+        },
+        'passAudit':
+        {
+            type : Boolean,
+            required : "is required",
+            default: false,
+            trim : true
+        },
+        'UUID':
+        {
+            type : String,
+            trim : true
         }
-    ],
-    'UUID':String
-})
+    },
+    {
+        collection : "trainers"
+    }
+)
 
 // configure options for User Model
 

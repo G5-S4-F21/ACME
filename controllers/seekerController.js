@@ -139,8 +139,54 @@ module.exports.renderFavorites = (req, res, next) => {
         user_password:req.session.user_password,
         user_account_type:req.session.user_account_type
     };
-
-    res.render('seekerViews/seekerFavView', { title : 'Favorites', userInfo : userInfo });
+    let tList = [];
+    //find the account details about seeker
+    SeekerModel.Trainer_seeker.find((err, seekerlist) => {
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            for(let a of seekerlist) 
+            {
+                if(a.trainer_seeker_email == userInfo.user_email)
+                {
+                    let favList = a.favorites;
+                    let tList = new Set();
+                    Trainer.find((err, trainerList) => {
+                        if(err)
+                        {
+                            return console.error(err);
+                        }
+                        else
+                        {
+                            //console.log(trainerList);
+                            for(let b of favList)
+                            {
+                                for(let a of trainerList)
+                                {
+                                    let id = a._id;
+                                    console.log(b, id);
+                                    if(b == id)
+                                    {
+                                        tList.add(a); 
+                                    }
+                                }
+                            } 
+                            console.log(tList);
+                            res.render('seekerViews/seekerFavView', { title : 'Favorites', userInfo : userInfo, tList : tList });
+                        }
+                    });
+                    
+                }
+            }
+            //console.log(tList);
+            //res.render('seekerViews/seekerFavView', { title : 'Favorites', userInfo : userInfo, tList : tList });
+        }
+    });
+    //send the list to the view
+    //res.render('seekerViews/seekerFavView', { title : 'Favorites', userInfo : userInfo, tList : tList });
 }
 //render the schedule page for the seeker
 module.exports.renderSeekerSchedule = (req, res, next) => {
