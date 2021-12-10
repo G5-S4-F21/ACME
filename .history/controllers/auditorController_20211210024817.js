@@ -56,4 +56,3 @@ function DisplayPendingTrainerJoinRequests(req, res, next) {
     });
 }
 exports.DisplayPendingTrainerJoinRequests = DisplayPendingTrainerJoinRequests;
-

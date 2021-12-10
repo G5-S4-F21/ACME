@@ -18,5 +18,5 @@ function requireAuth(req, res, next)
 //router.get('/registerAuditor', auditorController.DisplayRegisterAuditorPage);
 //router.post('/registerAuditor', auditorController.ProcessRegisterAuditorPage);
 router.get('/pendingTrainerJoinRequests', auditorController.DisplayPendingTrainerJoinRequests);
-//router.get('/displayTrainerRequestDetails/:username', auditorController.DisplayTrainerRequestDetails);
+router.get('/displayTrainerRequestDetails/:username', auditorController.DisplayTrainerRequestDetails);
 module.exports = router;
