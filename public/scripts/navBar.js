@@ -21,8 +21,21 @@ $('#my_schedule').click(()=>{
                     }
                 })
             }else if(data==='1'){
+                console.log('goto')
                 // this trainer does fill certificate form
-                window.location.href='/trainer/schedule'
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    confirmButtonText: 'Schedule now',
+                    title: 'Great',
+                    text: 'You are all set!'
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        window.location.href='/trainer/doSchedule'
+                    }
+                })
+                // window.location.href='/trainer/schedule'
             }else if(data==='-2'){
                 // server error
                 Swal.fire({

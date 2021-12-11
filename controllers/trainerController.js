@@ -55,13 +55,64 @@ module.exports.renderScheduleView = (req, res, next) => {
                 // filled certificate form
                 //retreive the list of appts and send to the client
                 // TODO: render trainer schedule view
+                console.log('show schedule')
+                return res.send('1')
+                // Appt.find({},(err, mainList) => {
+                //     console.log('hello')
+                //     if(err) {
+                //         return console.error(err);
+                //     }
+                //     else {
+                //         res.render('trainerViews/viewSchedule', { title : "My Schedule",
+                //             list : mainList, userInfo : userInfo });
+                //     }
+                // });
+            }
+        }
+    })
+}
+
+/**
+ * render the schedule page
+ * @param req
+ * @param res
+ * @param next
+ */
+module.exports.doRenderScheduleView = (req, res, next) => {
+    //cannot view this page without logged in
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    //console.log("the trainer schedule view controller");
+    if(!req.session.user_email){
+        res.redirect('/login')
+        return
+    }
+
+    // if the trainer does not submit their profile, they cannot book appointment.
+    // use years of training as the enter point
+    Trainer.findOne({trainerEmail:req.session.user_email}, (err, trainer) => {
+        console.log(trainer)
+        if(!trainer){
+            // no such user
+            res.redirect('/register')
+        }else{
+            // have this user
+            // To see whether the user fill the certificate form
+            if(trainer.trainerYearsOfTraining.trim()===''){
+                // did not fill certificate form
+                return res.send('0')
+            }else{
+
+                console.log('show schedule')
                 Appt.find({},(err, mainList) => {
+                    console.log('hello')
                     if(err) {
                         return console.error(err);
                     }
                     else {
-
-                        console.log('schedule')
                         res.render('trainerViews/viewSchedule', { title : "My Schedule",
                             list : mainList, userInfo : userInfo });
                     }
@@ -74,6 +125,7 @@ module.exports.renderScheduleView = (req, res, next) => {
 
 
 module.exports.renderSetAppt = (req, res, next) => {
+    console.log('hh')
     //find the user and check that there data
     let localAppt = new Appt({
         ApptTrainer : req.body.apptTrainer,
@@ -194,7 +246,8 @@ module.exports.trainerFillCertificate=(req,res,next)=>{
             trainerName:trainer_full_name,
             trainerYearsOfTraining:trainer_years_of_training,
             trainerProvince:trainer_province,
-            trainerCity:trainer_city
+            trainerCity:trainer_city,
+            certificateFilled:true
         }
     }, {},(err, trainer) => {
         if(err){

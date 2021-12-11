@@ -35,7 +35,11 @@
                                 </a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">My Profile</a></li>
-                            <li><a id="my_schedule" class="dropdown-item" data-des=<%= userInfo.user_account_type.toLowerCase() %>/schedule>My schedule</a></li>
+                            <% if(userInfo.user_account_type==='Trainer' || userInfo.user_account_type==='Trainer Seeker'){ %>
+                                <li><a id="my_schedule" class="dropdown-item" data-des=<%= userInfo.user_account_type.toLowerCase() %>/schedule>My schedule</a></li>
+                            <% }else if(userInfo.user_account_type==='Auditor'){ %>
+                                <li><a href=<%= userInfo.user_account_type.toLowerCase() %>/allTrainers id="my_schedule" class="dropdown-item" >View all trainers</a></li>
+                            <% } %>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </div>

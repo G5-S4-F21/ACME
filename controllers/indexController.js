@@ -18,6 +18,9 @@ const Trainer=TrainerModel.Trainer
 // refer to trainer seeker DB
 const Trainer_seeker_model=require('../models/Trainer_seeker')
 const Trainer_seeker=Trainer_seeker_model.Trainer_seeker
+//refer to auditor DB
+const Auditor_model=require('../models/Auditor')
+const Auditor=Auditor_model.Auditor
 
 
 
@@ -73,7 +76,7 @@ module.exports.handleCreateAccount = (req, res, next) => {
     const {user_account_type}=req.body
     switch (user_account_type){
         case 'trainer_seeker':
-            // TODO:register trainer seeker
+            // register trainer seeker
             registerTrainerSeeker(req,res)
             break
         case 'trainer':
@@ -82,11 +85,43 @@ module.exports.handleCreateAccount = (req, res, next) => {
             break
         case 'auditor':
             // TODO:register trainer seek
-            console.log('handle auditor DB')
+            registerAuditor(req,res)
             break
         default:
             break
     }
+}
+
+/**
+ * register auditor
+ * @param req
+ * @param res
+ */
+const registerAuditor=(req,res)=>{
+    console.log(req.body)
+    Auditor.find({auditorEmail:req.body.user_email}, (err, auditors) =>{
+        if(err){
+            console.log(err)
+            return res.send('-2') // server err
+        }
+
+        if(auditors[0]){
+            return res.send('1') // auditor already exists
+        }else{
+            // can register
+            let auditor=new Auditor({
+                auditorEmail:req.body.user_email,
+                auditorPassword:req.body.user_password,
+                auditorCellphone:req.body.user_cellphone_number,
+                UUID:uuidv4()
+            })
+
+            auditor.save().then(()=>{
+                return res.send('0')
+            })
+
+        }
+    })
 }
 
 /**
@@ -123,6 +158,7 @@ const registerTrainer=(req,res)=>{
 
 //renders the login page
 module.exports.loginView = (req, res, next) => {
+
     const userInfo={
         user_email:req.session.user_email,
         user_password:req.session.user_password,
@@ -146,7 +182,6 @@ const registerTrainerSeeker=(req,res)=>{
             console.log(err)
             return res.send('-2') // server err
         }
-
         if(trainer_seekers[0]){
             return res.send('1') // trainer seeker already exists
         }else{
@@ -179,8 +214,8 @@ module.exports.handleLogin=(req, res, next)=>{
             findTrainerSeekerByEmailAndPassword(req,res)
             break
         case 'Auditor':
-            // TODO: find user in Auditor DB
-            console.log('look for auditor')
+            // find user in Auditor DB
+            findAuditorByEmailAndPassword(req,res)
             break
         case 'Admin':
             // TODO: find user in Admin DB
@@ -188,9 +223,33 @@ module.exports.handleLogin=(req, res, next)=>{
             break
         default:
             break
-    }        
+    }
 }
-  
+
+/**
+ * find the auditor by email and password
+ * @param req
+ * @param res
+ */
+const findAuditorByEmailAndPassword=(req,res)=>{
+    Auditor.find({
+        auditorEmail: req.body.user_email,
+        auditorPassword:req.body.user_password
+    }, (err, auditors) =>{
+        if(err){
+            return res.send('-2') // server error
+        }else if(!auditors[0]){
+            return res.send('-1') // email or password not right
+        }else{
+            // save session
+            req.session.user_email=req.body.user_email
+            req.session.user_password=req.body.user_password
+            req.session.user_account_type=req.body.user_account_type
+            return res.send('1') // find user successfully
+        }
+    })
+}
+
 
 /**
  * find the trainer by email and password
@@ -281,7 +340,8 @@ module.exports.sendRecoverPasswordEmail=(req,res,next)=>{
             findTrainerSeekerByEmail(req,res)
             break
         case 'Auditor':
-            // TODO: find from Auditor DB
+            // find from Auditor DB
+            findAuditorByEmail(req,res)
             break
         case 'Admin':
             // TODO: find from Admin DB
@@ -289,6 +349,50 @@ module.exports.sendRecoverPasswordEmail=(req,res,next)=>{
         default:
             break
     }
+}
+
+/**
+ * find trainer by email
+ * @param req
+ * @param res
+ */
+const findAuditorByEmail=(req, res)=>{
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    Auditor.find({auditorEmail:req.query.user_email}, (err, auditors)=>{
+        if(err){
+            return res.send('-2') // server error
+        }else if(!auditors[0]){
+            return res.send('0') // no such user
+        }else{
+            // find user and ready to recover password email
+            //send an email to my email
+            const options = {
+                from        : '"My Personal Website" <wangxiaobei666@hotmail.com>',
+                to          : req.query.user_email,
+                subject        : 'An email from G5-S4-F21/ACME',
+                // text          : 'An email from my website',
+
+                html           : '<h4>Please click the link below to reset your password</h4><p>' +
+                    '<p>From: G5-S4-F21/ACME</p>' +
+                    '<p><a href="http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+auditors[0].UUID+'">http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+auditors[0].UUID+'</a>'
+            };
+
+            mailTransport.sendMail(options, function(err, msg){
+                if(err){
+                    console.log(err);
+                    res.render('index', { title: err, userInfo });
+                }
+                else {
+                    console.log(msg);
+                    res.render('index', { title: "Received："+msg.accepted, userInfo});
+                }
+            })
+        }
+    })
 }
 
 /**
@@ -417,7 +521,8 @@ module.exports.resetPasswordByAccountTypeAndUUID=(req,res,next)=>{
             findTrainerSeekerByUUID(req,res)
             break;
         case 'Auditor':
-            // TODO: find this user in Auditor DB by UUID
+            // find this user in Auditor DB by UUID
+            findAuditorByUUID(req,res)
             break;
         case 'Admin':
             // TODO: find this user in Admin DB by UUID
@@ -425,6 +530,32 @@ module.exports.resetPasswordByAccountTypeAndUUID=(req,res,next)=>{
         default:
             break
     }
+}
+
+/**
+ * find the trainer by UUID
+ * @param req
+ * @param res
+ */
+const findAuditorByUUID = (req,res)=>{
+    Auditor.findOneAndUpdate({UUID: req.body.UUID}, {
+        $set:{
+            auditorPassword:req.body.new_password
+        }
+    }, {},(err, auditor) => {
+        if(err){
+            // -2: server error
+            return res.send('-2')
+        }
+        if(!auditor){
+            // 0: no such user
+            return res.send('0')
+        }else{
+            // reset password
+            console.log('updated!')
+            return res.send('1')
+        }
+    })
 }
 
 /**

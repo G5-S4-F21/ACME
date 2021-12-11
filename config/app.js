@@ -26,6 +26,7 @@ let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
 let seekerRouter = require('../routes/seeker');
 let trainerRouter = require('../routes/trainer');
+let auditorRouter = require('../routes/auditor');
 
 var app = express();
 
@@ -55,6 +56,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/seeker', seekerRouter);
 app.use('/trainer', trainerRouter);
+app.use('/auditor', auditorRouter);
 
 //the passport stuff
 let userModel = require('../models/users.js');
