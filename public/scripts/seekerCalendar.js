@@ -21,13 +21,28 @@
             //console.log(elle);
             let ApptList = elle.getAttribute("value");
             let jsonList = JSON.parse(ApptList);
-            for(let a in jsonList)
+            if(jsonList[a].ApptSeeker == '')
+                {
+                    if(jsonList[a].ApptDate == element.getAttribute('data-day'))
+                    {
+                        //element.style.borderColor = 'Chartreuse';
+                        element.style.color = 'Chartreuse';
+                    }
+                }
+                else
+                {
+                    if(jsonList[a].ApptDate == element.getAttribute('data-day'))
+                    {
+                        element.style.borderColor = 'DarkRed';
+                    }
+                }
+            /*for(let a in jsonList)
             {
                 if(jsonList[a].ApptDate == element.getAttribute('data-day'))
                 {
                     element.style.borderColor = 'DarkRed';
                 }
-            }
+            }*/
             element.addEventListener("click", (event) => {
                 //retreive the date and add to the url then send
                 let setterDate = (element.getAttribute("data-day"));

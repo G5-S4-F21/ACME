@@ -16,7 +16,7 @@ let AppointmentModel = mongoose.Schema
             type: String,
             default: '',
             trim: true,
-            required: 'Seeker is required'
+            //required: 'Seeker is required'
         },
         ApptDate: 
         {

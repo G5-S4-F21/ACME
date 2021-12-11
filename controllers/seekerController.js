@@ -233,6 +233,49 @@ module.exports.favBook = (req, res, next) => {
     //res.render('seekerViews/singleBooking', { title : "booking", userInfo : userInfo });
 }
 
+//function to book from the favorites schedule
+module.exports.bookWithFav = (req, res, next) => {
+    //should have the appt Id and just update the seeker email to assign
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
+    let apptId = req.body.dateLookup;
+    console.log(apptId);
+    Appt.findById({ _id : apptId}, (err, selectedAppt) => {
+        if(err)
+        {
+            console.error(err);
+        }
+        else
+        {
+            //create and update mongo record
+            let newAppt = selectedAppt;
+            newAppt.ApptSeeker = userInfo.user_email;
+            Appt.updateOne({_id : apptId }, newAppt, (err) => {
+                if(err)
+                {
+                    console.error(err);
+                    res.end(err);
+                }
+                else
+                {
+                    Appt.find((err, apptList) => {
+                        if(err)
+                        {
+                            console.error(err);
+                        }
+                        else
+                        {
+                            res.render('seekerViews/singleBooking', { title : "booking", userInfo : userInfo, list : apptList });
+                        }    
+                    });
+                }
+            });
+        }
+    });
+}
 //render the schedule page for the seeker
 module.exports.renderSeekerSchedule = (req, res, next) => {
     const userInfo={
@@ -243,25 +286,16 @@ module.exports.renderSeekerSchedule = (req, res, next) => {
     console.log(req.body);
   //let localUser = req.user;
   Appt.find((err, mainList) => {
-      if(err) {
+      if(err) 
+      {
           return console.error(err);
       }
-      else {
-          /*let list = [];
-          for(let a in mainList)
-          {
-              if(localUser.username == mainList[a].ApptSeeker)
-              {
-                  list.push(mainList[a]);
-                  
-              }
-              //console.log(mainList[a]);
-          }
-          let toSend = JSON.stringify(list);
-          console.log(toSend);*/
+      else 
+      {
           res.render('seekerViews/seekerScheduleView', { title : "Schedule", 
               list : mainList, 
-              userInfo : userInfo, email: userInfo.user_email });
+              userInfo : userInfo, 
+              email: userInfo.user_email });
       }
   });
   //res.render('seekerViews/seekerScheduleView', { title: "Schedule", list : mainList });

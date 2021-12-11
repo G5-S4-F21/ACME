@@ -13,11 +13,10 @@
         cheveronLeft.addEventListener('click', decCalendar);
 
 
-
+        //loads the appts into calendar
         let days = document.getElementsByTagName('td');
         let elle = document.getElementById('apptList');
         let ApptList = elle.getAttribute("value");
-        console.log(elle);
         let jsonList = JSON.parse(ApptList);
            
         let match = false;
@@ -29,7 +28,8 @@
                 {
                     if(jsonList[a].ApptDate == element.getAttribute('data-day'))
                     {
-                        element.style.borderColor = 'Chartreuse';
+                        //element.style.borderColor = 'Chartreuse';
+                        element.style.color = 'Chartreuse';
                     }
                 }
                 else
@@ -42,17 +42,18 @@
             }
 
             element.addEventListener("click", (event) => {
-                //retreive the date and add to the url then send
+                //retreive the date from the tag
                 let setterDate = (element.getAttribute("data-day"));
                 //pass the calendar date to the form below
-                let dateStr = document.getElementById('apptDate');
-                dateStr.setAttribute('value', setterDate);
+                //let dateStr = document.getElementById('apptDate');
+                //dateStr.setAttribute('value', setterDate);
                 //add in extra stuff that will pass the data to other calendar
                 let match = false;
                 let selectedDay = element.getAttribute('data-day');
                 let dayTitle = document.getElementById('dayTitle');
-                dayTitle.innerHTML = selectedDay;
-                //clear the list of tags in 
+                //dayTitle.innerHTML = selectedDay;
+                dayTitle.innerHTML = setterDate;
+                //clear the list of appts in daily calendar
                 let togo = document.getElementById('daily');
                 if(togo != null)
                 {
@@ -69,17 +70,17 @@
                         let mainDaily = document.getElementById('daily');
                         let form = document.createElement('form');
                         form.setAttribute('method', 'POST');
-                        form.setAttribute('action', 'schedule');
+                        form.setAttribute('action', '/seeker/book');
                         form.setAttribute('class', 'card-body d-flex');
-                        form.setAttribute('id','virtualForm');
+                        //form.setAttribute('id','virtualForm');
                         //add in the control here
                         mainDaily.appendChild(form);
                         let div1 = document.createElement('div');
                         div1.setAttribute('class', 'container');
                         form.appendChild(div1);
                         let h61 = document.createElement('h6');
-                        div1.appendChild(h61);
                         h61.innerHTML = jsonList[a].ApptDate;
+                        div1.appendChild(h61);
                         let hInput = document.createElement('input');
                         hInput.setAttribute('type', 'hidden');
                         hInput.setAttribute('name', 'dateLookup');
@@ -92,11 +93,15 @@
                         div1.appendChild(div2);
                         let br = document.createElement('br');
                         div2.appendChild(br);
-                        //let sub = document.createElement('input');
-                        //sub.setAttribute('type', 'submit');
-                        //sub.setAttribute('class', 'btn btn-secondary');
-                        //div2.appendChild(sub);
-                        
+                        if(jsonList[a].ApptSeeker == '')
+                        {
+                            let sub = document.createElement('button');
+                            sub.setAttribute('type', 'submit');
+                            sub.setAttribute('class', 'btn btn-secondary mt-0');
+                            sub.setAttribute('content', "Book");
+                            sub.innerHTML = "Book";
+                            div2.appendChild(sub);
+                        }
                         let div3 = document.createElement('div');
                         div3.setAttribute('class', 'container');
                         let list = document.createElement('dl');

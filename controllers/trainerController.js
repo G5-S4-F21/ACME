@@ -73,7 +73,7 @@ module.exports.renderScheduleView = (req, res, next) => {
 
 
 
-module.exports.renderSetAppt = (req, res, next) => {
+module.exports.processSetAppt = (req, res, next) => {
     const userInfo={
         user_email:req.session.user_email,
         user_password:req.session.user_password,
@@ -87,25 +87,40 @@ module.exports.renderSetAppt = (req, res, next) => {
         ApptLoc : req.body.apptLoc,
         ApptTime : req.body.apptTime
     });
-    localAppt.save(function (err) {
+    console.log(localAppt);
+
+    Appt.create(localAppt, (err, Appt) => {
         if(err)
         {
-            console.log('error setting appt');
-            res.render('seekerViews/viewSchedule', { title: 'Schedule', userInfo});
+            console.error(err);
+            res.end(err);
+        }
+        else
+        {
+            next;
         }
     });
-
-    Appt.find({},(err, mainList) => {
-        if(err) {
+    Appt.find((err, mainList) => {
+        if(err) 
+        {
             return console.error(err);
         }
-        else {
-
+        else 
+        {
             console.log('schedule')
             res.render('trainerViews/viewSchedule', { title : "My Schedule",
                 list : mainList, userInfo : userInfo });
         }
     });
+    /*localAppt.save(function (err) {
+        if(err)
+        {
+            console.log('error setting appt');
+            //res.render('trainerViews/viewSchedule', { title: 'Schedule', userInfo});
+        }
+    });*/
+
+    
 }
 //will show the detaile view of the trainer appt
 module.exports.renderDetailedView = (req, res, next) => {

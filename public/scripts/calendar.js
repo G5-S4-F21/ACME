@@ -13,21 +13,39 @@
         
         //change the color of the day with appts
         let days = document.getElementsByTagName('td');
-        
+        let elle = document.getElementById('apptList');
+        //console.log(elle);
+        let ApptList = elle.getAttribute("value");
+        let jsonList = JSON.parse(ApptList);    
         let match = false;
         for(let element of days)
         {
-            let elle = document.getElementById('apptList');
-            //console.log(elle);
-            let ApptList = elle.getAttribute("value");
-            let jsonList = JSON.parse(ApptList);
             for(let a in jsonList)
+            {
+                if(jsonList[a].ApptSeeker == '')
+                {
+                    if(jsonList[a].ApptDate == element.getAttribute('data-day'))
+                    {
+                        //element.style.borderColor = 'Chartreuse';
+                        element.style.color = 'Chartreuse';
+                    }
+                }
+                else
+                {
+                    if(jsonList[a].ApptDate == element.getAttribute('data-day'))
+                    {
+                        element.style.borderColor = 'DarkRed';
+                    }
+                }
+            }
+            
+            /*for(let a in jsonList)
             {
                 if(jsonList[a].ApptDate == element.getAttribute('data-day'))
                 {
                     element.style.borderColor = 'DarkRed';
                 }
-            }
+            }*/
             element.addEventListener("click", (event) => {
                 //retreive the date and add to the url then send
                 let setterDate = (element.getAttribute("data-day"));
@@ -38,15 +56,19 @@
                 let match = false;
                 //console.log(days);
                 let selectedDay = element.getAttribute('data-day');
-                console.log(selectedDay);
+                //console.log(selectedDay);
                 let dayTitle = document.getElementById('dayTitle');
                 dayTitle.innerHTML = selectedDay;
                 //clear the list of tags in 
-                let togo = document.getElementById('virtualForm');
+                let togo = document.getElementById('daily');
                 if(togo != null)
                 {
                     togo.remove();
                 }
+                let daily = document.createElement('div');
+                let dailyList = document.getElementById('dailyList');
+                daily.setAttribute('id', 'daily');
+                dailyList.appendChild(daily);
                 
                 for(let a in jsonList)
                 {
