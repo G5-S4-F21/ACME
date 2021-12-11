@@ -124,13 +124,13 @@ $('#submit_button').click(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    confirmButtonText: 'OK',
+                    confirmButtonText: 'Home',
                     title: 'Upload successfully',
-                    text: 'You will go to your schedule page'
+                    text: 'You will go to your home page'
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        window.location.href = '/trainer/schedule'
+                        window.location.href = '/'
                     }
                 })
             } else if (data === '-2') {
