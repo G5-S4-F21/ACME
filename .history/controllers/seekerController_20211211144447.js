@@ -628,3 +628,6 @@ function DisplayTrainerHome(req, res, next) {
 }
 exports.DisplayTrainerHome = DisplayTrainerHome;
 
+module.exports.UpdateOrDeleteAccount = (req, res, next) => {
+    res.render('trainerViews/trainerIndex', { title: "Update or Delete Account", page: 'updateOrDeleteAccount', displayName: (0, trainer_1.TrainerDisplayName)(req)});
+}
