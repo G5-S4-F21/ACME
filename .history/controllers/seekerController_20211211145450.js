@@ -628,3 +628,6 @@ function DisplayTrainerHome(req, res, next) {
 }
 exports.DisplayTrainerHome = DisplayTrainerHome;
 
+module.exports.UpdateOrDeleteAccount = (req, res, next) => {
+    res.render('seekerViews/seekerIndex', { title: "Update or Delete Account", page: 'updateOrDeleteAccount', displayName: (0, Util_1.UserDisplayName)(req) });
+}

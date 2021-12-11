@@ -628,3 +628,18 @@ function DisplayTrainerHome(req, res, next) {
 }
 exports.DisplayTrainerHome = DisplayTrainerHome;
 
+module.exports.UpdateOrDeleteAccount = (req, res, next) => {
+    res.render('seekerViews/seekerIndex', { title: "Update or Delete Account", page: 'updateOrDeleteAccount', displayName: (0, Util_1.UserDisplayName)(req) });
+}
+
+function DeleteSeekerAccount(req, res, next) {
+    let username = req.user.username;
+    tennisTrainerSeeker.default.remove({ username: username }, (err) => {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
+        res.redirect('/');
+    });
+}
+exports.DeleteSeekerAccount = DeleteSeekerAccount;

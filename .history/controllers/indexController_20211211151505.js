@@ -15,7 +15,6 @@ let bcrypt = require('bcrypt');
 const TrainerModel=require('../models/tennisTrainer')
 const Trainer=TrainerModel.Trainer
 const trainer_1 = require('../Utils/trainer');
-const seeker_1 = require('../Utils/index');
 //refer to auditor DB
 const AuditorModel=require('../models/auditor')
 const Auditor=AuditorModel.Auditor
@@ -480,11 +479,6 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
             // find this user in trainer DB by UUID
             findAndUpdateTrainerByUUID(req,res)
             break;    
-       
-        case 'SeekerUpdate':
-            // find this user in trainer DB by UUID
-            findAndUpdateSeekerByUUID(req,res)
-            break;                
         default:
             break
     }
@@ -610,42 +604,29 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
  * @param res
  * @param next
  */
- module.exports.renderChangePasswordView = (req,res,next)=>{
+ module.exports.renderTrainerChangePasswordView = (req,res,next)=>{
     // console.log(req.query.accountType,req.query.UUID)
     let userType = req.user.userType;
     let userTypeToChangePassword = "";
-    let pageToProcess = "";
-    const userInfo={}
     if(userType === "trainer")
     {
         userTypeToChangePassword = "TrainerUpdate";
-        pageToProcess = 'changePasswordView';
-        res.render('trainerViews/trainerIndex', {
-            title:'Reset password',
-            page: pageToProcess,
-            account_type: userTypeToChangePassword,
-            UUID: req.query.UUID,
-            displayName: (0, trainer_1.TrainerDisplayName)(req),
-            userInfo
-        })
     }
 
     else if (userType === "seeker")
     {
         userTypeToChangePassword = "SeekerUpdate";
-        pageToProcess = 'changeSeekerPasswordView';
-        res.render('seekerViews/seekerIndex', {
-            title:'Reset password',
-            page: pageToProcess,
-            account_type: userTypeToChangePassword,
-            UUID: req.query.UUID,
-            displayName: (0, seeker_1.UserDisplayName)(req),
-            userInfo
-        })
     }
-    
-    
-    
+    const userInfo={}
+    console.log(req.query.accountType)
+    res.render('trainerViews/trainerIndex', {
+        title:'Reset password',
+        page: 'changePasswordView',
+        account_type: userTypeToChangePassword,
+        UUID: req.query.UUID,
+        displayName: (0, trainer_1.TrainerDisplayName)(req),
+        userInfo
+    })
 }
 
 /**
@@ -697,56 +678,5 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
              });
 
          }
-}
-
-/**
- * find and update the seeker by UUID
- * @param req
- * @param res
- */
- const findAndUpdateSeekerByUUID = (req,res)=>{
-    const OldPass=req.body.old_password;
-   const NewPass=req.body.new_password;
-   confirm_password=req.body.new_password;        
-           if(NewPass==confirm_password){
-               TrainerSeekerModel.default.findById(req.user._id, (err, user)=>{
-                if(err) console.log(err);
-                else
-                  {
-                      // Password verification
-                      user.authenticate(OldPass, function(err,model,passwordError){
-                       if(passwordError){
-                           console.log(err);
-                           return res.send('-3');
-                       } else if(model) {
-                           console.log(`correct password ${model}`);
-                           user.setPassword(NewPass,(err, user)=>{
-                               if(err){
-                                   // -2: server error
-                                   return res.send('-2')
-                               }
-                               if(!user){
-                                   // 0: no such user
-                                   return res.send('0')
-                               }
-                               else{
-                                   // reset password
-                                   user.save();
-                                   console.log('updated!');
-                                   res.send('1');
-                                   return  res.render('seekerViews/seekerIndex', { title: "Update or Delete Account", page: 'updateOrDeleteAccount',  displayName: (0, seeker_1.UserDisplayName)(req)});
-                               }
-                               
-                              });  
-                            
-                       }
-                   })
-       
-                      
-                      
-                  } 
-            });
-
-        }
 }
 
