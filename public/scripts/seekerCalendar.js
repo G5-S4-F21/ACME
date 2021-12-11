@@ -21,13 +21,28 @@
             //console.log(elle);
             let ApptList = elle.getAttribute("value");
             let jsonList = JSON.parse(ApptList);
-            for(let a in jsonList)
+            if(jsonList[a].ApptSeeker == '')
+                {
+                    if(jsonList[a].ApptDate == element.getAttribute('data-day'))
+                    {
+                        //element.style.borderColor = 'Chartreuse';
+                        element.style.color = 'Chartreuse';
+                    }
+                }
+                else
+                {
+                    if(jsonList[a].ApptDate == element.getAttribute('data-day'))
+                    {
+                        element.style.borderColor = 'DarkRed';
+                    }
+                }
+            /*for(let a in jsonList)
             {
                 if(jsonList[a].ApptDate == element.getAttribute('data-day'))
                 {
                     element.style.borderColor = 'DarkRed';
                 }
-            }
+            }*/
             element.addEventListener("click", (event) => {
                 //retreive the date and add to the url then send
                 let setterDate = (element.getAttribute("data-day"));
@@ -42,11 +57,15 @@
                 let dayTitle = document.getElementById('dayTitle');
                 dayTitle.innerHTML = selectedDay;
                 //clear the list of tags in 
-                let togo = document.getElementById('virtualForm');
+                let togo = document.getElementById('daily');
                 if(togo != null)
                 {
                     togo.remove();
                 }
+                let daily = document.createElement('div');
+                let dailyList = document.getElementById('dailyList');
+                daily.setAttribute('id', 'daily');
+                dailyList.appendChild(daily);
                 
                 for(let a in jsonList)
                 {
@@ -117,7 +136,7 @@
 function incCalendar()
 {
     let center = document.getElementById("onethree");
-    console.log(center);
+    //console.log(center);
     let pCenter = center.getAttribute('data-day').split('/');
     let thisMonth = new Date(pCenter[2], pCenter[0]-1, pCenter[1], 0, 0, 0, 0);
     let nextMonth = new Date(thisMonth.setMonth(thisMonth.getMonth()+1));

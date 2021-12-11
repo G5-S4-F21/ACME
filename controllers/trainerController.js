@@ -37,7 +37,7 @@ module.exports.renderScheduleView = (req, res, next) => {
         res.redirect('/login')
         return
     }
-
+    console.log(userInfo);
     // if the trainer does not submit their profile, they cannot book appointment.
     // use years of training as the enter point
     Trainer.findOne({trainerEmail:req.session.user_email}, (err, trainer) => {
@@ -73,7 +73,12 @@ module.exports.renderScheduleView = (req, res, next) => {
 
 
 
-module.exports.renderSetAppt = (req, res, next) => {
+module.exports.processSetAppt = (req, res, next) => {
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
     //find the user and check that there data
     let localAppt = new Appt({
         ApptTrainer : req.body.apptTrainer,
@@ -82,14 +87,40 @@ module.exports.renderSetAppt = (req, res, next) => {
         ApptLoc : req.body.apptLoc,
         ApptTime : req.body.apptTime
     });
-    localAppt.save(function (err) {
+    console.log(localAppt);
+
+    Appt.create(localAppt, (err, Appt) => {
+        if(err)
+        {
+            console.error(err);
+            res.end(err);
+        }
+        else
+        {
+            next;
+        }
+    });
+    Appt.find((err, mainList) => {
+        if(err) 
+        {
+            return console.error(err);
+        }
+        else 
+        {
+            console.log('schedule')
+            res.render('trainerViews/viewSchedule', { title : "My Schedule",
+                list : mainList, userInfo : userInfo });
+        }
+    });
+    /*localAppt.save(function (err) {
         if(err)
         {
             console.log('error setting appt');
-            res.render('seekerViews/viewSchedule', { title: 'Schedule'});
+            //res.render('trainerViews/viewSchedule', { title: 'Schedule', userInfo});
         }
-    });
-    res.render('trainerViews/viewSchedule', { title: 'Schedule'});
+    });*/
+
+    
 }
 //will show the detaile view of the trainer appt
 module.exports.renderDetailedView = (req, res, next) => {

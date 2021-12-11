@@ -10,50 +10,26 @@
     </div>
     <div class="container">
         <div class="row">
-          <div class="col-sm">
-            <div class="card flex-fill bg-dark text-light border">
-                <p class='h3 px-3 mt-1'>header</p>
-            </div>
-            <div class="card-body d-flex border">
-                <dl>
-                    <dt>email</dt>
-                    <dt>other Info</dt>
-                </dl>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card flex-fill bg-dark text-light border">
-                <p class='h3 px-3 mt-1'>header</p>
-            </div>
-            <div class="card-body d-flex border">
-                <dl>
-                    <dt>email</dt>
-                    <dt>other Info</dt>
-                </dl>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card flex-fill bg-dark text-light border">
-                <p class='h3 px-3 mt-1'>header</p>
-            </div>
-            <div class="card-body d-flex border">
-                <dl>
-                    <dt>email</dt>
-                    <dt>other Info</dt>
-                </dl>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div class="card flex-fill bg-dark text-light border">
-                <p class='h3 px-3 mt-1'>header</p>
-            </div>
-            <div class="card-body d-flex border">
-                <dl>
-                    <dt>email</dt>
-                    <dt>other Info</dt>
-                </dl>
-            </div>
+
+            <% tList.forEach(function(trainer) { %>
+                <p></p>
+                <div class="col-sm">
+                    <div class="card flex-fill bg-dark text-light border">
+                        <p class='h3 px-3 mt-1'><%= trainer.trainerName %></p>
+                    </div>
+                    <div class="card-body d-flex border">
+                        <dl>
+                            <dt>Id: <%= trainer._id %></dt>
+                            <dt>Phone: <%= trainer.trainerCellphone %></dt>
+                            <dt>Email: <%= trainer.trainerEmail %></dt>
+                            <dt>City: <%= trainer.trainerCity %></dt>
+                        </dl>
+                        <a href="/seeker/bookwithfav/<%= trainer._id %>" class="btn btn-lg">
+                            <i class="far fa-address-card fa-3x" style="color:rgb(104, 42, 6)"></i></a>
+                    </div>
+                  </div>
+            <% }); %>
+
         </div>
-      </div>
     
 </div>

@@ -27,7 +27,7 @@ router.post('/schedule', requireAuth, trainerController.renderDetailedView);
 router.get('/certificate', trainerController.renderCertificateView);
 router.post('/certificate', trainerController.trainerFillCertificate);
 
-router.post('/setAppt', requireAuth, trainerController.renderSetAppt);
+router.post('/setAppt', requireAuth, trainerController.processSetAppt);
 
 router.post('/confirmDetailed', trainerController.confirmAppt)
 

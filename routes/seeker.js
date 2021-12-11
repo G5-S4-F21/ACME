@@ -37,6 +37,9 @@ router.post('/search', requireAuth, seekerController.performSearch);
 
 router.get('/favorite/:id', requireAuth, seekerController.setFavorite);
 
+router.get('/bookwithfav/:id', requireAuth, seekerController.favBook);
+
+router.post('/book', requireAuth, seekerController.bookWithFav);
 //viewing favorites page
 router.get('/favorites', requireAuth, seekerController.renderFavorites);
 
