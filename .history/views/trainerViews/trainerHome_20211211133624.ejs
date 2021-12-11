@@ -55,15 +55,14 @@
     </div>
 </div>
 <hr class="col-3 col-md-2 mb-5">
-                  
-                  <h2>Contact me</h2>
-                  <p class="fs-6 col-md-8">Hourly rate: $<%= hourlyRate %>  </p>
-                   <% if(phoneNumber !== "null") { %>
+                   <% if(!phoneNumber) { %>
          
-                  <p class="fs-6 col-md-8">Phone number: <%= phoneNumber %>  </p>   
+                      phoneNumber = 0;
           </li>
           <% }%>
-                  
+                  <h2>Contact me</h2>
+                  <p class="fs-6 col-md-8">Hourly rate: $<%= hourlyRate %>  </p>
+                  <p class="fs-6 col-md-8">Phone number: <%= phoneNumber %>  </p>
                   <p class="fs-6 col-md-8">Email: <%= emailAddress %>  </p>
                   <p class="fs-6 col-md-8">Province: <%= province %>  </p>
                   <p class="fs-6 col-md-8">City: <%= city %>  </p>

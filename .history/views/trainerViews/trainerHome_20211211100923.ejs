@@ -55,23 +55,17 @@
     </div>
 </div>
 <hr class="col-3 col-md-2 mb-5">
-                  
+
                   <h2>Contact me</h2>
-                  <p class="fs-6 col-md-8">Hourly rate: $<%= hourlyRate %>  </p>
-                   <% if(phoneNumber !== "null") { %>
-         
-                  <p class="fs-6 col-md-8">Phone number: <%= phoneNumber %>  </p>   
-          </li>
-          <% }%>
-                  
+                  <p class="fs-6 col-md-8">Phone number: <%= phoneNumber %>  </p>
                   <p class="fs-6 col-md-8">Email: <%= emailAddress %>  </p>
                   <p class="fs-6 col-md-8">Province: <%= province %>  </p>
                   <p class="fs-6 col-md-8">City: <%= city %>  </p>
                   <p class="fs-6 col-md-8">Age: <%= age %>  </p>
                   <p class="fs-6 col-md-8">Gender: <%= sex %>  </p>
                   <div class="btn-group" role="group" arial-label="Basic example" >
-                  
-                  <a href="/trainer/displayUpdatePersonalInformation/"style="color:black;text-decoration:none;" class ="button btn btn-info">Update personal information</a>
+                  <button id="submitButton" type="submit" class="btn btn-info">Update your personal information</button>
+                  <a href="/trainer/deleteTrainer/"style="color:white;text-decoration:none;" class ="delete">Delete Account</a></button> 
                    
                 </div>
                   <hr class="col-3 col-md-2 mb-5">

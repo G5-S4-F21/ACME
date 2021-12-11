@@ -225,49 +225,13 @@ function DisplayUpdatePersonalInformation(req, res, next) {
 exports.DisplayUpdatePersonalInformation = DisplayUpdatePersonalInformation;
 
 function ProcessUpdatePersonalInformation(req, res, next) {
-    //store province and city information
+    //store province information
     let province = req.body.province;
     let city = req.body.city;
-    let sex = req.body.sex;
-    let birthDate = req.body.birthDate;
-    let user = req.user;
     if(province === "")
     {
        province = req.user.province;
        city = req.user.city;
     }
-
-    if(city === "")
-    {
-        console.log("city is empty");
-        city = req.user.city;
-        
-    }
-
-    if(sex === "")
-    {
-        console.log("sex is empty");
-        sex = req.user.sex;
-        
-    }
-
-    if(birthDate === "")
-    {
-        console.log("birthdate is empty");
-        birthDate = req.user.birthDate;
-        
-    }
-    console.log(req.body.birthDate);
-    let ageCalculation = (0, moment_1.default)().diff(birthDate, 'years');
-    user.displayName = req.body.displayName;
-    user.phoneNumber = req.body.phoneNumber;
-    user.province = province;
-    user.city = city;
-    user.emailAddress = req.body.emailAddress;
-    user.sex = sex;
-    user.age = ageCalculation;
-    user.hourlyRate= req.body.hourlyRate;
-    user.aboutMe = req.body.aboutMe;
-    user.save();
 }
 exports.ProcessUpdatePersonalInformation = ProcessUpdatePersonalInformation;

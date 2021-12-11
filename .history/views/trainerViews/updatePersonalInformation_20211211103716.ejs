@@ -1,21 +1,17 @@
 <div class="row">
     <div class="offset-md-3 col-md-6 col-sm-12">
           <div class="login" id="contentArea">
-              <h1 class="display-4">Trainer Registration</h1>
+              <h1 class="display-4">Update Trainer Profile</h1>
 
-              <% if(messages.length > 0) { %>
-                <div id="messageArea" class="alert alert-danger">
-                  <%= messages %>
-                </div>
-              <% } %>
-
+              
               <form  enctype="multipart/form-data" method="POST" id="registerForm" novalidate>
-                <p class="hint-text">Create your own account. It's free and only takes a minute.</p>
+                <p class="hint-text">Update your personal information</p>
                 <div class="form-group">
                   <div class="row">
                     <p class="lead"><i class="fas fa-user-shield"></i> Personal Information</p>
                     <div class="col-md-6">
-                      <input class="form-control" type="text" name="FirstName" id="firstName" placeholder="First Name" required>
+                    <label for="user_email" class="form-label">Username</label>
+                      <input class="form-control" type="text" name="username" id="username" placeholder= "s"+ <%= title %> >
                     </div>
                     <div class="col-md-6">
                       <input class="form-control" type="text" name="LastName" id="lastName" placeholder="Last Name" required>
@@ -60,7 +56,7 @@
         <div class="form-group">
             <label class="lead">City</label>
             <div class="col-sm-4">
-                <select name="city" id="city" value="" ></select>
+                <select name="city" id="city" ></select>
             </div>
         </div><!--/.form-group-->
          <div class="col-md-6">

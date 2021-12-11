@@ -254,18 +254,16 @@ function ProcessUpdatePersonalInformation(req, res, next) {
     if(birthDate === "")
     {
         console.log("birthdate is empty");
-        birthDate = req.user.birthDate;
+        sex = req.user.sex;
         
     }
-    console.log(req.body.birthDate);
-    let ageCalculation = (0, moment_1.default)().diff(birthDate, 'years');
-    user.displayName = req.body.displayName;
+    user.username = req.body.username;
     user.phoneNumber = req.body.phoneNumber;
     user.province = province;
     user.city = city;
     user.emailAddress = req.body.emailAddress;
     user.sex = sex;
-    user.age = ageCalculation;
+    user.age = req.body.age;
     user.hourlyRate= req.body.hourlyRate;
     user.aboutMe = req.body.aboutMe;
     user.save();

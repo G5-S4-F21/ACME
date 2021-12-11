@@ -38,7 +38,7 @@ function populateCities(provinceElementId, cityElementId) {
 function populateCountries(provinceElementId, cityElementId) {
     // given the id of the <select> tag as function argument, it inserts <option> tags
     var cityElement = document.getElementById(cityElementId);
-    cityElement.options[0] = new Option('None', '');
+    cityElement.options[0] = new Option('Select City', '');
     var provinceElement = document.getElementById(provinceElementId);
     provinceElement.length = 0;
     provinceElement.options[0] = new Option('Select Province', "");

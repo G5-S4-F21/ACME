@@ -219,55 +219,52 @@ function DeleteTrainerAccount(req, res, next) {
 exports.DeleteTrainerAccount = DeleteTrainerAccount;
 
 function DisplayUpdatePersonalInformation(req, res, next) {
-    res.render('trainerViews/trainerIndex', { title: 'Trainer Page', page: 'updatePersonalInformation',  user: req.user, displayName: (0, trainer_1.TrainerDisplayName)(req), user: req.user })
-                         
+    var deferred = q.default.defer();
+    let trainerName = req.params.username;
+    tennisTrainer_1.default.find({
+        "username": trainerName
+    }, function (err, docs) {
+        if (err) {
+            console.log('Error Finding Files');
+            deferred.reject(err);
+        }
+        else {
+            let hourlyRate = " ";
+            let aboutMe = " ";
+            let emailAddress = " ";
+            let displayName = " ";
+            let phoneNumber = " ";
+            let sex = " ";
+            let age = " ";
+            let province = " ";
+            let city = " ";
+            let approved = " ";
+            docs.forEach(function fn(doc) {
+                hourlyRate = `${doc.hourlyRate}`;
+                aboutMe = `${doc.aboutMe}`;
+                emailAddress = `${doc.emailAddress}`;
+                displayName = `${doc.displayName}`;
+                phoneNumber = `${doc.phoneNumber}`;
+                sex = `${doc.sex}`;
+                age = `${doc.age}`;
+                province = `${doc.province}`;
+                city = `${doc.city}`;
+                approved = `${doc.approvedByAuditor}`;
+            });
+            deferred.resolve({
+                hourlyRate: hourlyRate,
+                aboutMe: aboutMe,
+                emailAddress: emailAddress,
+                displayName: displayName,
+                phoneNumber: phoneNumber,
+                sex: sex,
+                age: age,
+                province: province,
+                city: city,
+                approved: approved,
+                respond: res.render('trainerViews/trainerIndex', { title: 'Trainer Page', page: 'trainerHome', approved: approved, city: city, province: province, age: age, sex: sex, hourlyRate: hourlyRate, aboutMe: aboutMe, emailAddress: emailAddress, displayNameFromQuery: displayName, phoneNumber: phoneNumber, username: trainerName, displayName: (0, trainer_1.TrainerDisplayName)(req) })
+            });
+        }
+    });
 }
-exports.DisplayUpdatePersonalInformation = DisplayUpdatePersonalInformation;
-
-function ProcessUpdatePersonalInformation(req, res, next) {
-    //store province and city information
-    let province = req.body.province;
-    let city = req.body.city;
-    let sex = req.body.sex;
-    let birthDate = req.body.birthDate;
-    let user = req.user;
-    if(province === "")
-    {
-       province = req.user.province;
-       city = req.user.city;
-    }
-
-    if(city === "")
-    {
-        console.log("city is empty");
-        city = req.user.city;
-        
-    }
-
-    if(sex === "")
-    {
-        console.log("sex is empty");
-        sex = req.user.sex;
-        
-    }
-
-    if(birthDate === "")
-    {
-        console.log("birthdate is empty");
-        birthDate = req.user.birthDate;
-        
-    }
-    console.log(req.body.birthDate);
-    let ageCalculation = (0, moment_1.default)().diff(birthDate, 'years');
-    user.displayName = req.body.displayName;
-    user.phoneNumber = req.body.phoneNumber;
-    user.province = province;
-    user.city = city;
-    user.emailAddress = req.body.emailAddress;
-    user.sex = sex;
-    user.age = ageCalculation;
-    user.hourlyRate= req.body.hourlyRate;
-    user.aboutMe = req.body.aboutMe;
-    user.save();
-}
-exports.ProcessUpdatePersonalInformation = ProcessUpdatePersonalInformation;
+exports.DisplayTrainerHome = DisplayTrainerHome;

@@ -257,9 +257,8 @@ function ProcessUpdatePersonalInformation(req, res, next) {
         birthDate = req.user.birthDate;
         
     }
-    console.log(req.body.birthDate);
-    let ageCalculation = (0, moment_1.default)().diff(birthDate, 'years');
-    user.displayName = req.body.displayName;
+    let ageCalculation = (0, moment_1.default)().diff(req.body.birthDate, 'years');
+    user.username = req.body.username;
     user.phoneNumber = req.body.phoneNumber;
     user.province = province;
     user.city = city;

@@ -47,5 +47,4 @@ router.get('/displayTrainerHome/:username', trainerController.DisplayTrainerHome
 router.get('/updateOrDeleteAccount/', trainerController.UpdateOrDeleteAccount);
 router.get('/deleteTrainer/', trainerController.DeleteTrainerAccount);
 router.get('/displayUpdatePersonalInformation/', trainerController.DisplayUpdatePersonalInformation);
-router.post('/displayUpdatePersonalInformation/', trainerController.ProcessUpdatePersonalInformation);
 module.exports = router;
