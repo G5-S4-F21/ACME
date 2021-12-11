@@ -1,0 +1,5 @@
+I will create the download for the seeker schedule
+  -I will create a pdf on the server and pass it to the client for download
+  -this involves the pdfkit library 
+    nmp install pdfkit
+  -I think i installed it alredy I just need to create the text on the pdf

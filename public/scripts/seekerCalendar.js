@@ -13,15 +13,15 @@
         
         //change the color of the day with appts
         let days = document.getElementsByTagName('td');
-        
+        let elle = document.getElementById('apptList');
+        let ApptList = elle.getAttribute("value");
+        let jsonList = JSON.parse(ApptList);   
         let match = false;
         for(let element of days)
         {
-            let elle = document.getElementById('apptList');
-            //console.log(elle);
-            let ApptList = elle.getAttribute("value");
-            let jsonList = JSON.parse(ApptList);
-            if(jsonList[a].ApptSeeker == '')
+            for(let a in jsonList)
+            {
+                if(jsonList[a].ApptSeeker == '')
                 {
                     if(jsonList[a].ApptDate == element.getAttribute('data-day'))
                     {
@@ -35,7 +35,9 @@
                     {
                         element.style.borderColor = 'DarkRed';
                     }
-                }
+                }  
+            }
+             
             /*for(let a in jsonList)
             {
                 if(jsonList[a].ApptDate == element.getAttribute('data-day'))
@@ -53,7 +55,7 @@
                 let match = false;
                 //console.log(days);
                 let selectedDay = element.getAttribute('data-day');
-                console.log(selectedDay);
+                //console.log(selectedDay);
                 let dayTitle = document.getElementById('dayTitle');
                 dayTitle.innerHTML = selectedDay;
                 //clear the list of tags in 
