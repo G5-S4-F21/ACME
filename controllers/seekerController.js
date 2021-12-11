@@ -304,13 +304,44 @@ module.exports.renderSeekerSchedule = (req, res, next) => {
 //performs the download
 module.exports.downloadSchedule = (req, res, next) => {
     //still required is the move to the schedule data
-    const doc = new PDFDocument;
-    doc.pipe(fs.createWriteStream('pdfs/pdf1.pdf'));
-    doc.pipe(res);
+    const userInfo={
+        user_email:req.session.user_email,
+        user_password:req.session.user_password,
+        user_account_type:req.session.user_account_type
+    }
 
-    doc.text('helloworld')
-    
-    doc.end();
+    Appt.find((err, apptList) => {
+        if(err)
+        {
+            return console.error(err);
+        }
+        else
+        {
+            let list = [];
+            for(let b of apptList)
+            {
+                if(b.ApptSeeker == userInfo.user_email)
+                {
+                    list.push(b);
+                }
+            }
+            const doc = new PDFDocument;
+            doc.pipe(fs.createWriteStream('pdfs/pdf1.pdf'));
+            doc.pipe(res);
+            doc.text('Schedule for ' + userInfo.user_email);
+            doc.text('\n');
+            for(let a of list)
+            {
+                doc.text("Appointment");
+                doc.text("Date: " + a.ApptDate);
+                doc.text('Trainer: ' + a.ApptTrainer);
+                doc.text('Time: ' + a.ApptTime);
+                doc.text('Venue: ' + a.ApptLoc);
+                doc.text('\n');
+            }
+            doc.end();
+        }
+    });
 }
 
 //handle the request for the detailed view of the schedule
