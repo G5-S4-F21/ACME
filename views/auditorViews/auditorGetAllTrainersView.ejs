@@ -1,0 +1,61 @@
+<%- include('../partials/home_header'); %>
+<%- include('../partials/defaultNav'); %>
+<meta charset="UTF-8" />
+
+<body>
+<main class="container">
+    <div class="row align-items-md-stretch">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <h2>View all trainers</h2>
+            <h4>Decide on the qualification of a trainer</h4>
+        </div>
+    </div>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <% if(trainers.length === 0 ){ %>
+                        <h1 style="color: #bfbfbf">No trainers yet</h1>
+                    <% } else{ %>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">NO.</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Cellphone</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Province</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Years of training</th>
+                                    <th scope="col">Qualification</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i = 0; i < trainers.length; i++) { %>
+                                    <tr>
+                                        <th scope="row"><%=i+1%></th>
+                                        <td><%= trainers[i].trainerEmail%></td>
+                                        <td><%= trainers[i].trainerCellphone%></td>
+                                        <td><%= trainers[i].trainerName%></td>
+                                        <td><%= trainers[i].trainerProvince.replace("_", " ")%></td>
+                                        <td><%= trainers[i].trainerCity%></td>
+                                        <td><%= trainers[i].trainerYearsOfTraining%></td>
+                                        <td><i class="fas <%= trainers[i].passAudit?'fa-check':'fa-times' %> " style="color: <%= trainers[i].passAudit?'green':'red' %>"></i></td>
+                                        <td><button pass-audit=<%= trainers[i].passAudit%> trainer-id=<%= trainers[i]._id%> id="passAndCancel-btn" type="button" class="btn btn-primary btn-sm"><%= trainers[i].passAudit?'Cancel':'Pass' %></button></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/footer.ejs'); %>
+</main>
+
+<script type="text/javascript" src="/scripts/allTrainers.js"></script>
+

@@ -18,11 +18,19 @@ const trainerSchema=mongoose.Schema({
         type:String,
         default: ''
     },
+    'certificateFilled': {
+        type:Boolean,
+        default:false
+    },
     'passAudit':{
         type:Boolean,
         default: false
     },
-    trainer_appointment:[
+    'myAuditor': {
+        type: String,
+        default: ''
+    },
+    'trainer_appointment':[
         {
             'trainer_seeker': String,
             'date':String

@@ -158,6 +158,7 @@ const registerTrainer=(req,res)=>{
 
 //renders the login page
 module.exports.loginView = (req, res, next) => {
+
     const userInfo={
         user_email:req.session.user_email,
         user_password:req.session.user_password,
@@ -181,7 +182,6 @@ const registerTrainerSeeker=(req,res)=>{
             console.log(err)
             return res.send('-2') // server err
         }
-
         if(trainer_seekers[0]){
             return res.send('1') // trainer seeker already exists
         }else{

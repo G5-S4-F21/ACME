@@ -246,7 +246,8 @@ module.exports.trainerFillCertificate=(req,res,next)=>{
             trainerName:trainer_full_name,
             trainerYearsOfTraining:trainer_years_of_training,
             trainerProvince:trainer_province,
-            trainerCity:trainer_city
+            trainerCity:trainer_city,
+            certificateFilled:true
         }
     }, {},(err, trainer) => {
         if(err){
