@@ -17,7 +17,7 @@ const Util_1 = require('../Utils/administrator.js');
 let indexController = require("../controllers/indexController");
 
 const auditor_1 = __importDefault(require("../models/auditor"));
-const administrator_1 = __importDefault(require("../models/administrator"));
+
 function DisplayRegisterAuditorPage(req, res, next) {
     if (!req.user) {
         return res.render('administratorViews/administratorIndex', { title: 'Auditor registration', page: 'registerAuditor', messages: req.flash('registerMessage'), displayName: (0, Util_1.AdministratorDisplayName)(req) });
@@ -45,9 +45,17 @@ function ProcessRegisterAuditorPage(req, res, next) {
             return res.redirect('/registerAuditor');
         }
         return passport.authenticate('auditorLocal')(req, res, () => {
-            return res.redirect('/displayAdministratorHomePage');
+            return res.redirect('/home');
         });
     });
 }
 exports.ProcessRegisterAuditorPage = ProcessRegisterAuditorPage;
 
+function DisplayRegisterAuditorPage(req, res, next) {
+    if (!req.user) {
+        return res.render('administratorViews/administratorIndex', { title: 'Administrator registration', page: 'registerAdministrator', messages: req.flash('registerMessage'), displayName: (0, Util_1.AdministratorDisplayName)(req) });
+    }
+    
+    return res.redirect('/tennis');
+}
+exports.DisplayRegisterAdministratorPage = DisplayRegisterAdministratorPage;

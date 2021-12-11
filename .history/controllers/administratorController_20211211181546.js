@@ -45,9 +45,41 @@ function ProcessRegisterAuditorPage(req, res, next) {
             return res.redirect('/registerAuditor');
         }
         return passport.authenticate('auditorLocal')(req, res, () => {
-            return res.redirect('/displayAdministratorHomePage');
+            return res.redirect('/home');
         });
     });
 }
 exports.ProcessRegisterAuditorPage = ProcessRegisterAuditorPage;
 
+function DisplayRegisterAdministratorPage(req, res, next) {
+    if (!req.user) {
+        return res.render('administratorViews/administratorIndex', { title: 'Administrator registration', page: 'registerAdministrator', messages: req.flash('registerMessage'), displayName: (0, Util_1.AdministratorDisplayName)(req) });
+    }
+    
+    return res.redirect('/tennis');
+}
+exports.DisplayRegisterAdministratorPage = DisplayRegisterAdministratorPage;
+
+function ProcessRegisterAdministratorPage(req, res, next) {
+    console.log(req.body.emailAddress);
+    let newUser = new administrator_1.default({
+        userType: "administrator",
+        username: req.body.username,
+        emailAddress: req.body.emailAddress,
+        displayName: req.body.FirstName + " " + req.body.LastName
+    });
+    administrator_1.default.register(newUser, req.body.password, (err) => {
+        if (err) {
+            console.error('Error: Inserting New User');
+            if (err.name == "UserExistsError") {
+                req.flash('registerMessage', 'Registration Error');
+            }
+            console.log('Error: User Already Exists');
+            return res.redirect('/registerAdministrator');
+        }
+        return passport.authenticate('administratorLocal')(req, res, () => {
+            return res.redirect('/home');
+        });
+    });
+}
+exports.ProcessRegisterAuditorPage = ProcessRegisterAuditorPage;

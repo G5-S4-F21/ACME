@@ -18,5 +18,5 @@ function requireAuth(req, res, next)
 router.get('/registerAuditor', administratorController.DisplayRegisterAuditorPage);
 router.post('/registerAuditor', administratorController.ProcessRegisterAuditorPage);
 router.get('/registerAdministrator', administratorController.DisplayRegisterAdministratorPage);
-router.post('/registerAdministrator', administratorController.ProcessRegisterAdministratorPage);
+
 module.exports = router;

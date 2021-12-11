@@ -69,6 +69,7 @@ let seekerModel = require('../models/tennisTrainerSeeker.js');
 let Seeker = seekerModel.UserSchema;
 let auditorModel = require('../models/auditor.js');
 let auditor = auditorModel.UserSchema;
+let auditorModel = require('../models/auditor.js');
 let administratorModel = require('../models/administrator.js');
 let administrator = administratorModel.UserSchema;
 passport.use('trainerLocal',trainerModel.default.createStrategy());
