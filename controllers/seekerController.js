@@ -191,14 +191,15 @@ module.exports.renderFavorites = (req, res, next) => {
 
 module.exports.favBook = (req, res, next) => {
     let fav = req.params.id;
+    let favId = mongoose.Types.ObjectId(fav);
     const userInfo={
         user_email:req.session.user_email,
         user_password:req.session.user_password,
         user_account_type:req.session.user_account_type
     }
     //get trainer
-    let apptList;
-    /*Trainer.findById({fav}, (err, fTrainer) => {
+    
+    Trainer.findById({_id : favId }, (err, fTrainer) => {
         if(err)
         {
             return console.error(err);
@@ -206,18 +207,30 @@ module.exports.favBook = (req, res, next) => {
         else
         {
             Appt.find((err, apptList) => {
-                for(let a of apptList)
+                if(err)
                 {
-                    if(a.apptTrainer == fTrainer.apptEmail)
+                    console.error(err);
+                }
+                else
+                {
+                    let aList = [];
+                    let j = 0;
+                    for(let i = 0; i < apptList.length; i++)
                     {
-                        apptList.push(a);
+                        if(apptList[i].ApptTrainer == fTrainer.trainerEmail)
+                        {
+                            aList[j] = apptList[i];
+                            j++;
+                        }
                     }
+                    console.log(aList);
+                    res.render('seekerViews/singleBooking', { title : "booking", userInfo : userInfo, list : aList });
                 }
             });
-            res.render('/seekerViews/singleBooking');
+            
         }
-    });*/
-    res.render('seekerViews/singleBooking', { title : "booking", userInfo : userInfo });
+    });
+    //res.render('seekerViews/singleBooking', { title : "booking", userInfo : userInfo });
 }
 
 //render the schedule page for the seeker
