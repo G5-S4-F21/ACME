@@ -644,3 +644,18 @@ function DeleteSeekerAccount(req, res, next) {
 }
 exports.DeleteSeekerAccount = DeleteSeekerAccount;
 
+function DisplayUpdatePersonalInformation(req, res, next) {
+    res.render('seekerViews/seekerIndex', { title: 'Update your personal information', page: 'updatePersonalInformation',  user: req.user, displayName: (0, Util_1.UserDisplayName)(req) })
+                         
+}
+exports.DisplayUpdatePersonalInformation = DisplayUpdatePersonalInformation;
+
+function ProcessUpdatePersonalInformation(req, res, next) {
+   
+    user.displayName = req.body.displayName;
+    user.emailAddress = req.body.emailAddress;
+    user.save();
+    let trainerRoute = '/seeker/displaySeekerHome/';
+    return res.redirect(trainerRoute);
+}
+exports.ProcessUpdatePersonalInformation = ProcessUpdatePersonalInformation;

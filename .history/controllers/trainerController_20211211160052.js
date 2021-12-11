@@ -219,7 +219,7 @@ function DeleteTrainerAccount(req, res, next) {
 exports.DeleteTrainerAccount = DeleteTrainerAccount;
 
 function DisplayUpdatePersonalInformation(req, res, next) {
-    res.render('trainerViews/trainerIndex', { title: 'Update your personal information', page: 'updatePersonalInformation',  user: req.user, displayName: (0, trainer_1.TrainerDisplayName)(req) })
+    res.render('trainerViews/trainerIndex', { title: 'Update your personal information', page: 'updatePersonalInformation',  user: req.user, displayName: (0, trainer_1.TrainerDisplayName)(req), user: req.user })
                          
 }
 exports.DisplayUpdatePersonalInformation = DisplayUpdatePersonalInformation;
