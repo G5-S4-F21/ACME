@@ -21,5 +21,4 @@ router.get('/registerAdministrator', administratorController.DisplayRegisterAdmi
 router.post('/registerAdministrator', administratorController.ProcessRegisterAdministratorPage);
 router.get('/displayAdministratorHome', administratorController.DisplayAdministratorHome);
 router.get('/displayAdministratorSearch', administratorController.DisplayAdministratorSearch);
-router.post('/displayAdministratorSearch', administratorController.ProcessAdministratorSearchPage);
 module.exports = router;

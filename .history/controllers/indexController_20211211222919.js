@@ -10,8 +10,7 @@ let nodemailer  = require('nodemailer')
 // refer to user DB
 let UserModel = require('../models/users');
 let User = UserModel.User;
-
-// refer to trainer DB
+/ refer to trainer DB
 const TrainerModel=require('../models/tennisTrainer')
 const Trainer=TrainerModel.Trainer
 const trainer_1 = require('../Utils/trainer');
@@ -24,7 +23,7 @@ const Auditor=AuditorModel.Auditor
 const AdministratorModel=require('../models/administrator')
 const Administrator=AdministratorModel.Administrator
 
-//refer to seeker DB
+//refer to auditor DB
 const TrainerSeekerModel=require('../models/tennisTrainerSeeker')
 const TrainerSeeker=TrainerSeekerModel.Trainer
 

@@ -9,7 +9,6 @@ let db = require('../config/db');
 let passport = require('passport'), 
 LocalStrategy = require('passport-local').Strategy;
 let router = express.Router();
-const q_1 = __importDefault(require("q"));
 let ProfileModel = require('../models/profile');
 let Profile = ProfileModel.Profile;
 let UserModel = require('../models/users')
@@ -22,8 +21,6 @@ const administratorExists = require("../Utils/checkIfAdministratorUserNameExist"
 const auditor_1 = __importDefault(require("../models/auditor"));
 const administrator_1 = __importDefault(require("../models/administrator"));
 const auditorExists = require("../Utils/checkIfAuditorUserNameExist");
-const tennisTrainer = __importDefault(require("../models/tennisTrainer"));
-const tennisTrainerSeeker = __importDefault(require("../models/tennisTrainerSeeker"));
 function DisplayRegisterAuditorPage(req, res, next) {
     
         return res.render('administratorViews/administratorIndex', { title: 'Auditor registration', page: 'registerAuditor', messages: req.flash('registerMessage'), displayName: (0, Util_1.AdministratorDisplayName)(req) });
@@ -199,78 +196,39 @@ function DisplayAdministratorSearch(req, res, next) {
 exports.DisplayAdministratorSearch = DisplayAdministratorSearch;
 
 function ProcessAdministratorSearchPage(req, res, next) {
-    
+    console.log(req.body.userType);
     var deferred = q_1.default.defer();
-    let userType = req.body.userType;
-    let username = req.body.username;
-    
-   
-        if ( userType === "Trainer") {
-            tennisTrainer.default.find({
-                "username": username
-                
+    let province = req.body.province;
+    let city = req.body.city;
+    let minAmount = 0;
+    let maxAmount = 51;
+    if (province && !city)
+    {
+        if ((0, rateIndex_1.rateIndex)(req) === "1") {
+            tennisTrainer_1.default.find({
+                "province": req.body.province,
+                "approvedByAuditor": "true",
+                "hourlyRate": { $gt: minAmount, $lt: maxAmount },
+                $or: [{ "sex": req.body.sex }, { "anyGender": req.body.sex }]
             }, function (err, docs) {
                 if (err) {
                     console.log('Error Finding Files');
                     deferred.reject(err);
                 }
                 else {
-                    let trainer = " ";
+                    var names = [];
                     docs.forEach(function fn(doc) {
-                       trainer = doc;
+                        var item = { title: `${doc.displayName}`, description: '${doc.aboutMe}', username: `${doc.username}`, hourlyRate: `${doc.hourlyRate}` };
+                        names.push(item);
                     });
                     deferred.resolve({
-                        trainer: trainer,
-                        respond: res.render('administratorViews/administratorIndex', { title: 'Trainer Search Result', page: 'trainerSearchResult', trainer: trainer, displayName: (0, Util_1.AdministratorDisplayName)(req), userSearch: req.body.username, userType: req.body.userType })
+                        names: names,
+                        respond: res.render('seekerViews/seekerIndex', { title: 'Search Results', page: 'searchResult', name: names, displayName: (0, Util_1.UserDisplayName)(req) })
                     });
                 }
             });
         }
-        
-        else if ( userType === "Seeker") {
-            tennisTrainerSeeker.default.find({
-                "username": username
-                
-            }, function (err, docs) {
-                if (err) {
-                    console.log('Error Finding Files');
-                    deferred.reject(err);
-                }
-                else {
-                    let seeker = " ";
-                    docs.forEach(function fn(doc) {
-                       seeker = doc;
-                    });
-                    deferred.resolve({
-                        seeker: seeker,
-                        respond: res.render('administratorViews/administratorIndex', { title: 'Seeker Search Result', page: 'seekerSearchResult', seeker: seeker, displayName: (0, Util_1.AdministratorDisplayName)(req), userSearch: req.body.username, userType: req.body.userType })
-                    });
-                }
-            });
-        }
-
-        else if ( userType === "Auditor") {
-            auditor_1.default.find({
-                "username": username
-                
-            }, function (err, docs) {
-                if (err) {
-                    console.log('Error Finding Files');
-                    deferred.reject(err);
-                }
-                else {
-                    let auditor = " ";
-                    docs.forEach(function fn(doc) {
-                       auditor = doc;
-                    });
-                    deferred.resolve({
-                        auditor: auditor,
-                        respond: res.render('administratorViews/administratorIndex', { title: 'Auditor Search Result', page: 'auditorSearchResult', auditor: auditor, displayName: (0, Util_1.AdministratorDisplayName)(req), userSearch: req.body.username, userType: req.body.userType })
-                    });
-                }
-            });
-        }
-    
+    }
         
 }
 exports.ProcessAdministratorSearchPage = ProcessAdministratorSearchPage;

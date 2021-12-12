@@ -221,7 +221,7 @@ function ProcessAdministratorSearchPage(req, res, next) {
                     });
                     deferred.resolve({
                         trainer: trainer,
-                        respond: res.render('administratorViews/administratorIndex', { title: 'Trainer Search Result', page: 'trainerSearchResult', trainer: trainer, displayName: (0, Util_1.AdministratorDisplayName)(req), userSearch: req.body.username, userType: req.body.userType })
+                        respond: res.render('administratorViews/administratorIndex', { title: 'Search Result', page: 'trainerSearchResult', trainer: trainer, displayName: (0, Util_1.AdministratorDisplayName)(req), userSearch: req.body.username, userType: req.body.userType })
                     });
                 }
             });
@@ -243,29 +243,7 @@ function ProcessAdministratorSearchPage(req, res, next) {
                     });
                     deferred.resolve({
                         seeker: seeker,
-                        respond: res.render('administratorViews/administratorIndex', { title: 'Seeker Search Result', page: 'seekerSearchResult', seeker: seeker, displayName: (0, Util_1.AdministratorDisplayName)(req), userSearch: req.body.username, userType: req.body.userType })
-                    });
-                }
-            });
-        }
-
-        else if ( userType === "Auditor") {
-            auditor_1.default.find({
-                "username": username
-                
-            }, function (err, docs) {
-                if (err) {
-                    console.log('Error Finding Files');
-                    deferred.reject(err);
-                }
-                else {
-                    let auditor = " ";
-                    docs.forEach(function fn(doc) {
-                       auditor = doc;
-                    });
-                    deferred.resolve({
-                        auditor: auditor,
-                        respond: res.render('administratorViews/administratorIndex', { title: 'Auditor Search Result', page: 'auditorSearchResult', auditor: auditor, displayName: (0, Util_1.AdministratorDisplayName)(req), userSearch: req.body.username, userType: req.body.userType })
+                        respond: res.render('administratorViews/administratorIndex', { title: 'Search Result', page: 'seekerSearchResult', seeker: seeker, displayName: (0, Util_1.AdministratorDisplayName)(req), userSearch: req.body.username, userType: req.body.userType })
                     });
                 }
             });

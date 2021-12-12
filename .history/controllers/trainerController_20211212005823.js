@@ -21,9 +21,7 @@ const moment_1 = __importDefault(require("moment"));
 const fs_1 = __importDefault(require("fs"));
 const db = mongoose.connection;
 const q = __importDefault(require("q"));
-const seekerExists = require("../Utils/checkIfSeekerUserNameExist");
-const auditorExists = require("../Utils/checkIfAuditorUserNameExist");
-const administratorExists = require("../Utils/checkIfAdministratorUserNameExist");
+
 
 const tennisTrainer_1 = require("../models/tennisTrainer");
 
@@ -127,76 +125,6 @@ function ProcessRegisterTrainerPage(req, res, next)
         approvedByAuditor: "false",
         displayName: req.body.FirstName + " " + req.body.LastName
     });
-
-    //Register trainer
-    (0, seekerExists.checkIfSeekerNameIsTaken)(req).then(result =>{ 
-        
-        if(result === "true")
-        {
-            req.flash('registerMessage', 'Registration Error - user exists');
-            return res.redirect('/trainer/registerTrainer');
-        }
-        else
-        {
-            (0, auditorExists.checkIfAuditorNameIsTaken)(req).then(result =>{ 
-                console.log(result);
-        
-                if(result === "true")
-                {
-                    req.flash('registerMessage', 'Registration Error - user exists');
-                    return res.redirect('/trainer/registerTrainer');
-                }
-                else
-                {
-                    (0, administratorExists.checkIfAdministratorNameIsTaken)(req).then(result =>{ 
-                        
-                
-                        if(result === "true")
-                        {
-                            req.flash('registerMessage', 'Registration Error - user exists');
-                            return res.redirect('/trainer/registerTrainer');
-                        }
-                        else
-                        {
-                            tennisTrainer_1.default.register(newUser2, req.body.password, (err) => {
-        
-                                if (err) {
-                                    
-                                    console.error('Error: Inserting New User');
-                                    if (err.name == "UserExistsError") {
-                                        req.flash('registerMessage', 'Registration Error');
-                                    }
-                                    console.log(err);
-                                    console.log('Error: User Already Exists');
-                                    return res.json("not successful");
-                        
-                                }
-                                return passport.authenticate('trainerLocal')(req, res, () => {
-                                    
-                                    //return res.redirect('/home');
-                                    //return res.json("successful");
-                                    let username = req.body.username;
-                                    let trainerRoute = '/trainer/displayTrainerHome/'+ `${username}`;
-                                    return res.redirect(trainerRoute);
-                                });
-                                
-                            });
-                        }
-                            
-                    
-                   
-                    }) 
-                }
-                    
-            
-           
-            }) 
-           
-        }
-            
-    
-   
-    })
     
 }
 exports.ProcessRegisterTrainerPage = ProcessRegisterTrainerPage;

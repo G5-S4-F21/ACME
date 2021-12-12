@@ -84,8 +84,9 @@ async function ProcessRegisterSeekerPage(req, res, next) {
         emailAddress: req.body.emailAddress,
         displayName: req.body.FirstName + " " + req.body.LastName
     });
+    //Check if the user already exist
     
-    //Check if the user already exist    
+    
     (0, trainerExists.checkIfTrainerNameIsTaken)(req).then(result =>{ 
         console.log(result);
 
@@ -106,35 +107,21 @@ async function ProcessRegisterSeekerPage(req, res, next) {
                 }
                 else
                 {
-                    (0, administratorExists.checkIfAdministratorNameIsTaken)(req).then(result =>{ 
-                        
-                
-                        if(result === "true")
-                        {
-                            req.flash('registerMessage', 'Registration Error - user exists');
+                    tennisTrainerSeeker.default.register(newUser, req.body.password, (err) => {
+                        if (err) {
+                            console.error('Error: Inserting New User');
+                            if (err.name == "UserExistsError") {
+                                req.flash('registerMessage', 'Registration Error');
+                            }
+                            console.log(err);
+                            console.log('Error: User Already Exists');
                             return res.redirect('/seeker/registerSeeker');
                         }
-                        else
-                        {
-                            tennisTrainerSeeker.default.register(newUser, req.body.password, (err) => {
-                                if (err) {
-                                    console.error('Error: Inserting New User');
-                                    if (err.name == "UserExistsError") {
-                                        req.flash('registerMessage', 'Registration Error');
-                                    }
-                                    console.log(err);
-                                    console.log('Error: User Already Exists');
-                                    return res.redirect('/seeker/registerSeeker');
-                                }
-                                return passport.authenticate('seekerLocal')(req, res, () => {
-                                    return res.redirect('/seeker/displaySeekerHome');
-                                });
-                            });    
-                        }
-                            
-                    
+                        return passport.authenticate('seekerLocal')(req, res, () => {
+                            return res.redirect('/seeker/displaySeekerHome');
+                        });
+                    });   
                    
-                    }) 
                 }
                     
             
@@ -148,7 +135,6 @@ async function ProcessRegisterSeekerPage(req, res, next) {
     })
     
     
-   
     
 }
 exports.ProcessRegisterSeekerPage = ProcessRegisterSeekerPage;

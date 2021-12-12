@@ -84,8 +84,9 @@ async function ProcessRegisterSeekerPage(req, res, next) {
         emailAddress: req.body.emailAddress,
         displayName: req.body.FirstName + " " + req.body.LastName
     });
+    //Check if the user already exist
     
-    //Check if the user already exist    
+    
     (0, trainerExists.checkIfTrainerNameIsTaken)(req).then(result =>{ 
         console.log(result);
 

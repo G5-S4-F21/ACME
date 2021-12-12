@@ -15,9 +15,7 @@ let UserModel = require('../models/users')
 let User = UserModel.User;
 const Util_1 = require('../Utils/index');
 let indexController = require("../controllers/indexController");
-const trainerExists = require("../Utils/checkIfTrainerUserNameExist");
-const auditorExists = require("../Utils/checkIfAuditorUserNameExist");
-const administratorExists = require("../Utils/checkIfAdministratorUserNameExist");
+const userExists = require("../Utils/checkIfCredentialsExist");
 let ApptModel = require('../models/appointment');
 let Appt = ApptModel.Appointment;
 
@@ -77,79 +75,34 @@ function DisplayRegisterSeekerPage(req, res, next) {
 }
 exports.DisplayRegisterSeekerPage = DisplayRegisterSeekerPage;
 
-async function ProcessRegisterSeekerPage(req, res, next) {
+function ProcessRegisterSeekerPage(req, res, next) {
     let newUser = new tennisTrainerSeeker.default({
         userType: "seeker",
         username: req.body.username,
         emailAddress: req.body.emailAddress,
         displayName: req.body.FirstName + " " + req.body.LastName
     });
-    
-    //Check if the user already exist    
-    (0, trainerExists.checkIfTrainerNameIsTaken)(req).then(result =>{ 
-        console.log(result);
-
-        if(result === "true")
-        {
-            req.flash('registerMessage', 'Registration Error - user exists');
+    //Check if the user already exist
+    console.log((0, userExists.checkIfUserNameIsTaken)(req))
+    if((0, userExists.checkIfUserNameIsTaken)(req) === 1)
+    {
+        req.flash('registerMessage', 'Registration Error - user exists');
+        return res.redirect('/seeker/registerSeeker');
+    }
+    tennisTrainerSeeker.default.register(newUser, req.body.password, (err) => {
+        if (err) {
+            console.error('Error: Inserting New User');
+            if (err.name == "UserExistsError") {
+                req.flash('registerMessage', 'Registration Error');
+            }
+            console.log(err);
+            console.log('Error: User Already Exists');
             return res.redirect('/seeker/registerSeeker');
         }
-        else
-        {
-            (0, auditorExists.checkIfAuditorNameIsTaken)(req).then(result =>{ 
-                console.log(result);
-        
-                if(result === "true")
-                {
-                    req.flash('registerMessage', 'Registration Error - user exists');
-                    return res.redirect('/seeker/registerSeeker');
-                }
-                else
-                {
-                    (0, administratorExists.checkIfAdministratorNameIsTaken)(req).then(result =>{ 
-                        
-                
-                        if(result === "true")
-                        {
-                            req.flash('registerMessage', 'Registration Error - user exists');
-                            return res.redirect('/seeker/registerSeeker');
-                        }
-                        else
-                        {
-                            tennisTrainerSeeker.default.register(newUser, req.body.password, (err) => {
-                                if (err) {
-                                    console.error('Error: Inserting New User');
-                                    if (err.name == "UserExistsError") {
-                                        req.flash('registerMessage', 'Registration Error');
-                                    }
-                                    console.log(err);
-                                    console.log('Error: User Already Exists');
-                                    return res.redirect('/seeker/registerSeeker');
-                                }
-                                return passport.authenticate('seekerLocal')(req, res, () => {
-                                    return res.redirect('/seeker/displaySeekerHome');
-                                });
-                            });    
-                        }
-                            
-                    
-                   
-                    }) 
-                }
-                    
-            
-           
-            }) 
-           
-        }
-            
-    
-   
-    })
-    
-    
-   
-    
+        return passport.authenticate('seekerLocal')(req, res, () => {
+            return res.redirect('/seeker/displaySeekerHome');
+        });
+    });
 }
 exports.ProcessRegisterSeekerPage = ProcessRegisterSeekerPage;
 

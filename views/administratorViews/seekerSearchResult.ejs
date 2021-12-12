@@ -1,0 +1,36 @@
+
+<div class="bg-image" 
+     >
+            <div class="col-lg-8 mx-auto p-3 py-md-5">
+            <h2>Seeker Search Result</h2>
+                 <% if (seeker.username){ %>
+                  <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                  <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4">Hi I'm: <%= seeker.displayName %> <span>&nbsp  </span></span>
+                  </a>
+                  <div class="btn-group" role="group" arial-label="Basic example" >
+                  <button id="submitButton" type="submit" class="btn btn-danger">Block user</button>
+                   
+                   
+                </div>
+                </header>
+              
+                
+                  <h1>Contact me</h1> 
+                  <p class="fs-6 col-md-8">Username: <%= seeker.username %>  </p>
+                  <p class="fs-6 col-md-8">Email: <%= seeker.emailAddress %>  </p>
+                  
+                  <hr class="col-3 col-md-2 mb-5">
+              
+                   
+                
+                
+              </div>
+         
+          <%} else{%>
+          <h4>No results found for the <%= userType %> '<%= userSearch %>'  </h4>
+          <%}%>
+               
+</div>
+
+
