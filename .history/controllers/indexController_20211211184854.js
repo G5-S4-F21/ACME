@@ -238,7 +238,7 @@ function ProcessLoginPage(req, res, next) {
         })(req, res, next);
     }
 
-    else if(req.body.userAccountType === 'Admin')
+    else if(req.body.userAccountType === 'Administrator')
     {
         passport.authenticate('administratorLocal', (err, user, info) => {
             if (err) {
@@ -255,7 +255,7 @@ function ProcessLoginPage(req, res, next) {
                     return next(err);
                 }
                 let username = req.body.username;
-                return res.redirect('/administrator/displayAdministratorHome/');
+                return res.redirect('/administrator/displayAdministratorHomePage/');
             });
         })(req, res, next);
     }

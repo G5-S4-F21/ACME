@@ -44,9 +44,9 @@ function ProcessRegisterAuditorPage(req, res, next) {
             console.log('Error: User Already Exists');
             return res.redirect('/administrator/registerAuditor');
         }
-        
+        return passport.authenticate('auditorLocal')(req, res, () => {
             return res.redirect('/administrator/displayAdministratorHome');
-        
+        });
     });
 }
 exports.ProcessRegisterAuditorPage = ProcessRegisterAuditorPage;

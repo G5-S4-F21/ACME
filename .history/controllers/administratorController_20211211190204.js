@@ -19,11 +19,11 @@ let indexController = require("../controllers/indexController");
 const auditor_1 = __importDefault(require("../models/auditor"));
 const administrator_1 = __importDefault(require("../models/administrator"));
 function DisplayRegisterAuditorPage(req, res, next) {
-    
+    if (!req.user) {
         return res.render('administratorViews/administratorIndex', { title: 'Auditor registration', page: 'registerAuditor', messages: req.flash('registerMessage'), displayName: (0, Util_1.AdministratorDisplayName)(req) });
+    }
     
-    
-    
+    return res.redirect('/tennis');
 }
 exports.DisplayRegisterAuditorPage = DisplayRegisterAuditorPage;
 
@@ -44,9 +44,9 @@ function ProcessRegisterAuditorPage(req, res, next) {
             console.log('Error: User Already Exists');
             return res.redirect('/administrator/registerAuditor');
         }
-        
+        return passport.authenticate('auditorLocal')(req, res, () => {
             return res.redirect('/administrator/displayAdministratorHome');
-        
+        });
     });
 }
 exports.ProcessRegisterAuditorPage = ProcessRegisterAuditorPage;
@@ -75,7 +75,7 @@ function ProcessRegisterAdministratorPage(req, res, next) {
                 req.flash('registerMessage', 'Registration Error');
             }
             console.log('Error: User Already Exists');
-            return res.redirect('/administrator/registerAdministrator');
+            return res.redirect('/registerAdministrator');
         }
         return passport.authenticate('administratorLocal')(req, res, () => {
             return res.redirect('/administrator/displayAdministratorHome');

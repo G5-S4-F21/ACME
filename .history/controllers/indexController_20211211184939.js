@@ -255,7 +255,7 @@ function ProcessLoginPage(req, res, next) {
                     return next(err);
                 }
                 let username = req.body.username;
-                return res.redirect('/administrator/displayAdministratorHome/');
+                return res.redirect('/administrator/displayAdministratorHomePage/');
             });
         })(req, res, next);
     }
