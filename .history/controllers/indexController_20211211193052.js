@@ -546,9 +546,8 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
             findAuditorByUUID(req,res)
             break;
         case 'Admin':
-             //find this user in Administrator DB by UUID
-             findAdministratorByUUID(req,res)
-             break;
+            // TODO: find this user in Admin DB by UUID
+            break;
         case 'TrainerUpdate':
             // find this user in trainer DB by UUID
             findAndUpdateTrainerByUUID(req,res)
@@ -613,44 +612,6 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
          if(NewPass==confirm_password){
              console.log(NewPass);
              AuditorModel.default.findById(req.body.UUID, (err, user)=>{
-                 if(err) console.log(err);
-                 else
-                   {
-                       user.setPassword(NewPass,(err, user)=>{
-                        if(err){
-                            // -2: server error
-                            return res.send('-2')
-                        }
-                        if(!user){
-                            // 0: no such user
-                            return res.send('0')
-                        }
-                        else{
-                            // reset password
-                            user.save();
-                            console.log('updated!')
-                            return res.send('1')
-                        }
-                        
-                       });
-                   } 
-             });
-
-         }
-}
-
-/**
- * find the administrator by UUID
- * @param req
- * @param res
- */
- const findAdministratorByUUID = (req,res)=>{
-    const NewPass=req.body.new_password,
-         confirm_password=req.body.new_password;
-         
-         if(NewPass==confirm_password){
-             
-             AdministratorModel.default.findById(req.body.UUID, (err, user)=>{
                  if(err) console.log(err);
                  else
                    {
