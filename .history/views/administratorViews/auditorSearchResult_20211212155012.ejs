@@ -1,0 +1,52 @@
+
+<div class="bg-image" 
+     >
+            <div class="col-lg-8 mx-auto p-3 py-md-5">
+                <h2>Auditor Search Result</h2>
+                 <% if (auditor.username){ %>
+                  <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                  <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4">Hi I'm: <%= auditor.displayName %> <span>&nbsp  </span></span>
+                  </a>
+                  <div class="btn-group" role="group" arial-label="Basic example" >
+                  <% if(auditor.blocked === "true") { %>
+                     <a href="/administrator/blockAuditor/<%= auditor.username %>/" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i>Block auditor</a>
+                 <% }%>
+
+                   <% if(auditor.blocked === "true") { %>
+                   <a href="/administrator/unBlockAuditor/<%= auditor.username %>/"  class="btn btn-success btn-sm "><i class="fa fa-check" aria-hidden="true"></i>Unblock auditor</a>
+                 <% }%>
+                   
+                </div>
+                </header>
+              
+                 <% if(auditor.blocked === "true") { %>
+                  <h1 style= "color:red"> <%= auditor.username %>  is blocked </h1>
+                  <pre class="fs-6 col-md-8" style=" white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><%= auditor.administratorThatBlockedNotes %></pre>
+                 
+                 <% }%>
+
+                  <% if(auditor.blocked === "false" && auditor.administratorThatBlockedNotes !== " ") { %>
+                  <h1 style= "color:green"> <%= auditor.username %> good standing most recent history </h1>
+                  <pre class="fs-6 col-md-8" style=" color: red; white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><%= auditor.administratorThatBlockedNotes %></pre>
+                  <pre class="fs-6 col-md-8" style=" color:green; white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><%= auditor.administratorThatUnBlockedNotes %></pre>
+                 <% }%>
+                
+                  <h1>Contact me</h1> 
+                  <p class="fs-6 col-md-8">Username: <%= auditor.username %>  </p>
+                  <p class="fs-6 col-md-8">Email: <%= auditor.emailAddress %>  </p>
+                  
+                  <hr class="col-3 col-md-2 mb-5">
+              
+                   
+                
+                
+              </div>
+         
+          <%} else{%>
+          <h4>No results found for the <%= userType %> '<%= userSearch %>'  </h4>
+          <%}%>
+               
+</div>
+
+

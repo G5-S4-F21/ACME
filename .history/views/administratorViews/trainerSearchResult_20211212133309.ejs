@@ -1,0 +1,46 @@
+
+<div class="bg-image" 
+     >
+            <div class="col-lg-8 mx-auto p-3 py-md-5">
+            <h2>Trainer Search Result</h2>
+                 <% if (trainer.username){ %>
+                  <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                  <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4">Hi I'm: <%= trainer.displayName %> <span>&nbsp  </span></span>
+                  </a>
+                  <div class="btn-group" role="group" arial-label="Basic example" >
+                   <a href="/administrator/blockTrainer/<%= trainer.username %>/" class="btn btn-danger btn-sm"><i class="fa fa-times" aria-hidden="true"></i>Block trainer</a>
+                   <a href="/administrator/blockTrainer/<%= trainer %>/"  class="btn btn-success btn-sm "><i class="fa fa-check" aria-hidden="true"></i>Unblock trainer</a>
+                   
+                   
+                </div>
+                </header>
+              
+                  <% if(trainer.blocked === "true") { %>
+                  <h1 style= "color:red"> <%= trainer.username %>  is blocked </h1>
+                  <pre class="fs-6 col-md-8" style="overflow-wrap: break-word;"><%= trainer.administratorThatBlockedNotes %></pre>
+                 
+                 <% }%>
+                  <h1>Contact me</h1>
+                  <p class="fs-6 col-md-8">Username: <%= trainer.username %>  </p>
+                  <p class="fs-6 col-md-8">Phone number: <%= trainer.phoneNumber %>  </p>
+                  <p class="fs-6 col-md-8">Email: <%= trainer.emailAddress %>  </p>
+                  <p class="fs-6 col-md-8">Province: <%= trainer.province %>  </p>
+                  <p class="fs-6 col-md-8">City: <%= trainer.city %>  </p>
+                  <p class="fs-6 col-md-8">Age: <%= trainer.age %>  </p>
+                  <p class="fs-6 col-md-8">Gender: <%= trainer.sex %>  </p>
+                  <hr class="col-3 col-md-2 mb-5">
+              
+                <h1>About me</h1>
+                  <p class="fs-6 col-md-12"><%= trainer.aboutMe %>  </p>   
+                </main>
+                
+              </div>
+              
+          <%} else{%>
+          <h4>No results found for the <%= userType %> '<%= userSearch %>'  </h4>
+          <%}%>
+               
+</div>
+
+

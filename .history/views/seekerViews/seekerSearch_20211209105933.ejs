@@ -1,0 +1,66 @@
+
+<div class="row" style="
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background-color: #e7e7e7;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 300;">
+    <div class="offset-md-1 col-md-10 col-sm-12">
+          <div class="login" id="contentArea">
+              <h1 class="display-4">Search for a trainer</h1>
+
+              
+              <form  method="POST" id="sortForm" novalidate>
+                <p class="hint-text">Find a trainer to get training</p>
+                <div class="form-group">
+                  <div class="row">
+                    <p class="lead"><i class="fas fa-user-shield"></i> Search details</p>
+                  
+                  </div>
+                </div><div class="form-group">
+            <label class="lead">Select Province</label>
+            <div class="col-sm-5" >
+                <select id="province" name="province" ></select>
+            </div>
+        </div><!--/.form-group-->
+        <div class="form-group">
+            <label class="lead">City</label>
+            <div class="col-sm-4">
+                <select name="city" id="city" ></select>
+            </div>
+            
+        </div><!--/.form-group-->
+
+        <span class="lead"></i>Hourly rate</span>
+        <select name= "hourlyRate" class="sel1">
+            <option>less than $50</option>
+            <option>$50-$100</option>
+            <option>$100-$200</option>
+            <option>$200-$300</option>
+            <option>$300-$400</option>
+            <option>equal or greater than $400</option>
+        </select>  
+        <br>
+        <span class="lead"></i>Gender</span>
+        <select name= "sex" class="sel1">
+            <option>Any gender</option>
+            <option>Female</option>
+            <option>Male</option>
+        </select>
+        <br>
+
+        <div class="text-start mt-2">
+            <button  class="btn btn-primary" >Search</button>
+        </div>
+        
+   
+</div>   
+
+
+    
+

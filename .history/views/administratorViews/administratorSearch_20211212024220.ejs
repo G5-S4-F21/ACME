@@ -1,0 +1,57 @@
+
+<div class="container row" style="
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background-color: #e7e7e7;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 300;">
+    <div class="offset-md-1 col-md-10 col-sm-12">
+          <div class="login" id="contentArea">
+              <h1 class="display-4">Search for a user</h1>
+
+              
+              <form  method="POST" id="sortForm" novalidate>
+                <p class="hint-text">Find a a user to resolve issues</p>
+                <div class="form-group">
+                  <div class="row">
+                    <p class="lead"><i class="fas fa-user-shield"></i> Search details</p>
+                  
+                  </div>
+                </div>
+                <div class="form-group">
+            <label class="lead">Input username</label>
+            <div class="col-md-6">
+             <input class="form-control" type="text" name="username" id="username" placeholder="Enter username" required>         
+            </div>                
+        
+            
+        
+        <br>
+        <span class="lead"></i>User type</span>
+        <select name= "userType" class="sel1">
+            <option>Trainer</option>
+            <option>Seeker</option>
+            <option>Auditor</option>
+            
+        </select>  
+        <br>
+        
+        <br>
+        <div class="text-start mt-2">
+            <button id="submitButton" type="submit" class="btn btn-primary" >Search</button>
+        </div>
+        </div><!--/.form-group-->
+        </form>
+   
+</div>   
+
+
+    
+
+
+

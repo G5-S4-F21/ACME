@@ -1,0 +1,39 @@
+<div class="bg-image" 
+     >
+            <div class="col-lg-8 mx-auto p-3 py-md-5">
+                <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+                  <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4">Hi I'm: <%= displayNameFromQuery %> <span>&nbsp  </span></span>
+                    <div class="btn-group" role="group" arial-label="Basic example" >
+                  
+                  <a href="/processTrainerRequestDetails/approve/<%= username %>/" class="btn btn-success btn-sm"><i class="fa fa-check" aria-hidden="true"></i>Approve trainer join request</a>
+                   <a href="/processTrainerRequestDetails/reject/<%= username %>/" class="btn btn-danger btn-sm delete"><i class="fa fa-times" aria-hidden="true"></i>Reject trainer join request</a>
+                                     
+                </div>   
+                  </a>
+                  
+                </header>
+              
+                <main>
+                    
+                  <h1>Contact me</h1>
+                  <p class="fs-6 col-md-8">Phone number: <%= phoneNumber %>  </p>
+                  <p class="fs-6 col-md-8">Email: <%= emailAddress %>  </p>
+                  <p class="fs-6 col-md-8">Province: <%= province %>  </p>
+                  <p class="fs-6 col-md-8">City: <%= city %>  </p>
+                  <p class="fs-6 col-md-8">Age: <%= age %>  </p>
+                  <p class="fs-6 col-md-8">Gender: <%= sex %>  </p>
+                  <p class="fs-6 col-md-8">My tennis trainer certificate: <a download="<%= certificate %>" href="/auditor/photo/<%= certificate %>"><%= certificate %></a>  </p>
+                  <hr class="col-3 col-md-2 mb-5">
+              
+                <h1>About me</h1>
+                  <p class="fs-6 col-md-12"><%= aboutMe %>  </p> 
+                    
+                </main>
+                
+              </div>
+</div>
+
+
+
+
