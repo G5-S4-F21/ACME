@@ -111,7 +111,7 @@ function DisplayRegisterAdministratorPage(req, res, next) {
         return res.render('administratorViews/administratorIndex', { title: 'Administrator registration', page: 'registerAdministrator', messages: req.flash('registerMessage'), displayName: (0, Util_1.AdministratorDisplayName)(req) });
     
     
-    
+    return res.redirect('/tennis');
 }
 exports.DisplayRegisterAdministratorPage = DisplayRegisterAdministratorPage;
 
