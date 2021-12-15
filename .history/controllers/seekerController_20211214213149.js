@@ -34,12 +34,23 @@ module.exports.renderSeekerSchedule = (req, res, next) => {
           return console.error(err);
       }
       else {
-         
+          /*let list = [];
+          for(let a in mainList)
+          {
+              if(localUser.username == mainList[a].ApptSeeker)
+              {
+                  list.push(mainList[a]);
+                  
+              }
+              //console.log(mainList[a]);
+          }
+          let toSend = JSON.stringify(list);
+          console.log(toSend);*/
           res.render('seekerViews/seekerScheduleView', { title : "Schedule", 
               list : mainList });
       }
   });
-  
+  //res.render('seekerViews/seekerScheduleView', { title: "Schedule", list : mainList });
 }
 //handle the request for the detailed view of the schedule
 module.exports.renderDetailedView = (req, res, next) => {
@@ -71,10 +82,7 @@ async function ProcessRegisterSeekerPage(req, res, next) {
         userType: "seeker",
         username: req.body.username,
         emailAddress: req.body.emailAddress,
-        displayName: req.body.FirstName + " " + req.body.LastName,
-        blocked: "false",
-        administratorThatBlockedNotes: " ",
-        administratorThatUnBlockedNotes: " "
+        displayName: req.body.FirstName + " " + req.body.LastName
     });
     
     //Check if the user already exist    
@@ -108,11 +116,6 @@ async function ProcessRegisterSeekerPage(req, res, next) {
                         }
                         else
                         {
-                            if(req.body.password != req.body.confirmPassword)
-                            {
-                                req.flash('registerMessage', 'Registration Error');
-                                return res.redirect('/seeker/registerSeeker');
-                            }
                             tennisTrainerSeeker.default.register(newUser, req.body.password, (err) => {
                                 if (err) {
                                     console.error('Error: Inserting New User');

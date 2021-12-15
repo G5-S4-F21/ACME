@@ -40,7 +40,6 @@ module.exports.renderSeekerSchedule = (req, res, next) => {
       }
   });
   
-}
 //handle the request for the detailed view of the schedule
 module.exports.renderDetailedView = (req, res, next) => {
   let apptDate = req.body.dateLookup;
@@ -71,10 +70,7 @@ async function ProcessRegisterSeekerPage(req, res, next) {
         userType: "seeker",
         username: req.body.username,
         emailAddress: req.body.emailAddress,
-        displayName: req.body.FirstName + " " + req.body.LastName,
-        blocked: "false",
-        administratorThatBlockedNotes: " ",
-        administratorThatUnBlockedNotes: " "
+        displayName: req.body.FirstName + " " + req.body.LastName
     });
     
     //Check if the user already exist    
@@ -108,11 +104,6 @@ async function ProcessRegisterSeekerPage(req, res, next) {
                         }
                         else
                         {
-                            if(req.body.password != req.body.confirmPassword)
-                            {
-                                req.flash('registerMessage', 'Registration Error');
-                                return res.redirect('/seeker/registerSeeker');
-                            }
                             tennisTrainerSeeker.default.register(newUser, req.body.password, (err) => {
                                 if (err) {
                                     console.error('Error: Inserting New User');

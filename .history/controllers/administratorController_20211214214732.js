@@ -38,10 +38,7 @@ function ProcessRegisterAuditorPage(req, res, next) {
         userType: "auditor",
         username: req.body.username,
         emailAddress: req.body.emailAddress,
-        displayName: req.body.FirstName + " " + req.body.LastName,
-        blocked: "false",
-        administratorThatBlockedNotes: " ",
-        administratorThatUnBlockedNotes: " "
+        displayName: req.body.FirstName + " " + req.body.LastName
     });
     
     //Process auditor registration
@@ -76,12 +73,6 @@ function ProcessRegisterAuditorPage(req, res, next) {
                         }
                         else
                         {
-                            if(req.body.password != req.body.confirmPassword)
-                            {
-                                req.flash('registerMessage', 'Registration Error');
-                                return res.redirect('/administrator/registerAuditor');
-                            }
-
                             auditor_1.default.register(newUser, req.body.password, (err) => {
                                 if (err) {
                                     console.error('Error: Inserting New User');
@@ -164,12 +155,6 @@ function ProcessRegisterAdministratorPage(req, res, next) {
                         }
                         else
                         {
-                            if(req.body.password != req.body.confirmPassword)
-                            {
-                                req.flash('registerMessage', 'Registration Error');
-                                return res.redirect('/administrator/registerAdministrator');
-                            }
-
                             administrator_1.default.register(newUser, req.body.password, (err) => {
                                 if (err) {
                                     console.error('Error: Inserting New User');

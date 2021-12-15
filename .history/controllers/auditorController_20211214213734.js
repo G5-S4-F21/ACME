@@ -19,6 +19,7 @@ let indexController = require("../controllers/indexController");
 const q_1 = __importDefault(require("q"));
 const tennisTrainer_1 = __importDefault(require("../models/tennisTrainer"));
 const auditor_2 = require("../Utils/auditor");
+//const tennisTrainerSeeker = __importDefault(require("../models/tennisTrainerSeeker"));
 
 function DisplayRegisterAuditorPage(req, res, next) {
     if (!req.user) {

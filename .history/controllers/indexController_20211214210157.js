@@ -78,21 +78,51 @@ module.exports.handleCreateAccount = (req, res, next) => {
     const {user_account_type}=req.body
     switch (user_account_type){
         case 'trainer_seeker':
-            // register trainer seeker
+            // TODO:register trainer seeker
             console.log('handle trainer seeker DB')
             break
         case 'trainer':
-            //register trainer seek
+            // TODO:register trainer seek
             registerTrainer(req, res)
             break
         case 'auditor':
-            //register trainer seek
+            // TODO:register trainer seek
             console.log('handle auditor DB')
             break
         default:
             break
     }
-   
+    //User account creation
+    // let currentUser = User({
+    //         username: req.body.uname,
+    //         password: req.body.password,
+    //         accountType: req.body.acctType
+    //     });
+    //     //console.log(tempUser);
+    //     User.register(currentUser, req.body.password, (err) => {
+    //         if(err)
+    //         {
+    //              if(err.name == "UserExistsError"){
+    //              /*req.flash(
+    //                     'registerMessage',
+    //                     'Registration Error: User Already Exists!'
+    //              );*/
+    //              console.log("Error: User Already Exists");
+    //          }
+    //             return res.render('createAccount', {
+    //                 title: 'Register',
+    //                 //messages: req.flash('register'),
+    //                 displayName: req.user ? req.user.displayname: ''
+    //             });
+    //         }
+    //         else
+    //         {
+    //              //successful registration to the confirm account details page
+    //             return passport.authenticate('local')(req, res, ()=>{
+    //                 res.render('confCreateAccount', {title: "Account Confirmation" })
+    //             })
+    //         }
+    //     });
 }
 
 /**
@@ -378,7 +408,7 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
 
                 html           : '<h4>Please click the link below to reset your password</h4><p>' +
                     '<p>From: G5-S4-F21/ACME</p>' +
-                    '<p><a href="https://lawntennistrainer.herokuapp.com/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+auditors[0]._id+'">https://lawntennistrainer.herokuapp.com/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+auditors[0]._id+'</a>'
+                    '<p><a href="http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+auditors[0]._id+'">http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+auditors[0]._id+'</a>'
             };
 
             mailTransport.sendMail(options, function(err, msg){
@@ -422,7 +452,7 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
 
                 html           : '<h4>Please click the link below to reset your password</h4><p>' +
                     '<p>From: G5-S4-F21/ACME</p>' +
-                    '<p><a href="https://lawntennistrainer.herokuapp.com/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+administrators[0]._id+'">https://lawntennistrainer.herokuapp.com/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+administrators[0]._id+'</a>'
+                    '<p><a href="http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+administrators[0]._id+'">http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+administrators[0]._id+'</a>'
             };
 
             mailTransport.sendMail(options, function(err, msg){
@@ -466,7 +496,7 @@ exports.ProcessLogoutPage = ProcessLogoutPage;
 
                 html           : '<h4>Please click the link below to reset your password</h4><p>' +
                     '<p>From: G5-S4-F21/ACME</p>' +
-                    '<p><a href="https://lawntennistrainer.herokuapp.com/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+seekers[0]._id+'">https://lawntennistrainer.herokuapp.com/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+seekers[0]._id+'</a>'
+                    '<p><a href="http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+seekers[0]._id+'">http://localhost:3000/recoverPassword?accountType='+req.query.user_account_type+'&UUID='+seekers[0]._id+'</a>'
             };
 
             mailTransport.sendMail(options, function(err, msg){

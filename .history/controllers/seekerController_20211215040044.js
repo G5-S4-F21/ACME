@@ -108,11 +108,6 @@ async function ProcessRegisterSeekerPage(req, res, next) {
                         }
                         else
                         {
-                            if(req.body.password != req.body.confirmPassword)
-                            {
-                                req.flash('registerMessage', 'Registration Error');
-                                return res.redirect('/seeker/registerSeeker');
-                            }
                             tennisTrainerSeeker.default.register(newUser, req.body.password, (err) => {
                                 if (err) {
                                     console.error('Error: Inserting New User');

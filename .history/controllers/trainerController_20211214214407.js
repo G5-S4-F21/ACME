@@ -160,11 +160,6 @@ function ProcessRegisterTrainerPage(req, res, next)
                         }
                         else
                         {
-                            if(req.body.password != req.body.confirmPassword)
-                            {
-                                req.flash('registerMessage', 'Registration Error');
-                                return res.redirect('/trainer/registerTrainer');
-                            }
                             tennisTrainer_1.default.register(newUser2, req.body.password, (err) => {
         
                                 if (err) {
@@ -175,7 +170,7 @@ function ProcessRegisterTrainerPage(req, res, next)
                                     }
                                     console.log(err);
                                     console.log('Error: User Already Exists');
-                                    return res.redirect("/trainer/registerTrainer");
+                                    return res.json("not successful");
                         
                                 }
                                 return passport.authenticate('trainerLocal')(req, res, () => {

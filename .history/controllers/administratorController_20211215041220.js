@@ -164,12 +164,6 @@ function ProcessRegisterAdministratorPage(req, res, next) {
                         }
                         else
                         {
-                            if(req.body.password != req.body.confirmPassword)
-                            {
-                                req.flash('registerMessage', 'Registration Error');
-                                return res.redirect('/administrator/registerAdministrator');
-                            }
-
                             administrator_1.default.register(newUser, req.body.password, (err) => {
                                 if (err) {
                                     console.error('Error: Inserting New User');

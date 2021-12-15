@@ -56,10 +56,11 @@ module.exports.renderSetAppt = (req, res, next) => {
         {
             let mainList = req.body.list;
             console.log('error setting appt');
+            //res.render('seekerViews/viewSchedule', { title: 'Schedule', list: mainList});
             res.redirect('schedule');
         }
     });
-   
+    //res.render('trainerViews/viewSchedule', { title: 'Schedule'});
     res.redirect('schedule');
 }
 module.exports.renderDetailedView = (req, res, next) => {
@@ -77,7 +78,7 @@ module.exports.renderDetailedView = (req, res, next) => {
     });
 
     
-   
+    //res.render('trainerViews/trainerDetailedAppt', { appt : })
 }
 
 function DisplayRegisterTrainerPage(req, res, next) {
@@ -160,11 +161,6 @@ function ProcessRegisterTrainerPage(req, res, next)
                         }
                         else
                         {
-                            if(req.body.password != req.body.confirmPassword)
-                            {
-                                req.flash('registerMessage', 'Registration Error');
-                                return res.redirect('/trainer/registerTrainer');
-                            }
                             tennisTrainer_1.default.register(newUser2, req.body.password, (err) => {
         
                                 if (err) {
@@ -175,12 +171,13 @@ function ProcessRegisterTrainerPage(req, res, next)
                                     }
                                     console.log(err);
                                     console.log('Error: User Already Exists');
-                                    return res.redirect("/trainer/registerTrainer");
+                                    return res.json("not successful");
                         
                                 }
                                 return passport.authenticate('trainerLocal')(req, res, () => {
                                     
-                                    
+                                    //return res.redirect('/home');
+                                    //return res.json("successful");
                                     let username = req.body.username;
                                     let trainerRoute = '/trainer/displayTrainerHome/'+ `${username}`;
                                     return res.redirect(trainerRoute);
