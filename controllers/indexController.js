@@ -92,37 +92,7 @@ module.exports.handleCreateAccount = (req, res, next) => {
         default:
             break
     }
-    //User account creation
-    // let currentUser = User({
-    //         username: req.body.uname,
-    //         password: req.body.password,
-    //         accountType: req.body.acctType
-    //     });
-    //     //console.log(tempUser);
-    //     User.register(currentUser, req.body.password, (err) => {
-    //         if(err)
-    //         {
-    //              if(err.name == "UserExistsError"){
-    //              /*req.flash(
-    //                     'registerMessage',
-    //                     'Registration Error: User Already Exists!'
-    //              );*/
-    //              console.log("Error: User Already Exists");
-    //          }
-    //             return res.render('createAccount', {
-    //                 title: 'Register',
-    //                 //messages: req.flash('register'),
-    //                 displayName: req.user ? req.user.displayname: ''
-    //             });
-    //         }
-    //         else
-    //         {
-    //              //successful registration to the confirm account details page
-    //             return passport.authenticate('local')(req, res, ()=>{
-    //                 res.render('confCreateAccount', {title: "Account Confirmation" })
-    //             })
-    //         }
-    //     });
+   
 }
 
 /**
