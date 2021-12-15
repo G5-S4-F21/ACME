@@ -172,7 +172,7 @@ function DisplayLoginPage(req, res, next) {
     if (!req.user) {
         return res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage') });
     }
-    
+    //TO DO
     return res.redirect('/');
 }
 exports.DisplayLoginPage = DisplayLoginPage;
