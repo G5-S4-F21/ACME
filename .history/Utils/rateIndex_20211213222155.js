@@ -26,3 +26,4 @@ function rateIndex(req) {
     return indexes[defaultIndex];
 }
 exports.rateIndex = rateIndex;
+//# sourceMappingURL=rateIndex.js.map
