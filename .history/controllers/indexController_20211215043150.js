@@ -55,32 +55,6 @@ passport.use(new LocalStrategy(
 
 //should render ../views/index.ejs//
 module.exports.renderIndex = (req, res, next) => {
-
-    //If a user is logged in, then show the user homepage
-    if(req.user)
-    {
-        if(req.user.userType === "trainer")
-        {
-            return res.redirect('/trainer/displayTrainerHome/'+ `${req.user.username}`);
-        }
-
-        else if (req.user.userType === "seeker")
-        {
-            return res.redirect('/seeker/displaySeekerHome');
-        }
-
-        else if (req.user.userType === "auditor")
-        {
-            return res.redirect('/auditor/pendingTrainerJoinRequests');
-        }
-        
-        else if (req.user.userType === "administrator")
-        {
-            return res.redirect('/administrator/displayAdministratorHome');
-        }
-
-        
-    }
     res.render('index', { title: 'Tennis Assistant', page: 'defaultHome' });
 }
 
@@ -118,7 +92,37 @@ module.exports.handleCreateAccount = (req, res, next) => {
         default:
             break
     }
-   
+    //User account creation
+    // let currentUser = User({
+    //         username: req.body.uname,
+    //         password: req.body.password,
+    //         accountType: req.body.acctType
+    //     });
+    //     //console.log(tempUser);
+    //     User.register(currentUser, req.body.password, (err) => {
+    //         if(err)
+    //         {
+    //              if(err.name == "UserExistsError"){
+    //              /*req.flash(
+    //                     'registerMessage',
+    //                     'Registration Error: User Already Exists!'
+    //              );*/
+    //              console.log("Error: User Already Exists");
+    //          }
+    //             return res.render('createAccount', {
+    //                 title: 'Register',
+    //                 //messages: req.flash('register'),
+    //                 displayName: req.user ? req.user.displayname: ''
+    //             });
+    //         }
+    //         else
+    //         {
+    //              //successful registration to the confirm account details page
+    //             return passport.authenticate('local')(req, res, ()=>{
+    //                 res.render('confCreateAccount', {title: "Account Confirmation" })
+    //             })
+    //         }
+    //     });
 }
 
 /**
@@ -172,7 +176,7 @@ function DisplayLoginPage(req, res, next) {
     if (!req.user) {
         return res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage') });
     }
-    
+    //TO DO
     return res.redirect('/');
 }
 exports.DisplayLoginPage = DisplayLoginPage;
